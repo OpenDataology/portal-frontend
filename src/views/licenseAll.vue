@@ -111,8 +111,8 @@
       <el-row>
         <el-col :span="24">
           <div class="bg-purple-dark tail_box_len">
-            <p>* 以上license的分析尚未得到律师review</p>
-            <p>* 该网站所有内容不构成任何法律上的建议和保证</p>
+            <p>* The analysis of the licenses has not been reviewed by lawyers</p>
+            <p>* All content of this website does not constitute any legal advice and guarantee</p>
           </div>
         </el-col>
       </el-row>
