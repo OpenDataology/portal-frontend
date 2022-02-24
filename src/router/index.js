@@ -9,9 +9,6 @@ export default new Router({
         path: '/licenseAll',
         component: () => import('../views/licenseAll.vue')
       },{
-        path: '/HelloWorld',
-        component: () => import('../components/HelloWorld.vue')
-      },{
         path: '/licenseInfo',
         component: () => import('../views/licenseInfo.vue'),
         props: route => ({id: route.query.id})
@@ -23,6 +20,16 @@ export default new Router({
         component: () => import('../views/dataSetInfo.vue'),
         props: route => ({id: route.query.id})
       },
+      {
+        path:"/searchLicense",
+        component:()=>import("../components/Search/searchLicense.vue"),
+      },{
+        path:"/searchDataset",
+        component:()=>import("../components/Search/searchDataset.vue"),
+      },{
+        path:"/Export",
+        component:()=>import("../components/Export/Export.vue"),
+      }
     
     ]
   })

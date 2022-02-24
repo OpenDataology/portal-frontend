@@ -7,7 +7,7 @@
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box flaot_box">
-              <img src="../assets/images/login.png" alt="" />
+              <img src="../assets/images/11.png" alt="" @click="toHome()" />
             </div>
             <!--          <div class="title_box flaot">
             <span>data.LISENCE</span>
@@ -31,33 +31,7 @@
             </div>
             <!--          搜索条部分-->
             <div class="search_box flaot_box">
-              <el-select
-                class="search_box_len"
-                v-model="value"
-                multiple
-                filterable
-                remote
-                reserve-keyword
-                placeholder="请输入关键词"
-                :remote-method="remoteMethod"
-                :loading="loading"
-              >
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </div>
-            <!--          搜索按钮放大镜部分-->
-            <div class="search_button_box flaot_box">
-              <el-button
-                class="search_button"
-                type="primary"
-                icon="el-icon-search"
-                >搜索</el-button
-              >
+              <searchDataset/>
             </div>
             <!--          登录部分-->
             <div class="login_box">
@@ -71,7 +45,7 @@
         </el-col>
       </el-row>
       <!--    欢迎语部分-->
-      <div class="welcome">Welcome to the data.License query tool</div>
+      <div class="welcome">Welcome to Dataset Metadata Portal</div>
     </div>
     <!--  中部-->
 
@@ -90,16 +64,16 @@
 
     <!--  分页-->
     <!-- <button @click="toLicenseInfo()"></button> -->
-    <div class="paging_box">
-      <div class="block">
-        <span class="demonstration"></span>
+    <div class="paging-box">
+            <div class="total_box flaot_box">Total:{{numDatasetData.totalNum}}</div>
+
+      <div class="block flaot_box">
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="dataSetData.pageNum"
-          :page-sizes="[3, 6, 9, 12]"
           :page-size="numDatasetData.pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
+          layout=" prev, pager, next, jumper"
           :total="numDatasetData.totalNum"
         >
         </el-pagination>
@@ -111,8 +85,8 @@
       <el-row>
         <el-col :span="24">
           <div class="bg-purple-dark tail_box_len">
-            <p>* 以上license的分析尚未得到律师review</p>
-            <p>* 该网站所有内容不构成任何法律上的建议和保证</p>
+           <p>* The above license analysis has not been reviewed by lawyers</p>
+            <p>* All contents of the portal do not constitute any legal advice and guarantee</p>
           </div>
         </el-col>
       </el-row>
@@ -121,18 +95,14 @@
 </template>
 <script>
 import axios from "axios";
+import searchDataset  from '../components/Search/searchDataset.vue';
 
 export default {
+  components: { searchDataset },
   name: "Welcome",
   data() {
     return {
-      options: [],
-      value: [],
-      list: [],
-      loading: false,
-      states: [
-        "MIT"
-      ],
+      value:[],
       vague: [
         {
           value: "选项1",
@@ -150,9 +120,12 @@ export default {
     };
   },
   mounted() {
-    this.list = this.states.map((item) => {
-      return { value: `value:${item}`};
-    });
+    document.getElementsByClassName(
+      "el-pagination__jump"
+    )[0].childNodes[0].nodeValue = "Go";
+    document.getElementsByClassName(
+      "el-pagination__jump"
+    )[0].childNodes[2].nodeValue = "";
   },
   created: function () {
     this.getDataSetData();
@@ -169,27 +142,7 @@ export default {
         query: { id },
       });
     },
-    tableRowClassName({ row, rowIndex }) {
-      if (rowIndex === 1) {
-        return "warning-row";
-      } else if (rowIndex === 3) {
-        return "success-row";
-      }
-      return "";
-    },
-    remoteMethod(query) {
-      if (query !== "") {
-        this.loading = true;
-        setTimeout(() => {
-          this.loading = false;
-          this.options = this.list.filter((item) => {
-            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
-          });
-        }, 200);
-      } else {
-        this.options = [];
-      }
-    },
+    
     getDataSetData() {
       let that = this;
       axios
@@ -226,6 +179,12 @@ export default {
 </script>
 
 <style>
+.total_box{
+  line-height: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: rgb(126, 123, 123);
+}
 .license_type_clo {
   font-size: 10px;
   color: #a8a4a4;
@@ -238,10 +197,10 @@ export default {
   letter-spacing: normal;
 }
 
-.paging_box {
+.paging-box {
   margin: 0 auto;
-  padding-top: 20px;
-  width: 500px;
+  margin-top: 20px;
+  width: 300px;
   height: 35px;
 }
 
@@ -258,7 +217,7 @@ export default {
   margin-top: 20px;
   margin-left: 30px;
   background-color: #FFFFFF;
-  box-shadow: 3px 2px 5px #232636;
+  box-shadow: 3px 2px 10px #232636;
 }
 
 .el-descriptions :not(.is-bordered) .el-descriptions-item__cell {
@@ -287,12 +246,12 @@ export default {
   font-size: 1px;
   margin-top: 17px;
 }
-
 .el-pagination.is-background .el-pager li:not(.disabled).active {
-  background-color: #3f51b5;
+  background-color: #4c8efc;
 }
 .el-pagination .el-select .el-input .el-input__inner {
-  border-radius: 10px;
+  border-radius: 8px;
+  height: 22px;
 }
 
 .margin_box {
@@ -322,7 +281,7 @@ export default {
 .header_box {
   width: 100%;
   height: 200px;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
 }
 
 /*logo部分*/
@@ -364,7 +323,7 @@ export default {
 
 /*搜索按钮*/
 .search_button {
-  width: 65px;
+  width: 80px;
   border: #ffffff;
 }
 
@@ -406,7 +365,7 @@ export default {
 .el-input__inner {
   border-radius: 10px;
   border: 2px solid #fff;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
   color: #ffffff;
 }
 
@@ -417,7 +376,7 @@ export default {
 
 .el-button--primary:focus,
 .el-button--primary:hover {
-  background: #3f51b5;
+  background: #4c8efc;
   border-color: #fff;
   color: #fff;
 }
@@ -433,20 +392,20 @@ export default {
 .el-button--primary {
   margin-top: 7px;
   color: #fff;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
   border-color: #fff;
 }
 
-.el-dropdown {
+/* .el-dropdown {
   width: 100px;
-}
+} */
 
 .el-col {
   border-radius: 4px;
 }
 
 .bg-purple-dark {
-  background: #3f51b5;
+  background: #4c8efc;
 }
 
 .grid-content {
