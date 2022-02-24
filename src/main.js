@@ -8,7 +8,6 @@ import './assets/styles/styles.css'
 import 'element-ui/lib/theme-chalk/index.css'
 
 
-
 Vue.use(router)
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios)

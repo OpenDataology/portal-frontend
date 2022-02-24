@@ -7,7 +7,7 @@
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box flaot_box">
-              <img src="../assets/images/login.png" alt="" />
+              <img src="../assets/images/11.png" alt="" />
             </div>
             <!--          <div class="title_box flaot">
             <span>data.LISENCE</span>
@@ -31,33 +31,7 @@
             </div>
             <!--          搜索条部分-->
             <div class="search_box flaot_box">
-              <el-select
-                class="search_box_len"
-                v-model="value"
-                multiple
-                filterable
-                remote
-                reserve-keyword
-                placeholder="请输入关键词"
-                :remote-method="remoteMethod"
-                :loading="loading"
-              >
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </div>
-            <!--          搜索按钮放大镜部分-->
-            <div class="search_button_box flaot_box">
-              <el-button
-                class="search_button"
-                type="primary"
-                icon="el-icon-search"
-                >搜索</el-button
-              >
+              <searchLicense />
             </div>
             <!--          登录部分-->
             <div class="login_box">
@@ -71,39 +45,38 @@
         </el-col>
       </el-row>
       <!--    欢迎语部分-->
-      <div class="welcome">Welcome to the data.License query tool 
-      </div>
+      <div class="welcome">Welcome to Dataset Metadata Portal</div>
     </div>
     <!--  中部-->
 
-    <div class="middle_box">
+    <div class="licenseAll-middle">
       <div
         class="flaot_box like_box"
         v-for="item in licenseData"
         @click="toLicenseInfo(item.id)"
       >
+        <div class="license_id_clo">{{ item.id }}</div>
         <div class="license_name_clo">{{ item.license_name }}</div>
         <div class="license_type_clo">{{ item.license_type }}</div>
-        <div class="license_id_clo">{{ item.id }}</div>
       </div>
     </div>
 
     <!--  分页-->
     <!-- <button @click="toLicenseInfo()"></button> -->
-    <div class="paging_box">
-      <div class="block">
-        <span class="demonstration"></span>
+    <div class="licenseAll-paging">
+      <div class="total_box flaot_box">Total:{{ numLicenseData.totalNum }}</div>
+      <div class="block flaot_box">
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="licenseData.pageNum"
-          :page-sizes="[3, 6, 9, 12]"
           :page-size="numLicenseData.pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
+          layout=" prev, pager, next, jumper"
           :total="numLicenseData.totalNum"
         >
         </el-pagination>
       </div>
+      <div class="clear_box"></div>
     </div>
 
     <!--尾部-->
@@ -111,8 +84,8 @@
       <el-row>
         <el-col :span="24">
           <div class="bg-purple-dark tail_box_len">
-            <p>* 以上license的分析尚未得到律师review</p>
-            <p>* 该网站所有内容不构成任何法律上的建议和保证</p>
+            <p>* The above license analysis has not been reviewed by lawyers</p>
+            <p>* All contents of the portal do not constitute any legal advice and guarantee</p>
           </div>
         </el-col>
       </el-row>
@@ -121,18 +94,14 @@
 </template>
 <script>
 import axios from "axios";
+import searchLicense from "../components/Search/searchLicense.vue";
 
 export default {
+  components: { searchLicense },
   name: "Welcome",
   data() {
     return {
-      options: [],
       value: [],
-      list: [],
-      loading: false,
-      states: [
-        "MIT"
-      ],
       vague: [
         {
           value: "选项1",
@@ -150,46 +119,34 @@ export default {
     };
   },
   mounted() {
-    this.list = this.states.map((item) => {
-      return { value: `value:${item}`};
-    });
+    document.getElementsByClassName(
+      "el-pagination__jump"
+    )[0].childNodes[0].nodeValue = "Go";
+    document.getElementsByClassName(
+      "el-pagination__jump"
+    )[0].childNodes[2].nodeValue = "";
+    // document.getElementsByClassName(
+    //   "el-pagination__total"
+    // )[0].childNodes[0].nodeValue = "Total:";
+    // document.getElementsByClassName(
+    //   "el-pagination__total"
+    // )[0].childNodes[2].nodeValue = "";
   },
   created: function () {
     this.getLicenseData();
-    this.getLicenseForName();
+    // this.getLicenseForName();
   },
   methods: {
-    toDataSetALL(){
+    toDataSetALL() {
       this.$router.push({
-              path: "/dataSetAll",
-            });
+        path: "/dataSetAll",
+      });
     },
     toLicenseInfo(id) {
       this.$router.push({
         path: "/licenseInfo",
         query: { id },
       });
-    },
-    tableRowClassName({ row, rowIndex }) {
-      if (rowIndex === 1) {
-        return "warning-row";
-      } else if (rowIndex === 3) {
-        return "success-row";
-      }
-      return "";
-    },
-    remoteMethod(query) {
-      if (query !== "") {
-        this.loading = true;
-        setTimeout(() => {
-          this.loading = false;
-          this.options = this.list.filter((item) => {
-            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
-          });
-        }, 200);
-      } else {
-        this.options = [];
-      }
     },
     getLicenseData() {
       let that = this;
@@ -209,23 +166,6 @@ export default {
           // console.log(that.numData);
         });
     },
-     getLicenseForName() {
-      const that = this;
-      axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_basic_by_name", {
-          params: {
-            name:"MIT License",
-          },
-        })
-        .then(function (response) {
-          // console.log(response.data.data);
-          that.states = response.data.data.license_name;
-          console.log(response.data.data.license_name);
-          // console.log(that.licenseOthersTab);
-        });
-    },
-    
-
     //分页监听 监听尺寸改变
     handleSizeChange(newSize) {
       this.numLicenseData.pageSize = newSize;
@@ -242,6 +182,12 @@ export default {
 </script>
 
 <style>
+.total_box {
+  line-height: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: rgb(126, 123, 123);
+}
 .license_type_clo {
   font-size: 10px;
   color: #a8a4a4;
@@ -254,14 +200,14 @@ export default {
   letter-spacing: normal;
 }
 
-.paging_box {
+.licenseAll-paging {
   margin: 0 auto;
-  padding-top: 20px;
-  width: 500px;
+  margin-top: 20px;
+  width: 300px;
   height: 35px;
 }
 
-.middle_box {
+.licenseAll-middle {
   width: 1120px;
   height: 400px;
   margin: 0 auto;
@@ -273,8 +219,8 @@ export default {
   width: 330px;
   margin-top: 20px;
   margin-left: 30px;
-  background-color: #FFFFFF;
-  box-shadow: 3px 2px 5px #232636;
+  background-color: #ffffff;
+  box-shadow: 3px 2px 10px #232636;
 }
 
 .el-descriptions :not(.is-bordered) .el-descriptions-item__cell {
@@ -305,10 +251,11 @@ export default {
 }
 
 .el-pagination.is-background .el-pager li:not(.disabled).active {
-  background-color: #3f51b5;
+  background-color: #4c8efc;
 }
 .el-pagination .el-select .el-input .el-input__inner {
-  border-radius: 10px;
+  border-radius: 8px;
+  height: 22px;
 }
 
 .margin_box {
@@ -338,7 +285,7 @@ export default {
 .header_box {
   width: 100%;
   height: 200px;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
 }
 
 /*logo部分*/
@@ -390,7 +337,7 @@ export default {
 
 /*搜索按钮*/
 .search_button {
-  width: 65px;
+  width: 80px;
   border: #ffffff;
 }
 
@@ -432,7 +379,7 @@ export default {
 .el-input__inner {
   border-radius: 10px;
   border: 2px solid #fff;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
   color: #ffffff;
 }
 
@@ -443,7 +390,7 @@ export default {
 
 .el-button--primary:focus,
 .el-button--primary:hover {
-  background: #3f51b5;
+  background: #4c8efc;
   border-color: #fff;
   color: #fff;
 }
@@ -459,20 +406,20 @@ export default {
 .el-button--primary {
   margin-top: 7px;
   color: #fff;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
   border-color: #fff;
 }
 
-.el-dropdown {
+/* .el-dropdown {
   width: 100px;
-}
+} */
 
 .el-col {
   border-radius: 4px;
 }
 
 .bg-purple-dark {
-  background: #3f51b5;
+  background: #4c8efc;
 }
 
 .grid-content {

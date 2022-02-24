@@ -7,7 +7,7 @@
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box flaot_box">
-              <img src="../assets/images/login.png" alt="" @click="toHome()" />
+              <img src="../assets/images/logo1.png" alt="" @click="toHome()" />
             </div>
             <!--          <div class="title_box flaot">
             <span>data.LISENCE</span>
@@ -31,34 +31,7 @@
             </div>
             <!--          搜索条部分-->
             <div class="search_box flaot_box">
-              <el-select
-                class="search_box_len"
-                v-model="value"
-                multiple
-                filterable
-                remote
-                reserve-keyword
-                placeholder="请输入关键词"
-                :remote-method="remoteMethod"
-                :loading="loading"
-              >
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </div>
-            <!--          搜索按钮放大镜部分-->
-            <div class="search_button_box flaot_box">
-              <el-button
-                class="search_button"
-                type="primary"
-                icon="el-icon-search"
-                >搜索</el-button
-              >
+              <searchLicense />
             </div>
             <!--          登录部分-->
             <div class="login_box">
@@ -72,7 +45,7 @@
         </el-col>
       </el-row>
       <!--    基本信息部分-->
-      <div class="license_info_box">
+      <div class="license_info_box flaot_box">
         <div v-for="">
           <div class="basic_info_box license_name" style="font-size: 20px">
             Name:{{ licenseInfo.license_name }}
@@ -88,6 +61,11 @@
           </div>
         </div>
       </div>
+      <!-- 导出 -->
+      <div class="Export-box">
+        <export />
+      </div>
+      <div class="clear_box"></div>
     </div>
     <!--  中部-->
     <div class="basic_tabs_box">
@@ -95,7 +73,11 @@
         <el-tab-pane label="Data" name="first">
           <div class="info_tab_box_can flaot_box">
             <div class="tab_can_box">Can</div>
-            <el-collapse accordion v-for="(item,index) in licenseDataTabCan" :key="item.id">
+            <el-collapse
+              accordion
+              v-for="(item, index) in licenseDataTabCan"
+              :key="item.id"
+            >
               <el-collapse-item>
                 <template slot="title">
                   {{ item.property }}
@@ -108,7 +90,11 @@
           </div>
           <div class="info_tab_box_cannot flaot_box">
             <div class="tab_cannot_box">Cannot</div>
-            <el-collapse accordion v-for="item in licenseDataTabCannot" :key="item.id">
+            <el-collapse
+              accordion
+              v-for="item in licenseDataTabCannot"
+              :key="item.id"
+            >
               <el-collapse-item>
                 <template slot="title">
                   {{ item.property }}
@@ -156,10 +142,14 @@
           </div>
           <div class="clear_box"></div>
         </el-tab-pane>
-        <el-tab-pane label="Modle" name="second">
+        <el-tab-pane label="Model" name="second">
           <div class="info_tab_box_can flaot_box">
             <div class="tab_can_box">Can</div>
-            <el-collapse accordion v-for="item in licenseModleTabCan" :key="item.id">
+            <el-collapse
+              accordion
+              v-for="item in licenseModleTabCan"
+              :key="item.id"
+            >
               <el-collapse-item>
                 <template slot="title">
                   {{ item.property }}
@@ -172,7 +162,11 @@
           </div>
           <div class="info_tab_box_cannot flaot_box">
             <div class="tab_cannot_box">Cannot</div>
-            <el-collapse accordion v-for="item in licenseModleTabCannot" :key="item.id">
+            <el-collapse
+              accordion
+              v-for="item in licenseModleTabCannot"
+              :key="item.id"
+            >
               <el-collapse-item>
                 <template slot="title">
                   {{ item.property }}
@@ -235,77 +229,26 @@
       </el-tabs>
     </div>
     <!--尾部-->
-    <div class="tail_box">
-      <p>* 以上license的分析尚未得到律师review</p>
-      <p>* 该网站所有内容不构成任何法律上的建议和保证</p>
+    <div class="lincense-info-tail">
+      <p>* The above license analysis has not been reviewed by lawyers</p>
+      <p>* All contents of the portal do not constitute any legal advice and guarantee</p>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import searchLicense from "../components/Search/searchLicense.vue";
+import Export from "../components/Export/Export.vue";
 
 export default {
+  components: { searchLicense, Export },
   name: "license_Info",
   props: ["id"],
   data() {
     return {
-      activeName: 'second',
+      activeName: "second",
       options: [],
       value: [],
-      list: [],
-      loading: false,
-      states: [
-        "MIT",
-        "MITEE",
-        "Arizona",
-        "Arkansas",
-        "California",
-        "Colorado",
-        "Connecticut",
-        "Delaware",
-        "Florida",
-        "Georgia",
-        "Hawaii",
-        "Idaho",
-        "Illinois",
-        "Indiana",
-        "Iowa",
-        "Kansas",
-        "Kentucky",
-        "Louisiana",
-        "Maine",
-        "Maryland",
-        "Massachusetts",
-        "Michigan",
-        "Minnesota",
-        "Mississippi",
-        "Missouri",
-        "Montana",
-        "Nebraska",
-        "Nevada",
-        "New Hampshire",
-        "New Jersey",
-        "New Mexico",
-        "New York",
-        "North Carolina",
-        "North Dakota",
-        "Ohio",
-        "Oklahoma",
-        "Oregon",
-        "Pennsylvania",
-        "Rhode Island",
-        "South Carolina",
-        "South Dakota",
-        "Tennessee",
-        "Texas",
-        "Utah",
-        "Vermont",
-        "Virginia",
-        "Washington",
-        "West Virginia",
-        "Wisconsin",
-        "Wyoming",
-      ],
       vague: [
         {
           value: "选项1",
@@ -324,11 +267,7 @@ export default {
       licenseOthersTab: [],
     };
   },
-  mounted() {
-    this.list = this.states.map((item) => {
-      return { value: `value:${item}`, label: `label:${item}` };
-    });
-  },
+  mounted() {},
   created: function () {
     this.getLicenseInfo();
     this.getLicenseDataTab();
@@ -336,16 +275,16 @@ export default {
     this.getLicenseOtherTab();
   },
   methods: {
-    toHome(){
-       this.$router.push({
+    toHome() {
+      this.$router.push({
         path: "/licenseAll",
       });
     },
-    toDataSetInfo(id){
+    toDataSetInfo(id) {
       this.$router.push({
-              path: "/dataSetInfo",
-              query: { id },
-            });
+        path: "/dataSetInfo",
+        query: { id },
+      });
     },
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex === 1) {
@@ -354,19 +293,6 @@ export default {
         return "success-row";
       }
       return "";
-    },
-    remoteMethod(query) {
-      if (query !== "") {
-        this.loading = true;
-        setTimeout(() => {
-          this.loading = false;
-          this.options = this.list.filter((item) => {
-            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
-          });
-        }, 200);
-      } else {
-        this.options = [];
-      }
     },
     getLicenseInfo() {
       const that = this;
@@ -443,7 +369,9 @@ export default {
 };
 </script>
 <style>
-/* @import "../assets/styles/licenseInfo.css"; */
+.Export-box {
+  margin-left: 50px;
+}
 .tab_obligation_box {
   width: 299.7px;
   height: 49px;
@@ -493,20 +421,21 @@ export default {
   height: 60px;
   text-align: center;
   line-height: 60px;
-  
 }
-.el-tabs__item a:hover{ color:#F00}
+.el-tabs__item a:hover {
+  color: #f00;
+}
 .el-table .warning-row {
   background: oldlace;
 }
 .el-tabs__active-bar {
-  background-color:#3f51b5 ;
+  background-color: #4c8efc;
 }
-.el-tabs__item.is-active{
-  color: #3f51b5
+.el-tabs__item.is-active {
+  color: #4c8efc;
 }
-.el-tabs__item:hover{
-    color: #3f51b5
+.el-tabs__item:hover {
+  color: #4c8efc;
 }
 .el-table .success-row {
   background: #f0f9eb;
@@ -573,7 +502,7 @@ export default {
   border-radius: 5px;
   margin-top: 2px;
   margin-bottom: 2px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   /* background-color: rgb(234 237 235); */
 }
 .el-collapse {
@@ -596,7 +525,7 @@ export default {
 /*欢迎语部分*/
 .license_info_box {
   margin-top: 35px;
-  margin-left: 30px;
+  margin-left: 70px;
   height: 100px;
   width: 300px;
   font-size: 17px;
@@ -630,7 +559,7 @@ export default {
 
 /*搜索按钮*/
 .search_button {
-  width: 65px;
+  width: 80px;
   border: #ffffff;
 }
 
@@ -652,12 +581,12 @@ export default {
   letter-spacing: normal;
 } */
 
-.paging_box {
+/* .paging_box {
   margin: 0 auto;
   padding-top: 20px;
   width: 500px;
   height: 35px;
-}
+} */
 
 .middle_box {
   width: 1050px;
@@ -691,17 +620,17 @@ export default {
   background: #fde2e2;
 }
 
-.tail_box {
+.lincense-info-tail {
   width: 100%;
   height: 100%;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
   color: #ffffff;
   font-size: 1px;
   margin-top: 132px;
 }
 
 .el-pagination.is-background .el-pager li:not(.disabled).active {
-  background-color: #3f51b5;
+  background-color: #4c8efc;
 }
 .el-pagination .el-select .el-input .el-input__inner {
   border-radius: 10px;
@@ -734,7 +663,7 @@ export default {
 .header_box {
   width: 100%;
   height: 200px;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
 }
 
 /*logo部分*/
@@ -763,10 +692,6 @@ export default {
   background-color: #fff;
 }
 
-.el-icon-search {
-  margin-left: -15px;
-}
-
 .el-select__tags {
   width: 300px;
 }
@@ -780,18 +705,18 @@ export default {
 .el-input__inner {
   border-radius: 10px;
   border: 2px solid #fff;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
   color: #ffffff;
 }
 
 .el-button {
-  border-radius: 15px;
+  border-radius: 10px;
   border: 2px solid #fff;
 }
 
 .el-button--primary:focus,
 .el-button--primary:hover {
-  background: #3f51b5;
+  background: #4c8efc;
   border-color: #fff;
   color: #fff;
 }
@@ -807,20 +732,15 @@ export default {
 .el-button--primary {
   margin-top: 7px;
   color: #fff;
-  background-color: #3f51b5;
+  background-color: #4c8efc;
   border-color: #fff;
 }
-
-.el-dropdown {
-  width: 100px;
-}
-
 .el-col {
   border-radius: 4px;
 }
 
 .bg-purple-dark {
-  background: #3f51b5;
+  background: #4c8efc;
 }
 
 .grid-content {
