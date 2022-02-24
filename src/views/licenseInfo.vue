@@ -244,6 +244,8 @@
 <script>
 import axios from "axios";
 
+var baseUrl = process.env.BASE_URL;
+
 export default {
   name: "license_Info",
   props: ["id"],
@@ -371,7 +373,7 @@ export default {
     getLicenseInfo() {
       const that = this;
       axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_basic_by_id", {
+        .get(baseUrl + "/api/v1/get_license_basic_by_id", {
           params: {
             //  id: 1,
             id: that.id,
@@ -387,7 +389,7 @@ export default {
     getLicenseDataTab() {
       const that = this;
       axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_data_by_id", {
+        .get(baseUrl + "/api/v1/get_license_data_by_id", {
           params: {
             //  id: 1,
             id: that.id,
@@ -405,7 +407,7 @@ export default {
     getLicenseModleTab() {
       const that = this;
       axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_model_by_id", {
+        .get(baseUrl + "/api/v1/get_license_model_by_id", {
           params: {
             id: that.id,
           },
@@ -422,7 +424,7 @@ export default {
     getLicenseOtherTab() {
       const that = this;
       axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_other_by_id", {
+        .get(baseUrl + "/api/v1/get_license_other_by_id", {
           params: {
             id: that.id,
           },

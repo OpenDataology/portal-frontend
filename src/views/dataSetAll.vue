@@ -122,6 +122,8 @@
 <script>
 import axios from "axios";
 
+var baseUrl = process.env.BASE_URL;
+
 export default {
   name: "Welcome",
   data() {
@@ -193,7 +195,7 @@ export default {
     getDataSetData() {
       let that = this;
       axios
-        .get("http://140.83.83.152:30900/api/v1/dataset", {
+        .get(baseUrl + "/api/v1/dataset", {
           params: {
             pageNum: this.numDatasetData.pageNum,
             pageSize: this.numDatasetData.pageSize,

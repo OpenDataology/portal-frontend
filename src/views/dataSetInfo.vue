@@ -299,6 +299,8 @@
 <script>
 import axios from "axios";
 
+var baseUrl = process.env.BASE_URL;
+
 export default {
   name: "license_Info",
   props: ["id"],
@@ -414,7 +416,7 @@ export default {
     getDataSetBasicInfo() {
       const that = this;
       axios
-        .get("http://140.83.83.152:30900/api/v1/get_dataset_by_id", {
+        .get(baseUrl + "/api/v1/get_dataset_by_id", {
           params: {
             //  id: 1,
             id: that.id,

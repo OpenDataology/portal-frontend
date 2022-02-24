@@ -122,6 +122,8 @@
 <script>
 import axios from "axios";
 
+var baseUrl = process.env.BASE_URL;
+
 export default {
   name: "Welcome",
   data() {
@@ -194,7 +196,7 @@ export default {
     getLicenseData() {
       let that = this;
       axios
-        .get("http://140.83.83.152:30900/api/v1/data-license", {
+        .get(baseUrl + "/api/v1/data-license", {
           params: {
             pageNum: this.numLicenseData.pageNum,
             pageSize: this.numLicenseData.pageSize,
@@ -212,7 +214,7 @@ export default {
      getLicenseForName() {
       const that = this;
       axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_basic_by_name", {
+        .get(baseUrl + "/api/v1/get_license_basic_by_name", {
           params: {
             name:"MIT License",
           },
