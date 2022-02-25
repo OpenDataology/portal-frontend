@@ -1,5 +1,5 @@
 <template>
-  <div class="boby_box">
+  <div class="license-info-boby">
     <!--  头部-->
     <div class="header_box">
       <el-row class="el-row">
@@ -368,7 +368,7 @@ export default {
   },
 };
 </script>
-<style>
+<style >
 .Export-box {
   margin-left: 50px;
 }
@@ -485,16 +485,7 @@ export default {
   margin-bottom: 15px;
   box-shadow: 7px 4px 11px #232636;
 }
-/* .info_tab_box {
-  width: 300px;
-  height: 100%;
-  border: 2px solid rgb(34 139 34);
-  border-radius: 5px;
-  margin-left: 65px;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  box-shadow: 7px 4px 11px #232636;
-} */
+
 .el-collapse-item__wrap {
   border-radius: 10px;
 }
@@ -503,7 +494,6 @@ export default {
   margin-top: 2px;
   margin-bottom: 2px;
   background-color: #ffffff;
-  /* background-color: rgb(234 237 235); */
 }
 .el-collapse {
   border: 0;
@@ -573,27 +563,6 @@ export default {
   font-size: 10px;
   color: #a8a4a4;
 }
-
-/* .license_name_clo a {
-  color: #4598f1;
-  text-decoration: none;
-  font: 600 14px/20px Roboto, Helvetica Neue, sans-serif;
-  letter-spacing: normal;
-} */
-
-/* .paging_box {
-  margin: 0 auto;
-  padding-top: 20px;
-  width: 500px;
-  height: 35px;
-} */
-
-.middle_box {
-  width: 1050px;
-  height: 400px;
-  margin: 0 auto;
-}
-
 .like_box {
   border-radius: 10px;
   height: 80px;
@@ -654,7 +623,7 @@ export default {
   float: none;
 }
 
-.boby_box {
+.license-info-boby {
   height: 100%;
   width: 100%;
 }

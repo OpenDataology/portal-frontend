@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <!-- <welcome />
+    <!-- <welcome />-->
     <!-- <license-info/> -->
     <!-- <license-all/> -->
-    <!-- <data-set-all/> -->
-    <!-- <data-set-info/> -->
+     <!-- <data-set-all/> 
+    <data-set-info/> -->
   </div>
 </template>
 

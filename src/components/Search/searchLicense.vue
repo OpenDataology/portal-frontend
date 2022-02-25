@@ -125,10 +125,10 @@ export default {
   /* float: left; */
   margin-left: 10px;
 }
-.el-input {
-  width: 250%;
+.search-box .el-input {
+  width: 250% !important;
 }
 .el-input__icon {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 </style>
