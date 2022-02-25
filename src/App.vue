@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <!--<router-view></router-view>-->
     <!-- <welcome />
     <hello-world /> -->
     <!-- <license-info/> -->
-    <!-- <license-all/> -->
+    <license-all/>
     <!-- <data-set-all/> -->
     <!-- <data-set-info/> -->
   </div>
