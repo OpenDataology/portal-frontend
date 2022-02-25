@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal-frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: portal-frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: portal-frontend
+    spec:
+      containers:
+        - image: robekeane/portal-frontend:0.1
+          name: portal-frontend-con
