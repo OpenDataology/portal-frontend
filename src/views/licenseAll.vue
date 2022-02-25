@@ -6,14 +6,14 @@
         <el-col class="el-col" :span="24">
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
-            <div class="logo_box flaot_box">
+            <div class="logo_box license-flaot-box">
               <img src="../assets/images/11.png" alt="" />
             </div>
             <!--          <div class="title_box flaot">
             <span>data.LISENCE</span>
             </div>-->
             <!--          下拉框部分-->
-            <div class="dropdown_box flaot_box">
+            <div class="dropdown_box license-flaot-box">
               <el-select
                 class="license_color"
                 v-model="value"
@@ -30,7 +30,7 @@
               </el-select>
             </div>
             <!--          搜索条部分-->
-            <div class="search_box flaot_box">
+            <div class="search_box license-flaot-box">
               <searchLicense />
             </div>
             <!--          登录部分-->
@@ -51,21 +51,21 @@
 
     <div class="licenseAll-middle">
       <div
-        class="flaot_box like_box"
+        class="license-like-box license-flaot-box "
         v-for="item in licenseData"
         @click="toLicenseInfo(item.id)"
       >
-        <div class="license_id_clo">{{ item.id }}</div>
-        <div class="license_name_clo">{{ item.license_name }}</div>
-        <div class="license_type_clo">{{ item.license_type }}</div>
+        <!-- <div class="license_id_clo license-clo">{{ item.id }}</div> -->
+        <div class="license-name-clo license-clo">{{ item.license_name }}</div>
+        <div class="license_type_clo license-clo">{{ item.license_type }}</div>
       </div>
     </div>
 
     <!--  分页-->
     <!-- <button @click="toLicenseInfo()"></button> -->
     <div class="licenseAll-paging">
-      <div class="total_box flaot_box">Total:{{ numLicenseData.totalNum }}</div>
-      <div class="block flaot_box">
+      <div class="license-total-box license-flaot-box">Total:{{ numLicenseData.totalNum }}</div>
+      <div class="block license-flaot-box">
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -80,12 +80,15 @@
     </div>
 
     <!--尾部-->
-    <div class="tail_box">
+    <div class="license-tail-box">
       <el-row>
         <el-col :span="24">
           <div class="bg-purple-dark tail_box_len">
             <p>* The above license analysis has not been reviewed by lawyers</p>
-            <p>* All contents of the portal do not constitute any legal advice and guarantee</p>
+            <p>
+              * All contents of the portal do not constitute any legal advice
+              and guarantee
+            </p>
           </div>
         </el-col>
       </el-row>
@@ -93,8 +96,8 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import searchLicense from "../components/Search/searchLicense.vue";
+import { getLicenseList } from "../../config/http.env.js";
 
 export default {
   components: { searchLicense },
@@ -148,23 +151,22 @@ export default {
         query: { id },
       });
     },
-    getLicenseData() {
-      let that = this;
-      axios
-        .get("http://140.83.83.152:30900/api/v1/data-license", {
-          params: {
-            pageNum: this.numLicenseData.pageNum,
-            pageSize: this.numLicenseData.pageSize,
-            status: this.numLicenseData.status,
-            totalNum: this.numLicenseData.totalNum,
-          },
-        })
-        .then(function (response) {
-          that.licenseData = response.data.data;
-          // console.log(that.tableData);
-          that.numLicenseData = response.data;
-          // console.log(that.numData);
-        });
+    async getLicenseData() {
+      // let that = this;
+
+      const { data, pageNum } = await getLicenseList("/data-license", {
+        params: this.numLicenseData,
+      });
+      // }).then(function (response) {
+      //   console.log(response);
+      //    = response.data;
+      //   // console.log(that.tableData);
+      //   that.numLicenseData = response.pageNum;
+      //   // console.log(that.numData);
+      // });
+
+      this.licenseData = data;
+      this.numLicenseData.pageNum = pageNum;
     },
     //分页监听 监听尺寸改变
     handleSizeChange(newSize) {
@@ -182,7 +184,11 @@ export default {
 </script>
 
 <style>
-.total_box {
+.license-clo {
+  margin-left: 5px;
+  margin-top: 3px;
+}
+.license-total-box {
   line-height: 32px;
   text-align: center;
   font-size: 13px;
@@ -193,10 +199,10 @@ export default {
   color: #a8a4a4;
 }
 
-.license_name_clo a {
+.license-name-clo  {
   color: #4598f1;
   text-decoration: none;
-  font: 600 14px/20px Roboto, Helvetica Neue, sans-serif;
+  font: 600 13px/20px Roboto, Helvetica Neue, sans-serif;
   letter-spacing: normal;
 }
 
@@ -213,13 +219,13 @@ export default {
   margin: 0 auto;
 }
 
-.like_box {
+.license-like-box {
   border-radius: 5px;
   height: 80px;
   width: 330px;
   margin-top: 20px;
   margin-left: 30px;
-  background-color: #ffffff;
+  background-color: #f2f2f2;
   box-shadow: 3px 2px 10px #232636;
 }
 
@@ -244,7 +250,7 @@ export default {
   height: 40px;
 }
 
-.tail_box {
+.license-tail-box {
   color: #ffffff;
   font-size: 1px;
   margin-top: 17px;
@@ -267,7 +273,7 @@ export default {
 }
 
 /*顶部浮动*/
-.flaot_box {
+.license-flaot-box {
   float: left;
 }
 

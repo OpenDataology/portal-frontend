@@ -102,7 +102,7 @@
              License Name
             </template>
             <!-- <a href="licenseInfo">{{ dataSetBasicInfo.license_name }}</a> -->
-            <router-link :to="{path:'/licenseInfo', query: {id:dataSetBasicInfo.license_id}}"> 
+            <router-link :to="{path:'/licenseInfo', query: {id:dataSetBasicInfo.license_id}} " target="_blank"> 
               {{ dataSetBasicInfo.license_name }}
             </router-link>
           </el-descriptions-item>
@@ -295,7 +295,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .Export-box{
   margin-left: 50px;
 }

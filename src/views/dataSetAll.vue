@@ -6,14 +6,14 @@
         <el-col class="el-col" :span="24">
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
-            <div class="logo_box flaot_box">
+            <div class="logo_box daset-flaot-box">
               <img src="../assets/images/11.png" alt="" @click="toHome()" />
             </div>
             <!--          <div class="title_box flaot">
             <span>data.LISENCE</span>
             </div>-->
             <!--          下拉框部分-->
-            <div class="dropdown_box flaot_box">
+            <div class="dropdown_box daset-flaot-box">
               <el-select
                 class="license_color"
                 v-model="value"
@@ -30,8 +30,8 @@
               </el-select>
             </div>
             <!--          搜索条部分-->
-            <div class="search_box flaot_box">
-              <searchDataset/>
+            <div class="search_box daset-flaot-box">
+              <searchDataset />
             </div>
             <!--          登录部分-->
             <div class="login_box">
@@ -51,23 +51,23 @@
 
     <div class="middle_box">
       <div
-        class="flaot_box like_box"
+        class="dataset-like-box daset-flaot-box "
         v-for="item in dataSetData"
         @click="toDataSetInfo(item.id)"
       >
-              <div class="license_id_clo">{{ item.license_id }}</div>
+        <!-- <div class="license_id_clo">{{ item.license_id }}</div> -->
 
-        <div class="license_name_clo">{{ item.dataset_name }}</div>
-        <div class="license_type_clo">{{ item.dataset_version }}</div>
+        <div class="dataset-name-clo dataset-clo">{{ item.dataset_name }}</div>
+        <div class="license_type_clo dataset-clo">{{ item.dataset_version }}</div>
       </div>
     </div>
 
     <!--  分页-->
     <!-- <button @click="toLicenseInfo()"></button> -->
     <div class="paging-box">
-            <div class="total_box flaot_box">Total:{{numDatasetData.totalNum}}</div>
+      <div class="dataset-total-box daset-flaot-box">Total:{{ numDatasetData.totalNum }}</div>
 
-      <div class="block flaot_box">
+      <div class="block daset-flaot-box">
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -81,12 +81,15 @@
     </div>
 
     <!--尾部-->
-    <div class="tail_box">
+    <div class="dataset-tail-box">
       <el-row>
         <el-col :span="24">
           <div class="bg-purple-dark tail_box_len">
-           <p>* The above license analysis has not been reviewed by lawyers</p>
-            <p>* All contents of the portal do not constitute any legal advice and guarantee</p>
+            <p>* The above license analysis has not been reviewed by lawyers</p>
+            <p>
+              * All contents of the portal do not constitute any legal advice
+              and guarantee
+            </p>
           </div>
         </el-col>
       </el-row>
@@ -95,14 +98,14 @@
 </template>
 <script>
 import axios from "axios";
-import searchDataset  from '../components/Search/searchDataset.vue';
+import searchDataset from "../components/Search/searchDataset.vue";
 
 export default {
   components: { searchDataset },
   name: "Welcome",
   data() {
     return {
-      value:[],
+      value: [],
       vague: [
         {
           value: "选项1",
@@ -131,18 +134,18 @@ export default {
     this.getDataSetData();
   },
   methods: {
-      toHome(){
-       this.$router.push({
+    toHome() {
+      this.$router.push({
         path: "/licenseAll",
       });
     },
-      toDataSetInfo(id) {
+    toDataSetInfo(id) {
       this.$router.push({
         path: "/dataSetInfo",
         query: { id },
       });
     },
-    
+
     getDataSetData() {
       let that = this;
       axios
@@ -161,7 +164,6 @@ export default {
           // console.log(that.numDatasetData);
         });
     },
-    
 
     //分页监听 监听尺寸改变
     handleSizeChange(newSize) {
@@ -179,21 +181,25 @@ export default {
 </script>
 
 <style>
-.total_box{
+.dataset-total-box{
   line-height: 32px;
   text-align: center;
   font-size: 13px;
   color: rgb(126, 123, 123);
+}
+.dataset-clo{
+  margin-left: 5px;
+  margin-top: 3px;
 }
 .license_type_clo {
   font-size: 10px;
   color: #a8a4a4;
 }
 
-.license_name_clo a {
+.dataset-name-clo {
   color: #4598f1;
   text-decoration: none;
-  font: 600 14px/20px Roboto, Helvetica Neue, sans-serif;
+  font: 600 13px/20px Roboto, Helvetica Neue, sans-serif;
   letter-spacing: normal;
 }
 
@@ -210,13 +216,13 @@ export default {
   margin: 0 auto;
 }
 
-.like_box {
+.dataset-like-box {
   border-radius: 5px;
   height: 80px;
   width: 330px;
   margin-top: 20px;
   margin-left: 30px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 3px 2px 10px #232636;
 }
 
@@ -241,7 +247,7 @@ export default {
   height: 40px;
 }
 
-.tail_box {
+.dataset-tail-box {
   color: #ffffff;
   font-size: 1px;
   margin-top: 17px;
@@ -263,7 +269,7 @@ export default {
 }
 
 /*顶部浮动*/
-.flaot_box {
+.daset-flaot-box {
   float: left;
 }
 
