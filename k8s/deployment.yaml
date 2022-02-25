@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: portal-backend-deployment
+  name: portal-frontend-deployment
 spec:
   selector:
     matchLabels:
-      app: portal-backend
+      app: portal-frontend
   strategy:
     type: Recreate
   template:
