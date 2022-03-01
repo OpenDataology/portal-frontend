@@ -31,7 +31,7 @@
             </div>
             <!--          搜索条部分-->
             <div class="search_box flaot_box">
-              <searchDataset/>
+              <searchDataset />
             </div>
             <!--          登录部分-->
             <div class="login_box">
@@ -63,10 +63,9 @@
       </div>
       <!-- 导出 -->
       <div class="Export-box">
-          <export/>
+        <export />
       </div>
-            <div class="clear_box"></div>
-
+      <div class="clear_box"></div>
     </div>
     <!--  中部-->
     <div class="basic_metaData_box">
@@ -80,114 +79,84 @@
           border
         >
           <el-descriptions-item>
-            <template slot="label">
-             Name
-            </template>
+            <template slot="label"> Name </template>
             {{ dataSetBasicInfo.dataset_name }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-            Version
-            </template>
+            <template slot="label"> Version </template>
             {{ dataSetBasicInfo.dataset_version }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-             License ID
-            </template>
+            <template slot="label"> License ID </template>
             {{ dataSetBasicInfo.license_id }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-             License Name
-            </template>
+            <template slot="label"> License Name </template>
             <!-- <a href="licenseInfo">{{ dataSetBasicInfo.license_name }}</a> -->
-            <router-link :to="{path:'/licenseInfo', query: {id:dataSetBasicInfo.license_id}} " target="_blank"> 
+            <router-link
+              :to="{
+                path: '/licenseInfo',
+                query: { id: dataSetBasicInfo.license_id },
+              }"
+              target="_blank"
+            >
               {{ dataSetBasicInfo.license_name }}
             </router-link>
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-             Licensor
-            </template>
+            <template slot="label"> Licensor </template>
             {{ dataSetBasicInfo.licensor }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-             License From
-            </template>
+            <template slot="label"> License From </template>
             {{ dataSetBasicInfo.license_from }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              License Location
-            </template>
+            <template slot="label"> License Location </template>
             {{ dataSetBasicInfo.license_location }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Origin
-            </template>
+            <template slot="label"> Origin </template>
             {{ dataSetBasicInfo.origin }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Downloaded
-            </template>
+            <template slot="label"> Downloaded </template>
             {{ dataSetBasicInfo.downloaded_outlet }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Outlet
-            </template>
+            <template slot="label"> Outlet </template>
             {{ dataSetBasicInfo.outlet_licensed }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Size
-            </template>
+            <template slot="label"> Size </template>
             {{ dataSetBasicInfo.data_size }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Format
-            </template>
+            <template slot="label"> Format </template>
             {{ dataSetBasicInfo.format }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Personal
-            </template>
+            <template slot="label"> Personal </template>
             {{ dataSetBasicInfo.is_personal_data }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Additional
-            </template>
+            <template slot="label"> Additional </template>
             {{ dataSetBasicInfo.is_additional_verify }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Offensive
-            </template>
+            <template slot="label"> Offensive </template>
             {{ dataSetBasicInfo.is_offensive_content }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Comply
-            </template>
+            <template slot="label"> Comply </template>
             {{ dataSetBasicInfo.is_comply }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Collect
-            </template>
+            <template slot="label"> Collect </template>
             {{ dataSetBasicInfo.dataset_collect_method }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Available
-            </template>
+            <template slot="label"> Available </template>
             {{ dataSetBasicInfo.available }}
           </el-descriptions-item>
         </el-descriptions>
@@ -199,27 +168,19 @@
           border
         >
           <el-descriptions-item>
-            <template slot="label">
-              License content
-            </template>
+            <template slot="label"> License content </template>
             {{ dataSetBasicInfo.license_content }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Description
-            </template>
+            <template slot="label"> Description </template>
             {{ dataSetBasicInfo.description }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Collection process
-            </template>
+            <template slot="label"> Collection process </template>
             {{ dataSetBasicInfo.collection_process }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label">
-              Collection process
-            </template>
+            <template slot="label"> Collection process </template>
             {{ dataSetBasicInfo.collection_process }}
           </el-descriptions-item>
         </el-descriptions>
@@ -228,15 +189,19 @@
     <!--尾部-->
     <div class="dataset-info-tail">
       <p>* The above license analysis has not been reviewed by lawyers</p>
-      <p>* All contents of the portal do not constitute any legal advice and guarantee</p>
+      <p>
+        * All contents of the portal do not constitute any legal advice and
+        guarantee
+      </p>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
 
-import searchDataset  from '../components/Search/searchDataset.vue';
-import Export from '../components/Export/Export.vue';
+import searchDataset from "../components/Search/searchDataset.vue";
+import Export from "../components/Export/Export.vue";
+import { getDatasetBasic } from "../../config/http.env.js";
 
 export default {
   components: { searchDataset, Export },
@@ -245,7 +210,7 @@ export default {
   data() {
     return {
       size: "",
-      value:[],
+      value: [],
       vague: [
         {
           value: "选项1",
@@ -270,22 +235,40 @@ export default {
         query: { id },
       });
     },
-    getDataSetBasicInfo() {
-      const that = this;
-      axios
-        .get("http://140.83.83.152:30900/api/v1/get_dataset_by_id", {
-          params: {
-            //  id: 1,
-            id: that.id,
-          },
-        })
-        .then(function (response) {
-          // console.log(response.data.data);
-          that.dataSetBasicInfo = response.data.data;
-          // console.log(that.licenseInfo);
-        });
-      // console.log(that.$router.query.goodsid);
+    async getDataSetBasicInfo() {
+      // let that = this;
+      const { data } = await getDatasetBasic({ id: this.id });
+      console.log(data);
+      this.dataSetBasicInfo = data;
+      console.log(this.dataSetBasicInfo);
     },
+    //  async getDataSetBasicInfo() {
+    //   // let that = this;
+    //   const { data } = await getDatasetBasic("/get_dataset_by_id", {
+    //     params: {
+    //       id: this.id,
+    //     },
+    //   });
+    //   console.log(data);
+    //   this.dataSetBasicInfo = data;
+    //   console.log(this.dataSetBasicInfo);
+    // },
+    // getDataSetBasicInfo() {
+    //   const that = this;
+    //   axios
+    //     .get("http://140.83.83.152:30900/api/v1/get_dataset_by_id", {
+    //       params: {
+    //         //  id: 1,
+    //         id: that.id,
+    //       },
+    //     })
+    //     .then(function (response) {
+    //       // console.log(response.data.data);
+    //       that.dataSetBasicInfo = response.data.data;
+    //       // console.log(that.licenseInfo);
+    //     });
+    //   // console.log(that.$router.query.goodsid);
+    // },
     handleClick(tab, event) {
       console.log(tab, event);
     },
@@ -296,7 +279,7 @@ export default {
 };
 </script>
 <style scoped>
-.Export-box{
+.Export-box {
   margin-left: 50px;
 }
 .basic_metaData_box {
@@ -387,7 +370,7 @@ export default {
   margin-top: 2px;
   margin-bottom: 2px;
   background-color: #ffffff; */
-  /* background-color: rgb(234 237 235); */
+/* background-color: rgb(234 237 235); */
 /* }
 .el-collapse {
   border: 0;

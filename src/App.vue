@@ -5,7 +5,7 @@
     <!-- <license-info/> -->
     <!-- <license-all/> -->
      <!-- <data-set-all/> 
-    <data-set-info/> -->
+    <!--<data-set-info/> -->
   </div>
 </template>
 

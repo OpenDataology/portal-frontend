@@ -65,7 +65,7 @@
     <!--  分页-->
     <!-- <button @click="toLicenseInfo()"></button> -->
     <div class="paging-box">
-      <div class="dataset-total-box daset-flaot-box">Total:{{ numDatasetData.totalNum }}</div>
+      <div class="dataset-total-box daset-flaot-box">Total:{{totalNum }}</div>
 
       <div class="block daset-flaot-box">
         <el-pagination
@@ -74,7 +74,7 @@
           :current-page="dataSetData.pageNum"
           :page-size="numDatasetData.pageSize"
           layout=" prev, pager, next, jumper"
-          :total="numDatasetData.totalNum"
+          :total="totalNum"
         >
         </el-pagination>
       </div>
@@ -99,6 +99,7 @@
 <script>
 import axios from "axios";
 import searchDataset from "../components/Search/searchDataset.vue";
+import { getDatasetDataAll } from "../../config/http.env.js";
 
 export default {
   components: { searchDataset },
@@ -108,16 +109,15 @@ export default {
       value: [],
       vague: [
         {
-          value: "选项1",
+          value: "1",
           label: "License",
         },
       ],
       dataSetData: [],
+      totalNum: 0,
       numDatasetData: {
-        totalNum: 20,
         pageSize: 12,
         pageNum: 1,
-        status: "success",
       },
       basicInfoId: {},
     };
@@ -131,7 +131,7 @@ export default {
     )[0].childNodes[2].nodeValue = "";
   },
   created: function () {
-    this.getDataSetData();
+    this.getDatasetData();
   },
   methods: {
     toHome() {
@@ -145,25 +145,38 @@ export default {
         query: { id },
       });
     },
-
-    getDataSetData() {
-      let that = this;
-      axios
-        .get("http://140.83.83.152:30900/api/v1/dataset", {
-          params: {
-            pageNum: this.numDatasetData.pageNum,
-            pageSize: this.numDatasetData.pageSize,
-            status: this.numDatasetData.status,
-            totalNum: this.numDatasetData.totalNum,
-          },
-        })
-        .then(function (response) {
-          that.dataSetData = response.data.data;
-          // console.log(that.dataSetData);
-          that.numDatasetData = response.data;
-          // console.log(that.numDatasetData);
-        });
+    async getDatasetData() {
+      const { data, totalNum } = await getDatasetDataAll(this.numLicenseData);
+      this.dataSetData = data;
+      this.totalNum = totalNum;
     },
+    // async getDatasetData() {
+    //   // let that = this;
+
+    //   const { data, pageNum } = await getDatasetDataAll("/dataset", {
+    //     params: this.numLicenseData,
+    //   });
+    //   this.dataSetData = data;
+    //   this.numDatasetData.pageNum = pageNum;
+    // },
+    // getDataSetData() {
+    //   let that = this;
+    //   axios
+    //     .get("http://140.83.83.152:30900/api/v1/dataset", {
+    //       params: {
+    //         pageNum: this.numDatasetData.pageNum,
+    //         pageSize: this.numDatasetData.pageSize,
+    //         status: this.numDatasetData.status,
+    //         totalNum: this.numDatasetData.totalNum,
+    //       },
+    //     })
+    //     .then(function (response) {
+    //       that.dataSetData = response.data.data;
+    //       // console.log(that.dataSetData);
+    //       that.numDatasetData = response.data;
+    //       // console.log(that.numDatasetData);
+    //     });
+    // },
 
     //分页监听 监听尺寸改变
     handleSizeChange(newSize) {

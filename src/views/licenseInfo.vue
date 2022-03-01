@@ -47,16 +47,16 @@
       <!--    基本信息部分-->
       <div class="license_info_box flaot_box">
         <div v-for="">
-          <div class="basic_info_box license_name" style="font-size: 20px">
+          <div class="basic-info-box license-name" style="font-size: 20px">
             Name:{{ licenseInfo.license_name }}
           </div>
-          <div class="basic_info_box license_type" style="font-size: 13px">
+          <div class="basic-info-box license-type" style="font-size: 13px">
             type:{{ licenseInfo.license_type }}
           </div>
-          <div class="basic_info_box osi_approved" style="font-size: 13px">
+          <div class="basic-info-box osi-approved" style="font-size: 13px">
             approved:{{ licenseInfo.osi_approved }}
           </div>
-          <div class="basic_info_box short_identifier" style="font-size: 13px">
+          <div class="basic-info-box short-identifier" style="font-size: 13px">
             identifier:{{ licenseInfo.short_identifier }}
           </div>
         </div>
@@ -231,7 +231,10 @@
     <!--尾部-->
     <div class="lincense-info-tail">
       <p>* The above license analysis has not been reviewed by lawyers</p>
-      <p>* All contents of the portal do not constitute any legal advice and guarantee</p>
+      <p>
+        * All contents of the portal do not constitute any legal advice and
+        guarantee
+      </p>
     </div>
   </div>
 </template>
@@ -239,6 +242,10 @@
 import axios from "axios";
 import searchLicense from "../components/Search/searchLicense.vue";
 import Export from "../components/Export/Export.vue";
+import { getLicenseBasicInfo } from "../../config/http.env.js";
+import { getLicenseBasicDataTab } from "../../config/http.env.js";
+import { getLicenseBasicModleTab } from "../../config/http.env.js";
+import { getLicenseBasicOtherTab } from "../../config/http.env.js";
 
 export default {
   components: { searchLicense, Export },
@@ -294,76 +301,121 @@ export default {
       }
       return "";
     },
-    getLicenseInfo() {
-      const that = this;
-      axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_basic_by_id", {
-          params: {
-            //  id: 1,
-            id: that.id,
-          },
-        })
-        .then(function (response) {
-          // console.log(response.data.data);
-          that.licenseInfo = response.data.data;
-          // console.log(that.licenseInfo);
-        });
-      // console.log(that.$router.query.goodsid);
+    // async getLicenseInfo() {
+    //   // let that = this;
+
+    //   const { data } = await getLicenseBasic("/get_license_basic_by_id", {
+    //     params: this.id,
+    //   });
+    //   // }).then(function (response) {
+    //   //   console.log(response);
+    //   //    = response.data;
+    //   //   // console.log(that.tableData);
+    //   //   that.numLicenseData = response.pageNum;
+    //   //   // console.log(that.numData);
+    //   // });
+
+    //   this.licenseInfo = data;
+    //   console.log(data);
+    //   // this.numLicenseData.pageNum = pageNum;
+    // },
+    // getLicenseInfo() {
+    //   const that = this;
+    //   axios
+    //     .get("http://140.83.83.152:30900/api/v1/get_license_basic_by_id", {
+    //       params: {
+    //         //  id: 1,
+    //         id: that.id,
+    //       },
+    //     })
+    //     .then(function (response) {
+    //       // console.log(response.data.data);
+    //       that.licenseInfo = response.data.data;
+    //       // console.log(that.licenseInfo);
+    //     });
+    // },
+    async getLicenseInfo() {
+      // let that = this;
+      const { data } = await getLicenseBasicInfo({ id: this.id });
+      console.log(data);
+      this.licenseInfo = data;
+      console.log(this.licenseInfo);
     },
-    getLicenseDataTab() {
-      const that = this;
-      axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_data_by_id", {
-          params: {
-            //  id: 1,
-            id: that.id,
-          },
-        })
-        .then(function (response) {
-          // console.log(response.data.data.cannot);
-          that.licenseDataTabCan = response.data.data.can;
-          that.licenseDataTabCannot = response.data.data.cannot;
-          that.licenseDataTabObligation = response.data.data.obligation;
-          that.licenseDataTabLimitation = response.data.data.limitation;
-          // console.log(that.licenseTab);
-        });
+    async getLicenseDataTab() {
+      const { data } = await getLicenseBasicDataTab({ id: this.id });
+      console.log(data);
+      this.licenseDataTabCan = data.can;
+      this.licenseDataTabCannot = data.cannot;
+      this.licenseDataTabObligation = data.obligation;
+      this.licenseDataTabLimitation = data.limitation;
     },
-    getLicenseModleTab() {
-      const that = this;
-      axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_model_by_id", {
-          params: {
-            id: that.id,
-          },
-        })
-        .then(function (response) {
-          // console.log(response.data.data.cannot);
-          that.licenseModleTabCan = response.data.data.can;
-          that.licenseModleTabCannot = response.data.data.cannot;
-          that.licenseModleTabObligation = response.data.data.obligation;
-          that.licenseModleTabLimitation = response.data.data.limitation;
-          // console.log(that.licenseModleTab);
-        });
+    async getLicenseModleTab() {
+      const { data } = await getLicenseBasicModleTab({ id: this.id });
+      this.licenseModleTabCan = data.can;
+      this.licenseModleTabCannot = data.cannot;
+      this.licenseModleTabObligation = data.obligation;
+      this.licenseModleTabLimitation = data.limitation;
     },
-    getLicenseOtherTab() {
-      const that = this;
-      axios
-        .get("http://140.83.83.152:30900/api/v1/get_license_other_by_id", {
-          params: {
-            id: that.id,
-          },
-        })
-        .then(function (response) {
-          // console.log(response.data.data);
-          that.licenseOthersTab = response.data.data;
-          // console.log(that.licenseOthersTab);
-        });
+    async getLicenseOtherTab() {
+      const { data } = await getLicenseBasicOtherTab({ id: this.id });
+      this.licenseOthersTab = data;
     },
+    // getLicenseDataTab() {
+    //   const that = this;
+    //   axios
+    //     .get("http://140.83.83.152:30900/api/v1/get_license_data_by_id", {
+    //       params: {
+    //         //  id: 1,
+    //         id: that.id,
+    //       },
+    //     })
+    //     .then(function (response) {
+    //       // console.log(response.data.data.cannot);
+    //       that.licenseDataTabCan = response.data.data.can;
+    //       that.licenseDataTabCannot = response.data.data.cannot;
+    //       that.licenseDataTabObligation = response.data.data.obligation;
+    //       that.licenseDataTabLimitation = response.data.data.limitation;
+    //       // console.log(that.licenseTab);
+    //     });
+    // },
+
+    // getLicenseModleTab() {
+    //   const that = this;
+    //   axios
+    //     .get("http://140.83.83.152:30900/api/v1/get_license_model_by_id", {
+    //       params: {
+    //         id: that.id,
+    //       },
+    //     })
+    //     .then(function (response) {
+    //       // console.log(response.data.data.cannot);
+    //       that.licenseModleTabCan = response.data.data.can;
+    //       that.licenseModleTabCannot = response.data.data.cannot;
+    //       that.licenseModleTabObligation = response.data.data.obligation;
+    //       that.licenseModleTabLimitation = response.data.data.limitation;
+    //       // console.log(that.licenseModleTab);
+    //     });
+    // },
+
+    // getLicenseOtherTab() {
+    //   const that = this;
+    //   axios
+    //     .get("http://140.83.83.152:30900/api/v1/get_license_other_by_id", {
+    //       params: {
+    //         id: that.id,
+    //       },
+    //     })
+    //     .then(function (response) {
+    //       // console.log(response.data.data);
+    //       that.licenseOthersTab = response.data.data;
+    //       // console.log(that.licenseOthersTab);
+    //     });
+    // },
     handleClick(tab, event) {
-      console.log(tab, event);
+      // console.log(tab, event);
     },
     handleChange(val) {
-      console.log(val);
+      // console.log(val);
     },
   },
 };
@@ -506,8 +558,8 @@ export default {
 /* .el-tabs__content {
   height: 390px;
 } */
-.basic_info_box {
-  width: 300px;
+.basic-info-box {
+  width: 500px;
   /* text-align: center;
   line-height: 100px; */
   color: #ffffffff;
@@ -559,10 +611,10 @@ export default {
   float: right;
 }
 
-.license_type_clo {
+/* .license_type_clo {
   font-size: 10px;
   color: #a8a4a4;
-}
+} */
 .like_box {
   border-radius: 10px;
   height: 80px;

@@ -6,6 +6,10 @@ Vue.use(Router)
 export default new Router({
     routes: [
       {
+        path: '/',
+        component: () => import('../views/licenseAll.vue')
+      },
+      {
         path: '/licenseAll',
         component: () => import('../views/licenseAll.vue')
       },{
@@ -29,6 +33,9 @@ export default new Router({
       },{
         path:"/Export",
         component:()=>import("../components/Export/Export.vue"),
+      },,{
+        path:"/licenseTypeAll",
+        component:()=>import("../views/licenseTypeAll.vue"),
       }
     
     ]
