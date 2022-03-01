@@ -149,7 +149,7 @@ export default {
     getDataSetData() {
       let that = this;
       axios
-        .get("http://140.83.83.152:30900/api/v1/dataset", {
+        .get("http://10.233.58.26:9000/api/v1/dataset", {
           params: {
             pageNum: this.numDatasetData.pageNum,
             pageSize: this.numDatasetData.pageSize,

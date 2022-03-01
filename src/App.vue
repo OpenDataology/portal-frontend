@@ -4,8 +4,8 @@
     <!-- <welcome />-->
     <!-- <license-info/> -->
     <!-- <license-all/> -->
-     <!-- <data-set-all/> 
-    <data-set-info/> -->
+     <!-- <data-set-all/> -->
+     <!-- <data-set-info/> -->
   </div>
 </template>
 
