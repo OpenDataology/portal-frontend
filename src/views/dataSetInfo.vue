@@ -24,7 +24,7 @@
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
-                  @click.native="toLicenseInfo(dataSetBasicInfo.license_id)"
+                  @click.native="toHome()"
                 >
                 </el-option>
               </el-select>
@@ -227,12 +227,6 @@ export default {
     toHome() {
       this.$router.push({
         path: "/licenseAll",
-      });
-    },
-    toLicenseInfo(id) {
-      this.$router.push({
-        path: "/licenseInfo",
-        query: { id },
       });
     },
     async getDataSetBasicInfo() {

@@ -24,7 +24,7 @@
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
-                  @click.native="toDataSetInfo(licenseInfo.id)"
+                  @click.native="toDataSetALL()"
                 >
                 </el-option>
               </el-select>
@@ -287,12 +287,17 @@ export default {
         path: "/licenseAll",
       });
     },
-    toDataSetInfo(id) {
+     toDataSetALL() {
       this.$router.push({
-        path: "/dataSetInfo",
-        query: { id },
+        path: "/dataSetAll",
       });
     },
+    // toDataSetInfo(id) {
+    //   this.$router.push({
+    //     path: "/dataSetInfo",
+    //     query: { id },
+    //   });
+    // },
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex === 1) {
         return "warning-row";
