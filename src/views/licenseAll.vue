@@ -51,7 +51,7 @@
 
     <div class="licenseAll-middle">
       <div
-        class="license-like-box license-flaot-box "
+        class="license-like-box license-flaot-box"
         v-for="item in licenseData"
         @click="toLicenseInfo(item.id)"
       >
@@ -64,7 +64,9 @@
     <!--  分页-->
     <!-- <button @click="toLicenseInfo()"></button> -->
     <div class="licenseAll-paging">
-      <div class="license-total-box license-flaot-box">Total:{{ numLicenseData.totalNum }}</div>
+      <div class="license-total-box license-flaot-box">
+        Total:{{ totalNum }}
+      </div>
       <div class="block license-flaot-box">
         <el-pagination
           @size-change="handleSizeChange"
@@ -72,7 +74,7 @@
           :current-page="licenseData.pageNum"
           :page-size="numLicenseData.pageSize"
           layout=" prev, pager, next, jumper"
-          :total="numLicenseData.totalNum"
+          :total="totalNum"
         >
         </el-pagination>
       </div>
@@ -97,7 +99,7 @@
 </template>
 <script>
 import searchLicense from "../components/Search/searchLicense.vue";
-import { getLicenseList } from "../../config/http.env.js";
+import { getLicenseDataAll } from "../../config/http.env.js";
 
 export default {
   components: { searchLicense },
@@ -107,16 +109,15 @@ export default {
       value: [],
       vague: [
         {
-          value: "选项1",
+          value: "1",
           label: "Dataset",
         },
       ],
       licenseData: [],
+      totalNum: 0,
       numLicenseData: {
-        totalNum: 20,
         pageSize: 12,
         pageNum: 1,
-        status: "success",
       },
       basicInfoId: {},
     };
@@ -153,20 +154,9 @@ export default {
     },
     async getLicenseData() {
       // let that = this;
-
-      const { data, pageNum } = await getLicenseList("/data-license", {
-        params: this.numLicenseData,
-      });
-      // }).then(function (response) {
-      //   console.log(response);
-      //    = response.data;
-      //   // console.log(that.tableData);
-      //   that.numLicenseData = response.pageNum;
-      //   // console.log(that.numData);
-      // });
-
+      const { data, totalNum } = await getLicenseDataAll(this.numLicenseData);
       this.licenseData = data;
-      this.numLicenseData.pageNum = pageNum;
+      this.totalNum = totalNum;
     },
     //分页监听 监听尺寸改变
     handleSizeChange(newSize) {
@@ -177,7 +167,6 @@ export default {
     handleCurrentChange(newPage) {
       this.numLicenseData.pageNum = newPage;
       this.getLicenseData();
-      // console.log(newPage)
     },
   },
 };
@@ -199,7 +188,7 @@ export default {
   color: #a8a4a4;
 }
 
-.license-name-clo  {
+.license-name-clo {
   color: #4598f1;
   text-decoration: none;
   font: 600 13px/20px Roboto, Helvetica Neue, sans-serif;
