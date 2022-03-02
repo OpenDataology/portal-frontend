@@ -11,13 +11,6 @@ axios.interceptors.response.use(
         return Promise.reject(error)
     }
 )
-
-
-
-
-
-axios.defaults.baseURL = "http://10.233.58.26:9000/api/v1";
-
 /**
  * 获取所有的License数据
  * @param {String} url 
