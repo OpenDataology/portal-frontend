@@ -97,9 +97,8 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import searchDataset from "../components/Search/searchDataset.vue";
-import { getDatasetDataAll } from "../../config/http.env.js";
+import { getDatasetDataAll } from "../../config/api.env.js";
 
 export default {
   components: { searchDataset },
@@ -146,10 +145,10 @@ export default {
       });
     },
     async getDatasetData() {
-      const { data, totalNum } = await getDatasetDataAll(this.numLicenseData);
+      const { data, totalNum } = await getDatasetDataAll(this.numDatasetData);
       this.dataSetData = data;
       this.totalNum = totalNum;
-
+      console.log(this.numDatasetData);
     },
     // async getDatasetData() {
     //   // let that = this;

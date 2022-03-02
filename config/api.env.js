@@ -1,16 +1,5 @@
-import axios from "axios";
-// axios.defaults.baseURL = "http://140.83.83.152:30900/api/v1";
-axios.interceptors.response.use(
-    config => {
-        if (config.status === 200) {
-            return config.data;
-        }
-    },
-    error => {
-        error.message = '请求超时或服务器异常，请检查网络或联系管理员！'
-        return Promise.reject(error)
-    }
-)
+import axios from "./http.env"
+import { Token } from "./http.env"
 /**
  * 获取所有的License数据
  * @param {String} url 
@@ -21,7 +10,11 @@ export const getLicenseDataAll = (data = {}) => {
     return axios.request({
         url: "/data-license",
         method: "get",
-        params: data
+        params: {
+            pageSize: data.pageSize,
+            pageNum: data.pageNum,
+            token: Token,
+        },
     })
 }
 
@@ -53,18 +46,6 @@ export const getDatasetBasic = (data) => {
     })
 }
 
-// export const getDatasetBasic = (url, parms = {}) => {
-//     return new Promise((resolve, reject) => {
-//         axios.get(`/get_dataset_by_id?${this.id}`).then(
-//             (res) => {
-//                 resolve(res.data);
-//             },
-//             (err) => {
-//                 reject(err)
-//             }
-//         )
-//     })
-// }
 
 /**
  * 
@@ -115,5 +96,41 @@ export const getLicenseBasicOtherTab = (data) => {
         url: "/get_license_other_by_id",
         method: "get",
         params: data
+    })
+}
+
+/**
+ * 
+ * @param {object} data 
+ * @returns 
+ */
+export const getLoadLicenseAll = (data) => {
+    return axios.request({
+        url: "/data-license",
+        method: "get",
+        params: {
+            data: data,
+            token: Token
+
+        }
+    })
+}
+
+
+/**
+ * 获取所有的Dataset数据
+ * @param {String} url 
+ * @param {Object} parms 
+ * @returns 
+ */
+export const getLoadDatasetAll = (data) => {
+    return axios.request({
+        url: "/dataset",
+        method: "get",
+        params: {
+            data: data,
+            token: '2f6b61b197c846f2c3da8efea0b37b6d3353d7fbc8acaca0ff9f03d3980794ec',
+
+        }
     })
 }

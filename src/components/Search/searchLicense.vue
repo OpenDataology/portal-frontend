@@ -26,7 +26,7 @@
 </template>
   
 <script>
-import axios from "axios";
+import {getLoadLicenseAll} from '../../../config/api.env'
 export default {
   data() {
     return {
@@ -54,26 +54,11 @@ export default {
         );
       };
     },
-    loadAll() {
-      // 请求所有的 liense
-      //要求提供模糊查询的接口
-      //{id name}
-      let that = this;
-      axios
-        .get("http://10.233.58.26:9000/api/v1/data-license", {
-          params: {
-            pageNum: 1,
-            pageSize: 20,
-            // status: this.numLicenseData.status,
-            // totalNum: this.numLicenseData.totalNum,
-          },
-        })
-        .then(function (response) {
-          that.restaurants = response.data.data;
-          // console.log(that.tableData);
-          // that.restaurants = response.data;
-          // console.log(that.numData);
-        });
+   async loadAll() {
+      const  {data}  = await getLoadLicenseAll();
+      this.restaurants = data;
+      console.log(this.restaurants);
+      
     },
     fuzzyMatch(str, key) {
       let index = -1,
