@@ -321,6 +321,7 @@ export default {
     async getLicenseOtherTab() {
       const { data } = await getLicenseBasicOtherTab({ id: this.id });
       this.licenseOthersTab = data;
+
     },
    
     handleClick(tab, event) {

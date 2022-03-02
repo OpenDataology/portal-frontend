@@ -149,6 +149,7 @@ export default {
       const { data, totalNum } = await getDatasetDataAll(this.numLicenseData);
       this.dataSetData = data;
       this.totalNum = totalNum;
+
     },
     // async getDatasetData() {
     //   // let that = this;

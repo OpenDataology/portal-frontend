@@ -235,6 +235,7 @@ export default {
       console.log(data);
       this.dataSetBasicInfo = data;
       console.log(this.dataSetBasicInfo);
+
     },
    
     handleClick(tab, event) {
