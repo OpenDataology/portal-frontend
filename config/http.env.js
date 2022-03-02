@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://140.83.83.152:30900/api/v1";
+axios.defaults.baseURL = "http://10.233.58.26:9000/api/v1";
 axios.interceptors.response.use(
     config => {
         if (config.status === 200) {
@@ -11,13 +11,6 @@ axios.interceptors.response.use(
         return Promise.reject(error)
     }
 )
-
-
-
-
-
-axios.defaults.baseURL = "http://10.233.58.26:9000/api/v1";
-
 /**
  * 获取所有的License数据
  * @param {String} url 
