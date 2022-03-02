@@ -236,13 +236,12 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import searchLicense from "../components/Search/searchLicense.vue";
 import Export from "../components/Export/Export.vue";
-import { getLicenseBasicInfo } from "../../config/http.env.js";
-import { getLicenseBasicDataTab } from "../../config/http.env.js";
-import { getLicenseBasicModleTab } from "../../config/http.env.js";
-import { getLicenseBasicOtherTab } from "../../config/http.env.js";
+import { getLicenseBasicInfo } from "../../config/api.env.js";
+import { getLicenseBasicDataTab } from "../../config/api.env.js";
+import { getLicenseBasicModleTab } from "../../config/api.env.js";
+import { getLicenseBasicOtherTab } from "../../config/api.env.js";
 
 export default {
   components: { searchLicense, Export },

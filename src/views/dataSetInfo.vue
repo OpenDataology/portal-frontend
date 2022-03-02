@@ -201,7 +201,7 @@ import axios from "axios";
 
 import searchDataset from "../components/Search/searchDataset.vue";
 import Export from "../components/Export/Export.vue";
-import { getDatasetBasic } from "../../config/http.env.js";
+import { getDatasetBasic } from "../../config/api.env.js";
 
 export default {
   components: { searchDataset, Export },
