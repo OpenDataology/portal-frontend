@@ -236,33 +236,7 @@ export default {
       this.dataSetBasicInfo = data;
       console.log(this.dataSetBasicInfo);
     },
-    //  async getDataSetBasicInfo() {
-    //   // let that = this;
-    //   const { data } = await getDatasetBasic("/get_dataset_by_id", {
-    //     params: {
-    //       id: this.id,
-    //     },
-    //   });
-    //   console.log(data);
-    //   this.dataSetBasicInfo = data;
-    //   console.log(this.dataSetBasicInfo);
-    // },
-    // getDataSetBasicInfo() {
-    //   const that = this;
-    //   axios
-    //     .get("http://140.83.83.152:30900/api/v1/get_dataset_by_id", {
-    //       params: {
-    //         //  id: 1,
-    //         id: that.id,
-    //       },
-    //     })
-    //     .then(function (response) {
-    //       // console.log(response.data.data);
-    //       that.dataSetBasicInfo = response.data.data;
-    //       // console.log(that.licenseInfo);
-    //     });
-    //   // console.log(that.$router.query.goodsid);
-    // },
+   
     handleClick(tab, event) {
       console.log(tab, event);
     },

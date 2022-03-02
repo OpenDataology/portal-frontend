@@ -9,9 +9,6 @@
             <div class="logo_box flaot_box">
               <img src="../assets/images/logo1.png" alt="" @click="toHome()" />
             </div>
-            <!--          <div class="title_box flaot">
-            <span>data.LISENCE</span>
-            </div>-->
             <!--          下拉框部分-->
             <div class="dropdown_box flaot_box">
               <el-select
@@ -292,12 +289,6 @@ export default {
         path: "/dataSetAll",
       });
     },
-    // toDataSetInfo(id) {
-    //   this.$router.push({
-    //     path: "/dataSetInfo",
-    //     query: { id },
-    //   });
-    // },
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex === 1) {
         return "warning-row";
@@ -306,41 +297,7 @@ export default {
       }
       return "";
     },
-    // async getLicenseInfo() {
-    //   // let that = this;
-
-    //   const { data } = await getLicenseBasic("/get_license_basic_by_id", {
-    //     params: this.id,
-    //   });
-    //   // }).then(function (response) {
-    //   //   console.log(response);
-    //   //    = response.data;
-    //   //   // console.log(that.tableData);
-    //   //   that.numLicenseData = response.pageNum;
-    //   //   // console.log(that.numData);
-    //   // });
-
-    //   this.licenseInfo = data;
-    //   console.log(data);
-    //   // this.numLicenseData.pageNum = pageNum;
-    // },
-    // getLicenseInfo() {
-    //   const that = this;
-    //   axios
-    //     .get("http://140.83.83.152:30900/api/v1/get_license_basic_by_id", {
-    //       params: {
-    //         //  id: 1,
-    //         id: that.id,
-    //       },
-    //     })
-    //     .then(function (response) {
-    //       // console.log(response.data.data);
-    //       that.licenseInfo = response.data.data;
-    //       // console.log(that.licenseInfo);
-    //     });
-    // },
     async getLicenseInfo() {
-      // let that = this;
       const { data } = await getLicenseBasicInfo({ id: this.id });
       console.log(data);
       this.licenseInfo = data;
@@ -365,62 +322,10 @@ export default {
       const { data } = await getLicenseBasicOtherTab({ id: this.id });
       this.licenseOthersTab = data;
     },
-    // getLicenseDataTab() {
-    //   const that = this;
-    //   axios
-    //     .get("http://140.83.83.152:30900/api/v1/get_license_data_by_id", {
-    //       params: {
-    //         //  id: 1,
-    //         id: that.id,
-    //       },
-    //     })
-    //     .then(function (response) {
-    //       // console.log(response.data.data.cannot);
-    //       that.licenseDataTabCan = response.data.data.can;
-    //       that.licenseDataTabCannot = response.data.data.cannot;
-    //       that.licenseDataTabObligation = response.data.data.obligation;
-    //       that.licenseDataTabLimitation = response.data.data.limitation;
-    //       // console.log(that.licenseTab);
-    //     });
-    // },
-
-    // getLicenseModleTab() {
-    //   const that = this;
-    //   axios
-    //     .get("http://140.83.83.152:30900/api/v1/get_license_model_by_id", {
-    //       params: {
-    //         id: that.id,
-    //       },
-    //     })
-    //     .then(function (response) {
-    //       // console.log(response.data.data.cannot);
-    //       that.licenseModleTabCan = response.data.data.can;
-    //       that.licenseModleTabCannot = response.data.data.cannot;
-    //       that.licenseModleTabObligation = response.data.data.obligation;
-    //       that.licenseModleTabLimitation = response.data.data.limitation;
-    //       // console.log(that.licenseModleTab);
-    //     });
-    // },
-
-    // getLicenseOtherTab() {
-    //   const that = this;
-    //   axios
-    //     .get("http://140.83.83.152:30900/api/v1/get_license_other_by_id", {
-    //       params: {
-    //         id: that.id,
-    //       },
-    //     })
-    //     .then(function (response) {
-    //       // console.log(response.data.data);
-    //       that.licenseOthersTab = response.data.data;
-    //       // console.log(that.licenseOthersTab);
-    //     });
-    // },
+   
     handleClick(tab, event) {
-      // console.log(tab, event);
     },
     handleChange(val) {
-      // console.log(val);
     },
   },
 };

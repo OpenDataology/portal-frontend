@@ -13,21 +13,12 @@ axios.interceptors.response.use(
 )
 
 
-// 分页
-export const getLicenseDataPaging = (data) => {
-    return axios.request({
-        url: "/data-license",
-        method: "get",
-        params: {
-        },
 
-    })
-}
 
 
 
 /**
- * 获取所有的数据
+ * 获取所有的License数据
  * @param {String} url 
  * @param {Object} parms 
  * @returns 
@@ -41,7 +32,7 @@ export const getLicenseDataAll = (data = {}) => {
 }
 
 /**
- * 获取所有的数据
+ * 获取所有的Dataset数据
  * @param {String} url 
  * @param {Object} parms 
  * @returns 
