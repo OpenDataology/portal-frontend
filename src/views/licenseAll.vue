@@ -9,9 +9,6 @@
             <div class="logo_box license-flaot-box">
               <img src="../assets/images/11.png" alt="" />
             </div>
-            <!--          <div class="title_box flaot">
-            <span>data.LISENCE</span>
-            </div>-->
             <!--          下拉框部分-->
             <div class="dropdown_box license-flaot-box">
               <el-select
@@ -34,11 +31,7 @@
               <searchLicense />
             </div>
             <!--          登录部分-->
-            <div class="login_box">
-              <el-row>
-                <el-button type="primary">Login</el-button>
-              </el-row>
-            </div>
+            <div class="login_box">Login</div>
             <!--          清除浮动部分-->
             <div class="clear_box"></div>
           </div>
@@ -64,16 +57,14 @@
     <!--  分页-->
     <!-- <button @click="toLicenseInfo()"></button> -->
     <div class="licenseAll-paging">
-      <div class="license-total-box license-flaot-box">
-        Total:{{ totalNum }}
-      </div>
-      <div class="block license-flaot-box">
+      
+      <div class="block">
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="licenseData.pageNum"
           :page-size="numLicenseData.pageSize"
-          layout=" prev, pager, next, jumper"
+          layout="total, prev, pager, next, jumper"
           :total="totalNum"
         >
         </el-pagination>
@@ -123,18 +114,6 @@ export default {
     };
   },
   mounted() {
-    document.getElementsByClassName(
-      "el-pagination__jump"
-    )[0].childNodes[0].nodeValue = "Go";
-    document.getElementsByClassName(
-      "el-pagination__jump"
-    )[0].childNodes[2].nodeValue = "";
-    // document.getElementsByClassName(
-    //   "el-pagination__total"
-    // )[0].childNodes[0].nodeValue = "Total:";
-    // document.getElementsByClassName(
-    //   "el-pagination__total"
-    // )[0].childNodes[2].nodeValue = "";
   },
   created: function () {
     this.getLicenseData();
@@ -347,6 +326,16 @@ export default {
 .login_box {
   margin-right: 30px;
   float: right;
+  width: 60px;
+  height: 40px;
+  border-radius: 10px;
+  color: #FFFFFF;
+  background-color: #4c8efc;
+  line-height: 40px;
+  text-align: center;
+  border: 2px solid #FFFFFF;
+
+  
 }
 
 /*欢迎语部分*/
@@ -411,11 +400,6 @@ export default {
   background-color: #4c8efc;
   border-color: #fff;
 }
-
-/* .el-dropdown {
-  width: 100px;
-} */
-
 .el-col {
   border-radius: 4px;
 }
