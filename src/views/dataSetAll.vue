@@ -9,10 +9,6 @@
             <div class="logo_box daset-flaot-box">
               <img src="../assets/images/11.png" alt="" @click="toHome()" />
             </div>
-            <!--          <div class="title_box flaot">
-            <span>data.LISENCE</span>
-            </div>-->
-            <!--          下拉框部分-->
             <div class="dropdown_box daset-flaot-box">
               <el-select
                 class="license_color"
@@ -58,22 +54,22 @@
         <!-- <div class="license_id_clo">{{ item.license_id }}</div> -->
 
         <div class="dataset-name-clo dataset-clo">{{ item.dataset_name }}</div>
-        <div class="license_type_clo dataset-clo">{{ item.dataset_version }}</div>
+        <div class="license_type_clo dataset-clo">license</div>
       </div>
     </div>
 
     <!--  分页-->
     <!-- <button @click="toLicenseInfo()"></button> -->
     <div class="paging-box">
-      <div class="dataset-total-box daset-flaot-box">Total:{{totalNum }}</div>
+      <!-- <div class="dataset-total-box paging-flaot-box">Total:{{totalNum }}</div> -->
 
-      <div class="block daset-flaot-box">
+      <div class="block paging-flaot-box">
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="dataSetData.pageNum"
           :page-size="numDatasetData.pageSize"
-          layout=" prev, pager, next, jumper"
+          layout="total, prev, pager, next, jumper"
           :total="totalNum"
         >
         </el-pagination>
@@ -122,12 +118,18 @@ export default {
     };
   },
   mounted() {
-    document.getElementsByClassName(
-      "el-pagination__jump"
-    )[0].childNodes[0].nodeValue = "Go";
-    document.getElementsByClassName(
-      "el-pagination__jump"
-    )[0].childNodes[2].nodeValue = "";
+    // document.getElementsByClassName(
+    //   "el-pagination__jump"
+    // )[0].childNodes[0].nodeValue = "Go";
+    // document.getElementsByClassName(
+    //   "el-pagination__jump"
+    // )[0].childNodes[2].nodeValue = "";
+    // document.getElementsByClassName(
+    //   "el-pagination__total"
+    // )[0].childNodes[0].nodeValue = "Total";
+    // document.getElementsByClassName(
+    //   "el-pagination__total"
+    // )[0].childNodes[2].nodeValue = "";
   },
   created: function () {
     this.getDatasetData();
@@ -181,12 +183,12 @@ export default {
     //分页监听 监听尺寸改变
     handleSizeChange(newSize) {
       this.numDatasetData.pageSize = newSize;
-      this.getLicenseData();
+      this.getDatasetData();
     },
     //监听页码改变
     handleCurrentChange(newPage) {
       this.numDatasetData.pageNum = newPage;
-      this.getLicenseData();
+      this.getDatasetData();
       // console.log(newPage)
     },
   },
@@ -194,6 +196,7 @@ export default {
 </script>
 
 <style>
+
 .dataset-total-box{
   line-height: 32px;
   text-align: center;
@@ -217,10 +220,12 @@ export default {
 }
 
 .paging-box {
-  margin: 0 auto;
   margin-top: 20px;
-  width: 300px;
   height: 35px;
+}
+.paging-box .el-pagination{
+  margin: 0 auto !important;
+  width: 35% !important;
 }
 
 .middle_box {
@@ -271,6 +276,7 @@ export default {
 .el-pagination .el-select .el-input .el-input__inner {
   border-radius: 8px;
   height: 22px;
+ 
 }
 
 .margin_box {
