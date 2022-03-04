@@ -30,7 +30,23 @@ export default new Router({
       },{
         path:"/searchDataset",
         component:()=>import("../components/Search/searchDataset.vue"),
+      },
+      /**
+       * Search components
+       * 
+       *  */ 
+      {
+        path:"/searchTypeLicense",
+        component:()=>import("../components/Search/searchTypeLicense.vue"),
+      },
+      {
+        path:"/searchTypeDataSpecificLicense",
+        component:()=>import("../components/Search/searchTypeDataSpecificLicense.vue"),
       },{
+        path:"/searchTypeDataSourceTermsofUse",
+        component:()=>import("../components/Search/searchTypeDataSourceTermsofUse.vue"),
+      },
+      {
         path:"/Export",
         component:()=>import("../components/Export/Export.vue"),
       },{

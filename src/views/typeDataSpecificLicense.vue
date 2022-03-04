@@ -103,7 +103,7 @@
 </template>
 <script>
 import { getTypeDataSpecificLicense } from "../../config/api.env.js";
-import SearchtypeDataSpecificLicense from '../components/Search/searchtypeDataSpecificLicense.vue';
+import SearchtypeDataSpecificLicense from "../components/Search/searchTypeDataSpecificLicense.vue";
 
 export default {
   components: { SearchtypeDataSpecificLicense },
@@ -193,10 +193,10 @@ export default {
 .typeLicense-box{
   width: 70px;
 }
-.typeData-Specific-License-box{
+/* .typeData-Specific-License-box{
 
 }
-.typeData-Source-Terms-of-Use-box{}
+.typeData-Source-Terms-of-Use-box{} */
 .typeButton1-box {
   /* margin-left: 10px; */
   color: #ffffff;

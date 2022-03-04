@@ -103,7 +103,7 @@
 </template>
 <script>
 import { getTypeDataSourceTermsofUse } from "../../config/api.env.js";
-import SearchTypeDataSourceTermsofUse from '../components/Search/searchTypeDataSourceTermsofUse.vue';
+import SearchTypeDataSourceTermsofUse from "../components/Search/searchTypeDataSourceTermsofUse.vue";
 
 export default {
   components: {SearchTypeDataSourceTermsofUse },
