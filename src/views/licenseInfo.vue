@@ -7,7 +7,7 @@
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box flaot_box">
-              <img src="../assets/images/logo1.png" alt="" @click="toHome()" />
+              <img src="../assets/images/logo.png" alt="" @click="toHome()" />
             </div>
             <!--          下拉框部分-->
             <div class="dropdown_box flaot_box">
@@ -31,11 +31,8 @@
               <searchLicense />
             </div>
             <!--          登录部分-->
-            <div class="login_box">
-              <el-row>
-                <el-button type="primary">Login</el-button>
-              </el-row>
-            </div>
+            <button class="login_box">Login</button>
+
             <!--          清除浮动部分-->
             <div class="clear_box"></div>
           </div>
@@ -226,7 +223,7 @@
       </el-tabs>
     </div>
     <!--尾部-->
-    <div class="lincense-info-tail">
+    <div class="license-info-tail">
       <p>* The above license analysis has not been reviewed by lawyers</p>
       <p>
         * All contents of the portal do not constitute any legal advice and
@@ -391,13 +388,13 @@ export default {
   background: oldlace;
 }
 .el-tabs__active-bar {
-  background-color: #4c8efc;
+  background-color: #4c8efc !important;
 }
 .el-tabs__item.is-active {
-  color: #4c8efc;
+  color: #4c8efc !important;
 }
 .el-tabs__item:hover {
-  color: #4c8efc;
+  color: #4c8efc !important;
 }
 .el-table .success-row {
   background: #f0f9eb;
@@ -518,7 +515,18 @@ export default {
 /*登陆部分*/
 .login_box {
   margin-right: 30px;
+  margin-top: 7px;
   float: right;
+  width: 70px;
+  height: 40px;
+  border-radius: 10px;
+  color: #FFFFFF;
+  background-color: #4c8efc;
+  line-height: 35px;
+  text-align: center;
+  border: 2px solid #FFFFFF;
+
+  
 }
 
 /* .license_type_clo {
@@ -551,7 +559,7 @@ export default {
   background: #fde2e2;
 }
 
-.lincense-info-tail {
+.license-info-tail {
   width: 100%;
   height: 100%;
   background-color: #4c8efc;
@@ -561,7 +569,7 @@ export default {
 }
 
 .el-pagination.is-background .el-pager li:not(.disabled).active {
-  background-color: #4c8efc;
+  background-color: #4c8efc !important;
 }
 .el-pagination .el-select .el-input .el-input__inner {
   border-radius: 10px;
@@ -634,22 +642,22 @@ export default {
 }
 
 .el-input__inner {
-  border-radius: 10px;
-  border: 2px solid #fff;
-  background-color: #4c8efc;
-  color: #ffffff;
+  border-radius: 10px !important;
+  border: 2px solid #fff !important;
+  background-color: #4c8efc !important;
+  color: #ffffff !important;
 }
 
 .el-button {
-  border-radius: 10px;
-  border: 2px solid #fff;
+  border-radius: 10px !important;
+  border: 2px solid #fff !important;
 }
 
 .el-button--primary:focus,
 .el-button--primary:hover {
-  background: #4c8efc;
-  border-color: #fff;
-  color: #fff;
+  background: #4c8efc !important;
+  border-color: #fff !important;
+  color: #fff !important;
 }
 
 .el-select .el-input__inner:focus {
@@ -663,7 +671,7 @@ export default {
 .el-button--primary {
   margin-top: 7px;
   color: #fff;
-  background-color: #4c8efc;
+  background-color: #4c8efc !important;
   border-color: #fff;
 }
 .el-col {
@@ -671,7 +679,7 @@ export default {
 }
 
 .bg-purple-dark {
-  background: #4c8efc;
+  background: #4c8efc !important;
 }
 
 .grid-content {

@@ -26,7 +26,7 @@
 </template>
   
 <script>
-import {getResultByLicense_name} from '../../../config/api.env'
+import {getResultByTypeDataSourceTermsofUse} from '../../../config/api.env'
 
 export default {
   data() {
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     async querySearch(queryString, cb) {
-      const { data } = await getResultByLicense_name(queryString);
+      const { data } = await getResultByTypeDataSourceTermsofUse(queryString);
       this.restaurants = data;
       var restaurants = this.restaurants;
       var results = queryString
@@ -49,37 +49,12 @@ export default {
     createFilter(queryString) {
       return (restaurant) => {
         return (
-          // this.fuzzyMatch(restaurant.license_name.toLowerCase(),queryString.toLowerCase())
           restaurant.license_name
             .toLowerCase()
             .indexOf(queryString.toLowerCase()) !== -1 //从头
         );
       };
     },
-    // fuzzyMatch(str, key) {
-    //   let index = -1,
-    //     flag = false;
-    //   for (var i = 0, arr = key.split(""); i < arr.length; i++) {
-    //     //有一个关键字都没匹配到，则没有匹配到数据
-    //     if (str.indexOf(arr[i]) < 0) {
-    //       break;
-    //     } else {
-    //       let match = str.matchAll(arr[i]);
-    //       let next = match.next();
-    //       while (!next.done) {
-    //         if (next.value.index > index) {
-    //           index = next.value.index;
-    //           if (i === arr.length - 1) {
-    //             flag = true;
-    //           }
-    //           break;
-    //         }
-    //         next = match.next();
-    //       }
-    //     }
-    //   }
-    //   return flag;
-    // },
     handleSelect(item) {
        this.$router.push({
         path: "/licenseInfo",

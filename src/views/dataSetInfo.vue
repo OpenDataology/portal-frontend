@@ -7,11 +7,8 @@
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box flaot_box">
-              <img src="../assets/images/11.png" alt="" @click="toHome()" />
+              <img src="../assets/images/logo.png" alt="" @click="toHome()" />
             </div>
-            <!--          <div class="title_box flaot">
-            <span>data.LISENCE</span>
-            </div>-->
             <!--          下拉框部分-->
             <div class="dropdown_box flaot_box">
               <el-select
@@ -34,11 +31,8 @@
               <searchDataset />
             </div>
             <!--          登录部分-->
-            <div class="login_box">
-              <el-row>
-                <el-button type="primary">Login</el-button>
-              </el-row>
-            </div>
+            <button class="login_box">Login</button>
+
             <!--          清除浮动部分-->
             <div class="clear_box"></div>
           </div>
@@ -235,9 +229,8 @@ export default {
       console.log(data);
       this.dataSetBasicInfo = data;
       console.log(this.dataSetBasicInfo);
-
     },
-   
+
     handleClick(tab, event) {
       console.log(tab, event);
     },
@@ -402,7 +395,16 @@ export default {
 /*登陆部分*/
 .login_box {
   margin-right: 30px;
+  margin-top: 7px;
   float: right;
+  width: 70px;
+  height: 40px;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #4c8efc;
+  line-height: 35px;
+  text-align: center;
+  border: 2px solid #ffffff;
 }
 
 .license_type_clo {
@@ -544,21 +546,21 @@ export default {
 
 .el-input__inner {
   border-radius: 10px;
-  border: 2px solid #fff;
-  background-color: #4c8efc;
-  color: #ffffff;
+  border: 2px solid #fff !important;
+  background-color: #4c8efc !important;
+  color: #ffffff !important;
 }
 
 .el-button {
   border-radius: 15px;
-  border: 2px solid #fff;
+  border: 2px solid #fff !important;
 }
 
 .el-button--primary:focus,
 .el-button--primary:hover {
-  background: #4c8efc;
-  border-color: #fff;
-  color: #fff;
+  background: #4c8efc !important;
+  border-color: #fff !important;
+  color: #fff !important;
 }
 
 .el-select .el-input__inner:focus {
@@ -570,10 +572,10 @@ export default {
 }
 
 .el-button--primary {
-  margin-top: 7px;
-  color: #fff;
-  background-color: #4c8efc;
-  border-color: #fff;
+  margin-top: 7px !important;
+  color: #fff !important;
+  background-color: #4c8efc !important;
+  border-color: #fff !important;
 }
 
 /* .el-dropdown {
@@ -585,7 +587,7 @@ export default {
 }
 
 .bg-purple-dark {
-  background: #4c8efc;
+  background: #4c8efc !important;
 }
 
 .grid-content {
