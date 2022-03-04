@@ -12,13 +12,12 @@
           @select="handleSelect"
           value-key="dataset_name"
         >
-        <i
-          class="el-icon-search el-input__icon"
-          slot="suffix"
-          @click="handleIconClick"
-        >
-        </i
-      >
+          <i
+            class="el-icon-search el-input__icon"
+            slot="suffix"
+            @click="handleIconClick"
+          >
+          </i>
         </el-autocomplete>
       </el-col>
     </el-row>
@@ -26,19 +25,19 @@
 </template>
   
 <script>
-import axios from "axios";
-import {getLoadDatasetAll} from '../../../config/api.env'
+import { getResultByDataset_name } from "../../../config/api.env";
 
 export default {
   data() {
     return {
       restaurants: [],
-      state1: "",
       state2: "",
     };
   },
   methods: {
-    querySearch(queryString, cb) {
+    async querySearch(queryString, cb) {
+      const { data } = await getResultByDataset_name(queryString);
+      this.restaurants = data;
       var restaurants = this.restaurants;
       var results = queryString
         ? restaurants.filter(this.createFilter(queryString))
@@ -56,13 +55,8 @@ export default {
         );
       };
     },
-    async loadAll() {
-      const  {data}  = await getLoadDatasetAll();
-      this.restaurants = data;
-      console.log(this.restaurants);
-    },
     handleSelect(item) {
-       this.$router.push({
+      this.$router.push({
         path: "/licenseInfo",
         query: { id: item.id },
       });
@@ -72,11 +66,9 @@ export default {
         path: "/licenseInfo",
         query: { id: item.id },
       });
-    }
+    },
   },
-  mounted() {
-    this.loadAll();
-  },
+
 };
 </script>
 <style>
@@ -92,5 +84,11 @@ export default {
 }
 .el-input__icon {
   color: #ffffff !important;
+}
+.el-input__inner {
+    border-radius: 10px !important;
+    border: 2px solid #fff !important;
+    background-color: #4c8efc !important;
+    color: #ffffff !important;
 }
 </style>

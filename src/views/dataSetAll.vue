@@ -1,13 +1,13 @@
 <template>
   <div class="boby_box">
     <!--  头部-->
-    <div class="header_box">
+    <div class="datasetHeader-box">
       <el-row class="el-row">
         <el-col class="el-col" :span="24">
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box daset-flaot-box">
-              <img src="../assets/images/11.png" alt="" @click="toHome()" />
+              <img src="../assets/images/logo.png" alt="" @click="toHome()" />
             </div>
             <div class="dropdown_box daset-flaot-box">
               <el-select
@@ -30,40 +30,32 @@
               <searchDataset />
             </div>
             <!--          登录部分-->
-            <div class="login_box">
-              <el-row>
-                <el-button type="primary">Login</el-button>
-              </el-row>
-            </div>
+            <button class="login_box">Login</button>
             <!--          清除浮动部分-->
-            <div class="clear_box"></div>
+            <div class="clear-box"></div>
           </div>
         </el-col>
       </el-row>
       <!--    欢迎语部分-->
       <div class="welcome">Welcome to Dataset Metadata Portal</div>
     </div>
+
     <!--  中部-->
 
     <div class="middle_box">
       <div
-        class="dataset-like-box daset-flaot-box "
+        class="dataset-like-box daset-flaot-box"
         v-for="item in dataSetData"
         @click="toDataSetInfo(item.id)"
       >
-        <!-- <div class="license_id_clo">{{ item.license_id }}</div> -->
-
         <div class="dataset-name-clo dataset-clo">{{ item.dataset_name }}</div>
-        <div class="license_type_clo dataset-clo">license</div>
+        <div class="license_type_clo dataset-clo">{{item.license_name}}</div>
       </div>
     </div>
 
     <!--  分页-->
-    <!-- <button @click="toLicenseInfo()"></button> -->
-    <div class="paging-box">
-      <!-- <div class="dataset-total-box paging-flaot-box">Total:{{totalNum }}</div> -->
-
-      <div class="block paging-flaot-box">
+    <div class="dataset-Paging-box">
+      <div class="block">
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -117,20 +109,7 @@ export default {
       basicInfoId: {},
     };
   },
-  mounted() {
-    // document.getElementsByClassName(
-    //   "el-pagination__jump"
-    // )[0].childNodes[0].nodeValue = "Go";
-    // document.getElementsByClassName(
-    //   "el-pagination__jump"
-    // )[0].childNodes[2].nodeValue = "";
-    // document.getElementsByClassName(
-    //   "el-pagination__total"
-    // )[0].childNodes[0].nodeValue = "Total";
-    // document.getElementsByClassName(
-    //   "el-pagination__total"
-    // )[0].childNodes[2].nodeValue = "";
-  },
+  mounted() {},
   created: function () {
     this.getDatasetData();
   },
@@ -150,36 +129,7 @@ export default {
       const { data, totalNum } = await getDatasetDataAll(this.numDatasetData);
       this.dataSetData = data;
       this.totalNum = totalNum;
-      console.log(this.numDatasetData);
     },
-    // async getDatasetData() {
-    //   // let that = this;
-
-    //   const { data, pageNum } = await getDatasetDataAll("/dataset", {
-    //     params: this.numLicenseData,
-    //   });
-    //   this.dataSetData = data;
-    //   this.numDatasetData.pageNum = pageNum;
-    // },
-    // getDataSetData() {
-    //   let that = this;
-    //   axios
-    //     .get("http://140.83.83.152:30900/api/v1/dataset", {
-    //       params: {
-    //         pageNum: this.numDatasetData.pageNum,
-    //         pageSize: this.numDatasetData.pageSize,
-    //         status: this.numDatasetData.status,
-    //         totalNum: this.numDatasetData.totalNum,
-    //       },
-    //     })
-    //     .then(function (response) {
-    //       that.dataSetData = response.data.data;
-    //       // console.log(that.dataSetData);
-    //       that.numDatasetData = response.data;
-    //       // console.log(that.numDatasetData);
-    //     });
-    // },
-
     //分页监听 监听尺寸改变
     handleSizeChange(newSize) {
       this.numDatasetData.pageSize = newSize;
@@ -197,13 +147,13 @@ export default {
 
 <style>
 
-.dataset-total-box{
+.dataset-total-box {
   line-height: 32px;
   text-align: center;
   font-size: 13px;
   color: rgb(126, 123, 123);
 }
-.dataset-clo{
+.dataset-clo {
   margin-left: 5px;
   margin-top: 3px;
 }
@@ -213,24 +163,24 @@ export default {
 }
 
 .dataset-name-clo {
-  color: #4598f1;
+  color: #4c8efc;
   text-decoration: none;
   font: 600 13px/20px Roboto, Helvetica Neue, sans-serif;
   letter-spacing: normal;
 }
 
-.paging-box {
-  margin-top: 20px;
+.dataset-Paging-box {
   height: 35px;
+
 }
-.paging-box .el-pagination{
+.dataset-Paging-box .el-pagination {
   margin: 0 auto !important;
   width: 35% !important;
 }
 
 .middle_box {
   width: 1120px;
-  height: 400px;
+  height: 450px;
   margin: 0 auto;
 }
 
@@ -238,13 +188,13 @@ export default {
   border-radius: 5px;
   height: 80px;
   width: 330px;
-  margin-top: 20px;
+  margin-top: 25px;
   margin-left: 30px;
   background-color: #ffffff;
   box-shadow: 3px 2px 10px #232636;
 }
 
-.el-descriptions :not(.is-bordered) .el-descriptions-item__cell {
+/* .el-descriptions :not(.is-bordered) .el-descriptions-item__cell {
   padding-bottom: 9px;
 }
 
@@ -258,7 +208,7 @@ export default {
 
 .my-content {
   background: #fde2e2;
-}
+} */
 
 .tail_box_len {
   width: 100%;
@@ -268,16 +218,15 @@ export default {
 .dataset-tail-box {
   color: #ffffff;
   font-size: 1px;
-  margin-top: 17px;
+  margin-top: 9px;
 }
-.el-pagination.is-background .el-pager li:not(.disabled).active {
+/* .el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #4c8efc;
 }
 .el-pagination .el-select .el-input .el-input__inner {
   border-radius: 8px;
   height: 22px;
- 
-}
+} */
 
 .margin_box {
   margin-left: 60px;
@@ -293,8 +242,8 @@ export default {
 }
 
 /*清除浮动*/
-.clear_box {
-  float: none;
+.clear-box {
+  clear:both;
 }
 
 .boby_box {
@@ -303,9 +252,9 @@ export default {
 }
 
 /*头部整体紫色部分*/
-.header_box {
+.datasetHeader-box {
   width: 100%;
-  height: 200px;
+  height: 210px;
   background-color: #4c8efc;
 }
 
@@ -355,7 +304,16 @@ export default {
 /*登陆部分*/
 .login_box {
   margin-right: 30px;
+  margin-top: 7px;
   float: right;
+  width: 70px;
+  height: 40px;
+  border-radius: 10px;
+  color: #ffffff;
+  background-color: #4c8efc;
+  line-height: 35px;
+  text-align: center;
+  border: 2px solid #ffffff;
 }
 
 /*欢迎语部分*/
@@ -370,55 +328,55 @@ export default {
 }
 
 .el-button::before {
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 .el-icon-search {
-  margin-left: -15px;
+  margin-left: -15px !important;
 }
 
 .el-select__tags {
-  width: 300px;
+  width: 300px !important;
 }
 
 /* 谷歌下拉框placeholder提示字颜色 */
 .el-input__inner::-webkit-input-placeholder {
-  color: #fff;
-  text-align: center;
+  color: #fff !important;
+  text-align: center !important;
 }
 
 .el-input__inner {
-  border-radius: 10px;
-  border: 2px solid #fff;
-  background-color: #4c8efc;
-  color: #ffffff;
+  border-radius: 10px !important;
+  border: 2px solid #fff !important;
+  background-color: #4c8efc !important;
+  color: #ffffff !important;
 }
 
 .el-button {
-  border-radius: 15px;
-  border: 2px solid #fff;
+  border-radius: 15px !important;
+  border: 2px solid #fff !important;
 }
 
 .el-button--primary:focus,
 .el-button--primary:hover {
-  background: #4c8efc;
-  border-color: #fff;
-  color: #fff;
+  background: #4c8efc !important;
+  border-color: #fff !important;
+  color: #fff !important;
 }
 
 .el-select .el-input__inner:focus {
-  border-color: #ffffff;
+  border-color: #ffffff !important;
 }
 
 .el-select .el-input.is-focus .el-input__inner {
-  border-color: #ffffff;
+  border-color: #ffffff !important;
 }
 
 .el-button--primary {
-  margin-top: 7px;
-  color: #fff;
-  background-color: #4c8efc;
-  border-color: #fff;
+  margin-top: 7px !important;
+  color: #fff !important;
+  background-color: #4c8efc !important;
+  border-color: #fff !important;
 }
 
 /* .el-dropdown {
@@ -430,7 +388,7 @@ export default {
 }
 
 .bg-purple-dark {
-  background: #4c8efc;
+  background: #4c8efc !important;
 }
 
 .grid-content {
@@ -440,8 +398,4 @@ export default {
   box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
     0 1px 18px 0 rgb(0 0 0 / 12%);
 }
-
-/*.header_box span{*/
-/*  line-height :200px*/
-/*}*/
 </style>

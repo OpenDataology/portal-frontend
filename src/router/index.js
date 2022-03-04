@@ -33,10 +33,16 @@ export default new Router({
       },{
         path:"/Export",
         component:()=>import("../components/Export/Export.vue"),
-      },,{
-        path:"/licenseTypeAll",
-        component:()=>import("../views/licenseTypeAll.vue"),
-      }
+      },{
+        path:"/typeLicense",
+        component:()=>import("../views/typeLicense.vue"),
+      },{
+        path:"/typeDataSpecificLicense",
+        component:()=>import("../views/typeDataSpecificLicense.vue"),
+      },{
+        path:"/typeDataSourceTermsofUse",
+        component:()=>import("../views/typeDataSourceTermsofUse.vue"),
+      },
     
     ]
   })

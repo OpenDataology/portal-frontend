@@ -28,7 +28,7 @@
             </div>
             <!--          搜索条部分-->
             <div class="search_box license-flaot-box">
-              <searchLicense />
+                <search-type-license/>
             </div>
             <!--          登录部分-->
             <button class="login_box">Login</button>
@@ -40,20 +40,18 @@
       <!--    欢迎语部分-->
       <div class="licenseWelcome-box">Welcome to Dataset Metadata Portal</div>
       <div class="licenseType-box">
-        <div style="margin:0 auto;">
-        <button class="typeAll-box license-flaot-box typeButton1-box">
+        <button class="typeAll-box license-flaot-box typeButton2-box" @click="toHome()">
           All
         </button>
-        <button class="typeLicense-box license-flaot-box typeButton2-box" @click="toTypeLicense()">
+        <button class="typeLicense-box license-flaot-box typeButton1-box">
           License
         </button>
-        <button class="typeData-Specific-License-box license-flaot-box typeButton2-box" @click="toTypeDataSpecificLicense()">
+        <button class="typeData-Specific-License-box license-flaot-box typeButton2-box" @click="toTypeDataSpecificLicense()" >
           Data-Specific-License
         </button>
         <button class="typeData-Source-Terms-of-Use-box license-flaot-box typeButton2-box" @click="toTypeDataSourceTermsofUse()">
           DataSource Terms of Use
         </button>
-        </div>
         <div class="clear-box"></div>
       </div>
     </div>
@@ -104,10 +102,11 @@
   </div>
 </template>
 <script>
-import searchLicense from "../components/Search/searchLicense.vue";
-import { getLicenseDataAll } from "../../config/api.env.js";
+import { getTypeLicenseData } from "../../config/api.env.js";
+import SearchTypeLicense from '../components/Search/searchTypeLicense.vue';
+
 export default {
-  components: { searchLicense },
+  components: { SearchTypeLicense },
   name: "Welcome",
   data() {
     return {
@@ -133,21 +132,9 @@ export default {
     // this.getLicenseForName();
   },
   methods: {
-    toDataSetALL() {
+    toHome() {
       this.$router.push({
-        path: "/dataSetAll",
-      });
-    },
-    toLicenseInfo(id) {
-      this.$router.push({
-        path: "/licenseInfo",
-        query: { id },
-      });
-    },
-    toTypeLicense() {
-      this.$router.push({
-        path: "/typeLicense",
-        
+        path: "/licenseAll",
       });
     },
     toTypeDataSpecificLicense() {
@@ -162,9 +149,20 @@ export default {
         
       });
     },
+    toDataSetALL() {
+      this.$router.push({
+        path: "/dataSetAll",
+      });
+    },
+    toLicenseInfo(id) {
+      this.$router.push({
+        path: "/licenseInfo",
+        query: { id },
+      });
+    },
     async getLicenseData() {
       // let that = this;
-      const { data, totalNum } = await getLicenseDataAll(this.numLicenseData);
+      const { data, totalNum } = await getTypeLicenseData(this.numLicenseData);
       // const { data, totalNum } = await getLicenseDataAll();
 
       this.licenseData = data;
@@ -195,6 +193,10 @@ export default {
 .typeLicense-box{
   width: 70px;
 }
+.typeData-Specific-License-box{
+
+}
+.typeData-Source-Terms-of-Use-box{}
 .typeButton1-box {
   /* margin-left: 10px; */
   color: #ffffff;
@@ -228,6 +230,9 @@ export default {
   margin: 0 auto ;
   width: 500px;
   height: 38px;
+  /* background-color: #4c8efc; */
+  /* box-shadow: 3px 2px 10px #232636; */
+
 }
 .licenseWelcome-box {
   height: 65px;
@@ -286,21 +291,21 @@ export default {
   box-shadow: 3px 2px 10px #232636;
 }
 
-/* .el-descriptions :not(.is-bordered) .el-descriptions-item__cell {
+.el-descriptions :not(.is-bordered) .el-descriptions-item__cell {
   padding-bottom: 9px;
-} */
+}
 
-/* .el-descriptions {
+.el-descriptions {
   font-size: 11px;
-} */
+}
 
-/* .my-label {
+.my-label {
   background: #e1f3d8;
 }
 
 .my-content {
   background: #fde2e2;
-} */
+}
 
 .tail_box_len {
   width: 100%;
@@ -313,13 +318,13 @@ export default {
   margin-top: 9px;
 }
 
-/* .el-pagination.is-background .el-pager li:not(.disabled).active {
-  background-color: #4c8efc !important;
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #4c8efc;
 }
 .el-pagination .el-select .el-input .el-input__inner {
   border-radius: 8px;
   height: 22px;
-} */
+}
 
 .margin_box {
   margin-left: 60px;
@@ -415,14 +420,14 @@ clear:both;
 .el-button::before {
   background-color: #fff;
 }
-/* 
+
 .el-icon-search {
-  margin-left: -15px ;
+  margin-left: -15px;
 }
 
 .el-select__tags {
   width: 300px;
-} */
+}
 
 /* 谷歌下拉框placeholder提示字颜色 */
 .el-input__inner::-webkit-input-placeholder {
@@ -431,10 +436,10 @@ clear:both;
 }
 
 .el-input__inner {
-  border-radius: 10px !important;
-  border: 2px solid #fff !important;
-  background-color: #4c8efc !important;
-  color: #ffffff !important;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  background-color: #4c8efc;
+  color: #ffffff;
 }
 
 .el-button {
@@ -444,8 +449,8 @@ clear:both;
 
 .el-button--primary:focus,
 .el-button--primary:hover {
-  background: #4c8efc !important;
-  border-color: #fff !important;
+  background: #4c8efc;
+  border-color: #fff;
   color: #fff;
 }
 
@@ -460,15 +465,15 @@ clear:both;
 .el-button--primary {
   margin-top: 7px;
   color: #fff;
-  background-color: #4c8efc !important;
+  background-color: #4c8efc;
   border-color: #fff;
 }
-/* .el-col {
+.el-col {
   border-radius: 4px;
-} */
+}
 
 .bg-purple-dark {
-  background: #4c8efc !important;
+  background: #4c8efc;
 }
 
 .grid-content {
