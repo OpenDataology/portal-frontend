@@ -7,7 +7,7 @@
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box flaot_box">
-              <img src="../assets/images/logo.png" alt="" @click="toHome()" />
+              <img src="../assets/images/logo11.png" alt="" @click="toHome()" />
             </div>
             <!--          下拉框部分-->
             <div class="dropdown_box flaot_box">
