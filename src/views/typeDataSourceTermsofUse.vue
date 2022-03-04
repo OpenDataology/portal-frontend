@@ -194,10 +194,10 @@ export default {
 .typeLicense-box{
   width: 70px;
 }
-.typeData-Specific-License-box{
+/* .typeData-Specific-License-box{
 
 }
-.typeData-Source-Terms-of-Use-box{}
+.typeData-Source-Terms-of-Use-box{} */
 .typeButton1-box {
   /* margin-left: 10px; */
   color: #ffffff;

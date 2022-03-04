@@ -103,7 +103,7 @@
 </template>
 <script>
 import { getTypeDataSpecificLicense } from "../../config/api.env.js";
-import SearchtypeDataSpecificLicense from "../components/Search/searchTypeDataSpecificLicense.vue";
+import SearchtypeDataSpecificLicense from "../components/Search/searchTypeDataSpecificLicense";
 
 export default {
   components: { SearchtypeDataSpecificLicense },
