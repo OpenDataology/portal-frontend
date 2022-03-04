@@ -7,7 +7,7 @@
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box daset-flaot-box">
-              <img src="../assets/images/logo.png" alt="" @click="toHome()" />
+              <img src="../assets/images/logo11.png" alt="" @click="toHome()" />
             </div>
             <div class="dropdown_box daset-flaot-box">
               <el-select

@@ -7,7 +7,7 @@
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box license-flaot-box">
-              <img src="../assets/images/logo.png" alt="" />
+              <img src="../assets/images/logo11.png" alt="" />
             </div>
             <!--          下拉框部分-->
             <div class="dropdown_box license-flaot-box">
@@ -193,10 +193,10 @@ export default {
 .typeLicense-box{
   width: 70px;
 }
-.typeData-Specific-License-box{
+/* .typeData-Specific-License-box{
 
 }
-.typeData-Source-Terms-of-Use-box{}
+.typeData-Source-Terms-of-Use-box{} */
 .typeButton1-box {
   /* margin-left: 10px; */
   color: #ffffff;

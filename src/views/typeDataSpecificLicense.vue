@@ -7,7 +7,7 @@
           <div class="grid-content bg-purple-dark">
             <!--          logo部分-->
             <div class="logo_box license-flaot-box">
-              <img src="../assets/images/logo.png" alt="" />
+              <img src="../assets/images/logo11.png" alt="" />
             </div>
             <!--          下拉框部分-->
             <div class="dropdown_box license-flaot-box">
@@ -103,7 +103,7 @@
 </template>
 <script>
 import { getTypeDataSpecificLicense } from "../../config/api.env.js";
-import SearchtypeDataSpecificLicense from "../components/Search/searchTypeDataSpecificLicense.vue";
+import SearchtypeDataSpecificLicense from "../components/Search/searchTypeDataSpecificLicense";
 
 export default {
   components: { SearchtypeDataSpecificLicense },

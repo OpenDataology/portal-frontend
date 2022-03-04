@@ -5,6 +5,12 @@ Vue.use(Router)
 
 export default new Router({
     routes: [
+
+      /**
+       * 
+       * Home page
+       * 
+       */
       {
         path: '/',
         component: () => import('../views/licenseAll.vue')
@@ -24,17 +30,36 @@ export default new Router({
         component: () => import('../views/dataSetInfo.vue'),
         props: route => ({id: route.query.id})
       },
-      {
+     
+
+      /**
+       * Search page
+       * 
+       *  */ 
+
+
+
+     {
+        path:"/typeLicense",
+        component:()=>import("../views/typeLicense.vue"),
+      },{
+        path:"/typeDataSpecificLicense",
+        component:()=>import("../views/typeDataSpecificLicense.vue"),
+      },{
+        path:"/typeDataSourceTermsofUse",
+        component:()=>import("../views/typeDataSourceTermsofUse.vue"),
+      },
+      /**
+       * Search components
+       * 
+       *  */ 
+       {
         path:"/searchLicense",
         component:()=>import("../components/Search/searchLicense.vue"),
       },{
         path:"/searchDataset",
         component:()=>import("../components/Search/searchDataset.vue"),
       },
-      /**
-       * Search components
-       * 
-       *  */ 
       {
         path:"/searchTypeLicense",
         component:()=>import("../components/Search/searchTypeLicense.vue"),
@@ -46,19 +71,18 @@ export default new Router({
         path:"/searchTypeDataSourceTermsofUse",
         component:()=>import("../components/Search/searchTypeDataSourceTermsofUse.vue"),
       },
+
+
+      /**
+       * 
+       * Export
+       * 
+       * 
+       */
       {
         path:"/Export",
         component:()=>import("../components/Export/Export.vue"),
-      },{
-        path:"/typeLicense",
-        component:()=>import("../views/typeLicense.vue"),
-      },{
-        path:"/typeDataSpecificLicense",
-        component:()=>import("../views/typeDataSpecificLicense.vue"),
-      },{
-        path:"/typeDataSourceTermsofUse",
-        component:()=>import("../views/typeDataSourceTermsofUse.vue"),
-      },
+      }
     
     ]
   })
