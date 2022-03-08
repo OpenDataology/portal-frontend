@@ -28,7 +28,7 @@
             </div>
             <!--          搜索条部分-->
             <div class="search_box flaot_box">
-              <searchDataset />
+              <search-dataset-info/>
             </div>
             <!--          登录部分-->
             <button class="login_box">Login</button>
@@ -56,9 +56,7 @@
         </div>
       </div>
       <!-- 导出 -->
-      <div class="Export-box">
         <export />
-      </div>
       <div class="clear_box"></div>
     </div>
     <!--  中部-->
@@ -191,14 +189,13 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-
-import searchDataset from "../components/Search/searchDataset.vue";
 import Export from "../components/Export/Export.vue";
-import { getDatasetBasic } from "../../config/api.env.js";
+import { getDatasetMetaData } from "../../config/api.env.js";
+import SearchDatasetInfo from '../components/Search/searchDatasetInfo.vue';
+import event from '../assets/js/instance'
 
 export default {
-  components: { searchDataset, Export },
+  components: {Export, SearchDatasetInfo },
   name: "license_Info",
   props: ["id"],
   data() {
@@ -216,6 +213,12 @@ export default {
   },
   created: function () {
     this.getDataSetBasicInfo();
+    event.$on('updateDataSet', (id) => {
+      this.getDataSetBasicInfo(id)
+    })
+  },
+  beforeDestroy(){
+    event.$off('updateDataSet')
   },
   methods: {
     toHome() {
@@ -223,11 +226,22 @@ export default {
         path: "/licenseAll",
       });
     },
-    async getDataSetBasicInfo() {
+    toDataSetInfo(id) {
+      this.$router.push({
+        path: "/dataSetInfo",
+        query: { id },
+      });
+    },
+    async getDataSetBasicInfo(id) {
       // let that = this;
-      const { data } = await getDatasetBasic({ id: this.id });
+      let data
+      if(!id){
+        data = await getDatasetMetaData({ id: this.id});
+      }else{
+        data = await getDatasetMetaData({ id });
+      }
       console.log(data);
-      this.dataSetBasicInfo = data;
+      this.dataSetBasicInfo = data.data;
       console.log(this.dataSetBasicInfo);
     },
 
@@ -471,7 +485,7 @@ export default {
   background-color: #4c8efc;
 }
 .el-pagination .el-select .el-input .el-input__inner {
-  border-radius: 10px;
+  border-radius: 10px !important;
 }
 
 .margin_box {
@@ -540,12 +554,12 @@ export default {
 
 /* 谷歌下拉框placeholder提示字颜色 */
 .el-input__inner::-webkit-input-placeholder {
-  color: #fff;
-  text-align: center;
+  color: #fff !important;
+  text-align: center !important;
 }
 
 .el-input__inner {
-  border-radius: 10px;
+  border-radius: 10px !important;
   border: 2px solid #fff !important;
   background-color: #4c8efc !important;
   color: #ffffff !important;
@@ -568,7 +582,7 @@ export default {
 }
 
 .el-select .el-input.is-focus .el-input__inner {
-  border-color: #ffffff;
+  border-color: #ffffff !important;
 }
 
 .el-button--primary {
@@ -597,6 +611,15 @@ export default {
   box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
     0 1px 18px 0 rgb(0 0 0 / 12%);
 }
+input::-webkit-input-placeholder {
+    color: #FFFFFF !important;
+  }
+  input::-moz-input-placeholder {
+    color: #FFFFFF !important;
+  }
+  input::-ms-input-placeholder {
+    color: #FFFFFF !important;
+  }
 
 /*.header_box span{*/
 /*  line-height :200px*/

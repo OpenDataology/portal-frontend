@@ -28,6 +28,7 @@
 <script>
 // import { getResultByDataset_name } from "../../../config/api.env";
 import { getResultDatasetIndex } from "../../../config/api.env";
+import event from '../../assets/js/instance'
 
 export default {
   data() {
@@ -86,10 +87,7 @@ export default {
   //     };
   //   },
     handleSelect(item) {
-      this.$router.push({
-        path: "/dataSetInfo",
-        query: { id: item.id },
-      });
+      event.$emit('updateDataSet', item.id)
     },
     handleIconClick(item) {
       this.$router.push({

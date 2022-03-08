@@ -26,7 +26,7 @@
 </template>
   
 <script>
-import {getResultByTypeDataSpecificLicense} from '../../../config/api.env'
+import {getResultTypeDataSpecificLicense} from '../../../config/api.env'
 
 export default {
   data() {
@@ -35,10 +35,13 @@ export default {
       state: "",
     };
   },
+  mounted(){
+    this.getResultDataSpecificLicenseType()
+  },
   methods: {
     async querySearch(queryString, cb) {
-      const { data } = await getResultByTypeDataSpecificLicense(queryString);
-      this.restaurants = data;
+      // const { data } = await getResultByTypeDataSpecificLicense(queryString);
+      // this.restaurants = data;
       var restaurants = this.restaurants;
       var results = queryString
         ? restaurants.filter(this.createFilter(queryString))
@@ -54,6 +57,10 @@ export default {
             .indexOf(queryString.toLowerCase()) !== -1 //从头
         );
       };
+    },
+    async getResultDataSpecificLicenseType() {
+      const { data } = await getResultTypeDataSpecificLicense();
+      this.restaurants = data;
     },
     handleSelect(item) {
        this.$router.push({

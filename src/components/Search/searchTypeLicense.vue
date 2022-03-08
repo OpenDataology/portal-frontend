@@ -27,6 +27,7 @@
   
 <script>
 import {getResultByTypeLicense} from '../../../config/api.env'
+import {getResultTypeLicense} from '../../../config/api.env'
 
 export default {
   data() {
@@ -35,10 +36,13 @@ export default {
       state: "",
     };
   },
+    mounted(){
+    this.getResultLicenseType()
+  },
   methods: {
     async querySearch(queryString, cb) {
-      const { data } = await getResultByTypeLicense(queryString);
-      this.restaurants = data;
+      // const { data } = await getResultByTypeLicense(queryString);
+      // this.restaurants = data;
       var restaurants = this.restaurants;
       var results = queryString
         ? restaurants.filter(this.createFilter(queryString))
@@ -54,6 +58,10 @@ export default {
             .indexOf(queryString.toLowerCase()) !== -1 //从头
         );
       };
+    },
+    async getResultLicenseType() {
+      const { data } = await getResultTypeLicense();
+      this.restaurants = data;
     },
     handleSelect(item) {
        this.$router.push({
