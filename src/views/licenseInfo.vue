@@ -28,7 +28,7 @@
             </div>
             <!--          搜索条部分-->
             <div class="search_box flaot_box">
-              <searchLicense />
+              <search-license-info/>
             </div>
             <!--          登录部分-->
             <button class="login_box">Login</button>
@@ -233,15 +233,17 @@
   </div>
 </template>
 <script>
-import searchLicense from "../components/Search/searchLicense.vue";
 import Export from "../components/Export/Export.vue";
 import { getLicenseBasicInfo } from "../../config/api.env.js";
 import { getLicenseBasicDataTab } from "../../config/api.env.js";
 import { getLicenseBasicModleTab } from "../../config/api.env.js";
 import { getLicenseBasicOtherTab } from "../../config/api.env.js";
+import SearchLicenseInfo from '../components/Search/searchLicenseInfo.vue';
+import event from "../assets/js/instance";
+
 
 export default {
-  components: { searchLicense, Export },
+  components: {Export, SearchLicenseInfo },
   name: "license_Info",
   props: ["id"],
   data() {
@@ -273,6 +275,24 @@ export default {
     this.getLicenseDataTab();
     this.getLicenseModleTab();
     this.getLicenseOtherTab();
+    event.$on("updateLicenseData", (id) => {
+      this.getLicenseInfo(id);
+    });
+    event.$on("updateLicenseData", (id) => {
+      this.getLicenseDataTab(id);
+    });
+    event.$on("updateLicenseData", (id) => {
+      this.getLicenseModleTab(id);
+    });
+    event.$on("updateLicenseData", (id) => {
+       this.getLicenseOtherTab(id);
+    });
+    
+      
+     
+  },
+  beforeDestroy() {
+    event.$off("updateLicenseData");
   },
   methods: {
     toHome() {
@@ -280,7 +300,7 @@ export default {
         path: "/licenseAll",
       });
     },
-     toDataSetALL() {
+    toDataSetALL() {
       this.$router.push({
         path: "/dataSetAll",
       });
@@ -293,37 +313,58 @@ export default {
       }
       return "";
     },
-    async getLicenseInfo() {
-      const { data } = await getLicenseBasicInfo({ id: this.id });
-      console.log(data);
-      this.licenseInfo = data;
+    async getLicenseInfo(id) {
+      // const { data } = await getLicenseBasicInfo({ id: this.id });
+      let data
+      if(!id){
+        data = await getLicenseBasicInfo({ id: this.id});
+      }else{
+        data = await getLicenseBasicInfo({ id });
+      }
+      // console.log(data);
+      this.licenseInfo = data.data;
       console.log(this.licenseInfo);
     },
-    async getLicenseDataTab() {
-      const { data } = await getLicenseBasicDataTab({ id: this.id });
+    async getLicenseDataTab(id) {
+      // const { data } = await getLicenseBasicDataTab({ id: this.id });
+      let data
+      if(!id){
+        data = await getLicenseBasicDataTab({ id: this.id});
+      }else{
+        data = await getLicenseBasicDataTab({ id });
+      }
       console.log(data);
-      this.licenseDataTabCan = data.can;
-      this.licenseDataTabCannot = data.cannot;
-      this.licenseDataTabObligation = data.obligation;
-      this.licenseDataTabLimitation = data.limitation;
+      this.licenseDataTabCan = data.data.can;
+      this.licenseDataTabCannot = data.data.cannot;
+      this.licenseDataTabObligation = data.data.obligation;
+      this.licenseDataTabLimitation = data.data.limitation;
     },
-    async getLicenseModleTab() {
-      const { data } = await getLicenseBasicModleTab({ id: this.id });
-      this.licenseModleTabCan = data.can;
-      this.licenseModleTabCannot = data.cannot;
-      this.licenseModleTabObligation = data.obligation;
-      this.licenseModleTabLimitation = data.limitation;
+    async getLicenseModleTab(id) {
+      // const { data } = await getLicenseBasicModleTab({ id: this.id });
+      let data
+      if(!id){
+        data = await getLicenseBasicModleTab({ id: this.id});
+      }else{
+        data = await getLicenseBasicModleTab({ id });
+      }
+      this.licenseModleTabCan = data.data.can;
+      this.licenseModleTabCannot = data.data.cannot;
+      this.licenseModleTabObligation = data.data.obligation;
+      this.licenseModleTabLimitation = data.data.limitation;
     },
-    async getLicenseOtherTab() {
-      const { data } = await getLicenseBasicOtherTab({ id: this.id });
-      this.licenseOthersTab = data;
+    async getLicenseOtherTab(id) {
+      // const { data } = await getLicenseBasicOtherTab({ id: this.id });
+      let data
+      if(!id){
+        data = await getLicenseBasicOtherTab({ id: this.id});
+      }else{
+        data = await getLicenseBasicOtherTab({ id });
+      }
+      this.licenseOthersTab = data.data;
+    },
 
-    },
-   
-    handleClick(tab, event) {
-    },
-    handleChange(val) {
-    },
+    handleClick(tab, event) {},
+    handleChange(val) {},
   },
 };
 </script>
@@ -520,13 +561,11 @@ export default {
   width: 70px;
   height: 40px;
   border-radius: 10px;
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: #4c8efc;
   line-height: 35px;
   text-align: center;
-  border: 2px solid #FFFFFF;
-
-  
+  border: 2px solid #ffffff;
 }
 
 /* .license_type_clo {

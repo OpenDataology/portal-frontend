@@ -26,7 +26,8 @@
 </template>
   
 <script>
-import {getResultByTypeDataSourceTermsofUse} from '../../../config/api.env'
+// import {getResultByTypeDataSourceTermsofUse} from '../../../config/api.env'
+import {getResultTypeDataSourceTermsofUse} from '../../../config/api.env'
 
 export default {
   data() {
@@ -35,16 +36,23 @@ export default {
       state: "",
     };
   },
+  mounted(){
+    this.getResultTypeDataSourceTermsofUse()
+  },
   methods: {
     async querySearch(queryString, cb) {
-      const { data } = await getResultByTypeDataSourceTermsofUse(queryString);
-      this.restaurants = data;
+      // const { data } = await getResultByTypeDataSourceTermsofUse(queryString);
+      // this.restaurants = data;
       var restaurants = this.restaurants;
       var results = queryString
         ? restaurants.filter(this.createFilter(queryString))
         : restaurants;
       // 调用 callback 返回建议列表的数据
       cb(results);
+    },
+    async getResultTypeDataSourceTermsofUse() {
+      const { data } = await getResultTypeDataSourceTermsofUse();
+      this.restaurants = data;
     },
     createFilter(queryString) {
       return (restaurant) => {

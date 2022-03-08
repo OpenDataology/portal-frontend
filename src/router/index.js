@@ -70,6 +70,12 @@ export default new Router({
       },{
         path:"/searchTypeDataSourceTermsofUse",
         component:()=>import("../components/Search/searchTypeDataSourceTermsofUse.vue"),
+      },{
+        path:"/searchDatasetInfo",
+        component:()=>import("../components/Search/searchDatasetInfo.vue"),
+      },{
+        path:"/searchLicenseInfo",
+        component:()=>import("../components/Search/searchLicenseInfo.vue"),
       },
 
 

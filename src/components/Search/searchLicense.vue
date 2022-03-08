@@ -26,7 +26,8 @@
 </template>
   
 <script>
-import {getResultByLicense_name} from '../../../config/api.env'
+// import {getResultByLicense_name} from '../../../config/api.env'
+import {getResultLicenseIndex} from '../../../config/api.env'
 
 export default {
   data() {
@@ -35,10 +36,11 @@ export default {
       state: "",
     };
   },
+    mounted(){
+    this.getLicenseIndex()
+  },
   methods: {
     async querySearch(queryString, cb) {
-      const { data } = await getResultByLicense_name(queryString);
-      this.restaurants = data;
       var restaurants = this.restaurants;
       var results = queryString
         ? restaurants.filter(this.createFilter(queryString))
@@ -56,30 +58,10 @@ export default {
         );
       };
     },
-    // fuzzyMatch(str, key) {
-    //   let index = -1,
-    //     flag = false;
-    //   for (var i = 0, arr = key.split(""); i < arr.length; i++) {
-    //     //有一个关键字都没匹配到，则没有匹配到数据
-    //     if (str.indexOf(arr[i]) < 0) {
-    //       break;
-    //     } else {
-    //       let match = str.matchAll(arr[i]);
-    //       let next = match.next();
-    //       while (!next.done) {
-    //         if (next.value.index > index) {
-    //           index = next.value.index;
-    //           if (i === arr.length - 1) {
-    //             flag = true;
-    //           }
-    //           break;
-    //         }
-    //         next = match.next();
-    //       }
-    //     }
-    //   }
-    //   return flag;
-    // },
+    async getLicenseIndex() {
+      const { data } = await getResultLicenseIndex();
+      this.restaurants = data;
+    },
     handleSelect(item) {
        this.$router.push({
         path: "/licenseInfo",
