@@ -168,8 +168,8 @@
             {{ dataSetBasicInfo.description }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Collection process </template>
-            {{ dataSetBasicInfo.collection_process }}
+            <template slot="label"> Hashcode </template>
+            {{ dataSetBasicInfo.hash_code }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template slot="label"> Collection process </template>
