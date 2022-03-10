@@ -31,7 +31,7 @@
               <searchtype-data-specific-license/>
             </div>
             <!--          登录部分-->
-            <button class="login_box">Login</button>
+            <!-- <button class="login_box">Login</button> -->
             <!--          清除浮动部分-->
             <div class="clear-box"></div>
           </div>
