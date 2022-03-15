@@ -174,13 +174,13 @@ export default {
     handleSizeChange(newSize) {
       this.numLicenseData.pageSize = newSize;
       this.getLicenseData();
-      console.log(newSize);
+      // console.log(newSize);
     },
     //监听页码改变
     handleCurrentChange(newPage) {
       this.numLicenseData.pageNum = newPage;
       this.getLicenseData();
-      console.log(newPage);
+      // console.log(newPage);
     },
   },
 };

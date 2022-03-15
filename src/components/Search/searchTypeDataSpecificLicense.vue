@@ -15,7 +15,6 @@
         <i
           class="el-icon-search el-input__icon"
           slot="suffix"
-          @click="handleIconClick"
         >
         </i
       >
@@ -68,12 +67,12 @@ export default {
         query: { id: item.id },
       });
     },
-    handleIconClick(item) {
-      this.$router.push({
-        path: "/licenseInfo",
-        query: { id: item.id },
-      });
-    }
+    // handleIconClick(item) {
+    //   this.$router.push({
+    //     path: "/licenseInfo",
+    //     query: { id: item.id },
+    //   });
+    // }
   },
 };
 </script>

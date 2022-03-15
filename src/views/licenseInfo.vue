@@ -324,7 +324,7 @@ export default {
       }
       // console.log(data);
       this.licenseInfo = data.data;
-      console.log(this.licenseInfo);
+      // console.log(this.licenseInfo);
     },
     async getLicenseDataTab(id) {
       // const { data } = await getLicenseBasicDataTab({ id: this.id });
@@ -334,7 +334,7 @@ export default {
       }else{
         data = await getLicenseBasicDataTab({ id });
       }
-      console.log(data);
+      // console.log(data);
       this.licenseDataTabCan = data.data.can;
       this.licenseDataTabCannot = data.data.cannot;
       this.licenseDataTabObligation = data.data.obligation;

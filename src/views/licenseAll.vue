@@ -166,23 +166,18 @@ export default {
       // let that = this;
       const { data, totalNum } = await getLicenseDataAll(this.numLicenseData);
       // const { data, totalNum } = await getLicenseDataAll();
-
       this.licenseData = data;
-      // console.log(this.licenseData);
       this.totalNum = totalNum;
-      // console.log(this.numLicenseData);
     },
     //分页监听 监听尺寸改变
     handleSizeChange(newSize) {
       this.numLicenseData.pageSize = newSize;
       this.getLicenseData();
-      console.log(newSize);
     },
     //监听页码改变
     handleCurrentChange(newPage) {
       this.numLicenseData.pageNum = newPage;
       this.getLicenseData();
-      console.log(newPage);
     },
   },
 };

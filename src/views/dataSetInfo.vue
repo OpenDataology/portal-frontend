@@ -241,16 +241,16 @@ export default {
       }else{
         data = await getDatasetMetaData({ id });
       }
-      console.log(data);
+      // console.log(data);
       this.dataSetBasicInfo = data.data;
-      console.log(this.dataSetBasicInfo);
+      // console.log(this.dataSetBasicInfo);
     },
 
     handleClick(tab, event) {
-      console.log(tab, event);
+      // console.log(tab, event);
     },
     handleChange(val) {
-      console.log(val);
+      // console.log(val);
     },
   },
 };
