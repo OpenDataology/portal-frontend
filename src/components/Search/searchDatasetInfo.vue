@@ -16,7 +16,6 @@
           <i
             class="el-icon-search el-input__icon"
             slot="suffix"
-            @click="handleIconClick"
           >
           </i>
         </el-autocomplete>
@@ -89,12 +88,12 @@ export default {
     handleSelect(item) {
       event.$emit('updateDataSet', item.id)
     },
-    handleIconClick(item) {
-      this.$router.push({
-        path: "/dataSetInfo",
-        query: { id: item.id },
-      });
-    },
+    // handleIconClick(item) {
+    //   this.$router.push({
+    //     path: "/dataSetInfo",
+    //     query: { id: item.id },
+    //   });
+    // },
   },
 
 };

@@ -15,7 +15,6 @@
         <i
           class="el-icon-search el-input__icon"
           slot="suffix"
-          @click="handleIconClick"
         >
         </i
       >
@@ -26,7 +25,6 @@
 </template>
   
 <script>
-import {getResultByTypeLicense} from '../../../config/api.env'
 import {getResultTypeLicense} from '../../../config/api.env'
 
 export default {
@@ -69,12 +67,12 @@ export default {
         query: { id: item.id },
       });
     },
-    handleIconClick(item) {
-      this.$router.push({
-        path: "/licenseInfo",
-        query: { id: item.id },
-      });
-    }
+    // handleIconClick(item) {
+    //   this.$router.push({
+    //     path: "/licenseInfo",
+    //     query: { id: item.id },
+    //   });
+    // }
   },
 };
 </script>
