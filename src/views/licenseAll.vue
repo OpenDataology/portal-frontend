@@ -45,7 +45,7 @@
           All
         </button>
         <button class="typeLicense-box license-flaot-box typeButton2-box" @click="toTypeLicense()">
-          Data License
+          Dataset License
         </button>
         <button class="typeData-Specific-License-box license-flaot-box typeButton2-box" @click="toTypeDataSpecificLicense()">
           Data-Specific License
@@ -188,7 +188,7 @@ export default {
   width: 70px;
 }
 .typeLicense-box{
-  width: 70px;
+  width: 170px;
 }
 .typeButton1-box {
   /* margin-left: 10px; */
@@ -221,7 +221,7 @@ export default {
 }
 .licenseType-box {
   margin: 0 auto ;
-  width: 500px;
+  width: 600px;
   height: 38px;
 }
 .licenseWelcome-box {
