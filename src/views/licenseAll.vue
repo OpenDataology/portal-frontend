@@ -45,10 +45,10 @@
           All
         </button>
         <button class="typeLicense-box license-flaot-box typeButton2-box" @click="toTypeLicense()">
-          License
+          Data License
         </button>
         <button class="typeData-Specific-License-box license-flaot-box typeButton2-box" @click="toTypeDataSpecificLicense()">
-          Data-Specific-License
+          Data-Specific License
         </button>
         <button class="typeData-Source-Terms-of-Use-box license-flaot-box typeButton2-box" @click="toTypeDataSourceTermsofUse()">
           DataSource Terms of Use
