@@ -6,8 +6,6 @@ spec:
   selector:
     matchLabels:
       app: portal-frontend
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
