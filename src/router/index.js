@@ -88,6 +88,15 @@ export default new Router({
       {
         path:"/Export",
         component:()=>import("../components/Export/Export.vue"),
+      },
+      /**
+       * 
+       * format
+       * 
+       */
+       {
+        path: '/dataSetFormat',
+        component: () => import('../views/dataSetFormat.vue'),
       }
     
     ]
