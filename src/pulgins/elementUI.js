@@ -1,18 +1,21 @@
 import {
-    Pagination,
-    Row,
-    Col,
-    Select,
-    Option,
-    Descriptions,
-    DescriptionsItem,
-    Tabs,
-    TabPane,
-    Collapse,
-    CollapseItem,
-    Table,
-    TableColumn,
-    Autocomplete
+  Pagination,
+  Row,
+  Col,
+  Select,
+  Option,
+  Descriptions,
+  DescriptionsItem,
+  Tabs,
+  TabPane,
+  Collapse,
+  CollapseItem,
+  Table,
+  TableColumn,
+  Autocomplete,
+  Tree,
+  Input,
+  Tooltip
 } from "element-ui";
 export default {
   install(app) {
@@ -31,6 +34,8 @@ export default {
       .use(Table)
       .use(TableColumn)
       .use(Autocomplete)
-      
+      .use(Tree)
+      .use(Input)
+      .use(Tooltip);
   }
 };
