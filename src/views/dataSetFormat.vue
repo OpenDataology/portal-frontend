@@ -2,7 +2,7 @@
   <div class="box">
     <div class="header-box">
       SPDX-like Template
-    </div>
+      </div>
     <el-tree
       :data="data"
       :props="defaultProps"
@@ -213,7 +213,7 @@ export default {
                 'More details: Please refer to 1.9 Dataset personal information appeared field in Dataset Metadata Schema.pdf.</br>'
             }, {
               key: '"addition"',
-              value: '"xxx"',
+              value: '"NOASSERTION"',
               tip:
                 'Dataset addition</br>' +
                 'Description: Additional information.</br>' +
