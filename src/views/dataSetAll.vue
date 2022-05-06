@@ -156,7 +156,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .format-box{
   margin-right: 30px;
   margin-top: 7px;

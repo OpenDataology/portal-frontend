@@ -1,5 +1,5 @@
 <template>
-  <div class="boby_box">
+  <div id="body-box" class="body-box">
     <!--  头部-->
     <div class="licenseHeader-box">
       <el-row class="el-row">
@@ -30,34 +30,103 @@
             <div class="search_box license-flaot-box">
               <searchLicense />
             </div>
-            <!--          登录部分-->
-            <!-- <button class="login_box">Login</button> -->
-            <!--          清除浮动部分-->
-            <div class="clear-box"></div>
+
+            <!--           功能部分 -->
+            <template v-if="username">
+              <el-button
+                class="licenseSkill-box"
+                @click="goToUpload"
+                type="primary"
+              >
+                Skill
+              </el-button>
+            </template>
+            <template v-else> </template>
+            <!--                      登录部分-->
+            <!--     已登录       -->
+            <template v-if="username">
+              <el-button class="license-login-box" type="primary">
+                {{ username }}
+              </el-button>
+              <!-- <el-select
+                class="license-login-box"
+                v-model="username"
+                placeholder="username"
+              >
+                <el-option
+                  v-for="item in login"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                  @click.native="logout()"
+                >
+                </el-option>
+              </el-select> -->
+            </template>
+            <!--     未登录       -->
+            <template v-else>
+              <el-button
+                class="license-login-box"
+                @click="drawer = true"
+                type="primary"
+              >
+                Login
+              </el-button>
+            </template>
+
+            <el-drawer
+              title="withHeader"
+              :visible.sync="drawer"
+              :with-header="false"
+              size="40%"
+              :modal="true"
+              :wrapperClosable="true"
+            >
+              <loginPage @success="loginSuccess" />
+            </el-drawer>
           </div>
+          <!--                      清除浮动部分-->
+          <div class="clear-box"></div>
         </el-col>
       </el-row>
       <!--    欢迎语部分-->
       <div class="licenseWelcome-box">Welcome to Dataset Metadata Portal</div>
       <div class="licenseType-box">
-        <div style="margin:0 auto;">
-        <button class="typeAll-box license-flaot-box typeButton1-box">
-          All
-        </button>
-        <button class="typeLicense-box license-flaot-box typeButton2-box" @click="toTypeLicense()">
-          Dataset License
-        </button>
-        <button class="typeData-Specific-License-box license-flaot-box typeButton2-box" @click="toTypeDataSpecificLicense()">
-          Data-Specific License
-        </button>
-        <button class="typeData-Source-Terms-of-Use-box license-flaot-box typeButton2-box" @click="toTypeDataSourceTermsofUse()">
-          DataSource Terms of Use
-        </button>
+        <div style="margin: 0 auto">
+          <button class="typeAll-box license-flaot-box typeButton1-box">
+            All
+          </button>
+          <button
+            class="typeLicense-box license-flaot-box typeButton2-box"
+            @click="toTypeLicense()"
+          >
+            License
+          </button>
+          <button
+            class="
+              typeData-Specific-License-box
+              license-flaot-box
+              typeButton2-box
+            "
+            @click="toTypeDataSpecificLicense()"
+          >
+            Data-Specific-License
+          </button>
+          <button
+            class="
+              typeData-Source-Terms-of-Use-box
+              license-flaot-box
+              typeButton2-box
+            "
+            @click="toTypeDataSourceTermsofUse()"
+          >
+            DataSource Terms of Use
+          </button>
         </div>
         <div class="clear-box"></div>
       </div>
     </div>
-
+    <!--    登录-->
     <!--  中部-->
     <div class="licenseAll-middle">
       <div
@@ -70,7 +139,6 @@
         <div class="license_type_clo license-clo">{{ item.license_type }}</div>
       </div>
       <div class="clear-box"></div>
-
     </div>
 
     <!--  分页-->
@@ -105,17 +173,26 @@
 </template>
 <script>
 import searchLicense from "../components/Search/searchLicense.vue";
+import loginPage from "../components/Login/loginPage.vue";
 import { getLicenseDataAll } from "../../config/api.env.js";
+
 export default {
-  components: { searchLicense },
-  name: "Welcome",
+  components: { searchLicense, loginPage },
+  name: "body-box",
   data() {
     return {
+      drawer: false,
       value: [],
       vague: [
         {
           value: "1",
           label: "Dataset",
+        },
+      ],
+      login: [
+        {
+          value: "1",
+          label: "Logout",
         },
       ],
       licenseData: [],
@@ -125,6 +202,7 @@ export default {
         pageNum: 1,
       },
       basicInfoId: {},
+      username: sessionStorage.getItem("userName") || "",
     };
   },
   mounted() {},
@@ -133,6 +211,24 @@ export default {
     // this.getLicenseForName();
   },
   methods: {
+    logout() {
+      sessionStorage.clear();
+      //页面不刷新
+      this.drawer = true;
+    },
+    loginSuccess(userName) {
+      this.getLicenseData();
+      this.drawer = false;
+      this.username = userName;
+    },
+    goToUpload() {
+      this.$router.push({
+        path: "/uploadLicense",
+      });
+    },
+    toggleBox() {
+      this.openSignin = !this.openSignin;
+    },
     toDataSetALL() {
       this.$router.push({
         path: "/dataSetAll",
@@ -147,19 +243,16 @@ export default {
     toTypeLicense() {
       this.$router.push({
         path: "/typeLicense",
-        
       });
     },
     toTypeDataSpecificLicense() {
       this.$router.push({
         path: "/typeDataSpecificLicense",
-        
       });
     },
     toTypeDataSourceTermsofUse() {
       this.$router.push({
         path: "/typeDataSourceTermsofUse",
-        
       });
     },
     async getLicenseData() {
@@ -167,6 +260,7 @@ export default {
       const { data, totalNum } = await getLicenseDataAll(this.numLicenseData);
       // const { data, totalNum } = await getLicenseDataAll();
       this.licenseData = data;
+      console.log(this.licenseData);
       this.totalNum = totalNum;
     },
     //分页监听 监听尺寸改变
@@ -184,12 +278,33 @@ export default {
 </script>
 
 <style>
-.typeAll-box{
+.license_color input::-webkit-input-placeholder {
+  color: #fff !important;
+  text-align: center !important;
+}
+
+.licenseSkill-box {
+  margin-right: 30px;
+  margin-top: 7px;
+  margin-left: 100px;
+  width: 80px;
+  height: 40px;
+  border-radius: 10px !important;
+  color: #ffffff;
+  background-color: #4c8efc;
+  text-align: center;
+  border: 2px solid #ffffff;
+  font-style: normal;
+}
+
+.typeAll-box {
   width: 70px;
 }
-.typeLicense-box{
-  width: 170px;
+
+.typeLicense-box {
+  width: 70px;
 }
+
 .typeButton1-box {
   /* margin-left: 10px; */
   color: #ffffff;
@@ -204,6 +319,7 @@ export default {
 
   height: 38px;
 }
+
 .typeButton2-box {
   /* margin-left: 10px; */
   /* color: #ffffff; */
@@ -219,11 +335,13 @@ export default {
 
   height: 38px;
 }
+
 .licenseType-box {
-  margin: 0 auto ;
-  width: 600px;
+  margin: 0 auto;
+  width: 500px;
   height: 38px;
 }
+
 .licenseWelcome-box {
   height: 65px;
   width: 1400px;
@@ -233,16 +351,19 @@ export default {
   margin: 0 auto;
   margin-top: 40px;
 }
+
 .license-clo {
   margin-left: 5px;
   margin-top: 3px;
 }
+
 .license-total-box {
   line-height: 32px;
   text-align: center;
   font-size: 13px;
   color: rgb(126, 123, 123);
 }
+
 .license_type_clo {
   font-size: 10px;
   color: #a8a4a4;
@@ -260,6 +381,7 @@ export default {
   height: 35px;
   /* margin-top: 40px; */
 }
+
 .licenseAll-paging .el-pagination {
   margin: 0 auto !important;
   width: 20% !important;
@@ -331,10 +453,10 @@ export default {
 
 /*清除浮动*/
 .clear-box {
-clear:both;
+  clear: both;
 }
 
-.boby_box {
+.body-box {
   height: 100%;
   width: 100%;
 }
@@ -358,7 +480,6 @@ clear:both;
   height: 50px;
   width: 80px;
 }
-
 
 /*下拉框部分*/
 .dropdown_box {
@@ -391,18 +512,19 @@ clear:both;
 }
 
 /*登陆部分*/
-.login_box {
+.license-login-box {
   margin-right: 30px;
   margin-top: 7px;
   float: right;
-  width: 70px;
+  width: 80px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 10px !important;
   color: #ffffff;
-  background-color: #4c8efc;
-  line-height: 35px;
+  background-color: #eaeff8;
   text-align: center;
-  border: 2px solid #ffffff;
+  border: 2px solid #ffffff !important
+;
+  font-size: 15px;
 }
 
 /*欢迎语部分*/
@@ -410,7 +532,8 @@ clear:both;
 .el-button::before {
   background-color: #fff;
 }
-/* 
+
+/*
 .el-icon-search {
   margin-left: -15px ;
 }
@@ -458,6 +581,7 @@ clear:both;
   background-color: #4c8efc !important;
   border-color: #fff;
 }
+
 /* .el-col {
   border-radius: 4px;
 } */

@@ -15,8 +15,20 @@ import {
   Autocomplete,
   Tree,
   Input,
-  Tooltip
+  Tooltip,
+  Form,
+  FormItem,
+  Button,
+  Drawer,
+  Transfer,
+  Empty,
+  Card,
+  Checkbox,
+  CheckboxGroup,
+  RadioGroup,
+  Radio,
 } from "element-ui";
+
 export default {
   install(app) {
     app
@@ -36,6 +48,18 @@ export default {
       .use(Autocomplete)
       .use(Tree)
       .use(Input)
-      .use(Tooltip);
+      .use(Tooltip)
+      .use(Form)
+      .use(FormItem)
+      .use(Button)
+      .use(Drawer)
+      .use(Transfer)
+      .use(Empty)
+      .use(Card)
+      .use(Checkbox)
+      .use(CheckboxGroup)
+      .use(RadioGroup)
+      .use(Radio)
+
   }
 };
