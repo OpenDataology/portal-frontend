@@ -96,8 +96,33 @@ export default new Router({
        */
        {
         path: '/dataSetFormat',
-        component: () => import('../views/dataSetFormat.vue'),
-      }
+        component: () => import('../components/Template/dataSetFormat.vue'),
+      },
+
+
+      /*
+    *
+    * login
+    * */
+
+      {
+        path: "/loginPage",
+        component: () => import("../components/Login/loginPage.vue"),
+      }, {
+        path: "/registerPage",
+        component: () => import("../components/Login/registerPage.vue"),
+      },
+      /*
+      *
+      * upload
+      *
+      *
+      * */
+      {
+        path: "/uploadLicense",
+        component: () => import("../components/Skill/uploadLicense"),
+      },
+  
     
     ]
   })

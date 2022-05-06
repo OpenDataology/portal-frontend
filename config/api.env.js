@@ -345,7 +345,56 @@ export const getResultDatasetIndex = (data) => {
 
 
 
+/**
+ *API 4.1 User sign up用户注册
+ * @param {*} queryString
+ * @returns
+ */
 
+ export function registerData(data){
+    return axios.request({
+      url: "/sign_up",
+      method: "post",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      transformRequest: [function (data) {
+        let ret = ''
+        for (let it in data) {
+          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+        }
+        return ret
+      }],
+      data,
+    })
+  }
+  
+  /**
+   *API 4.2 User sign in用户登录
+   * @param {*} queryString
+   * @returns
+   */
+  
+  // export function loginData(data){
+  //   return axios.request({
+  //     url: "/sign_in",
+  //     method: "post",
+  //     data
+  //   })
+  // }
+  export function loginData(data){
+    return axios.request({
+      url: "/sign_in",
+      method: "post",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      transformRequest: [function (data) {
+        let ret = ''
+        for (let it in data) {
+          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+        }
+        return ret
+      }],
+      data
+    })
+  }
 
 
 
