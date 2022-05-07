@@ -56,9 +56,9 @@
         </div>
       </div>
       <!-- 导出 -->
-      <!-- <div class="Export-box">
+      <div class="Export-box">
         <export />
-      </div> -->
+      </div>
       <div class="clear_box"></div>
     </div>
     <!--  中部-->
@@ -233,7 +233,7 @@
   </div>
 </template>
 <script>
-// import Export from "../components/Export/Export.vue";
+import Export from "../components/Export/Export.vue";
 import { getLicenseBasicInfo } from "../../config/api.env.js";
 import { getLicenseBasicDataTab } from "../../config/api.env.js";
 import { getLicenseBasicModleTab } from "../../config/api.env.js";
@@ -243,8 +243,8 @@ import event from "../assets/js/instance";
 
 
 export default {
-  // components: {Export, SearchLicenseInfo },
-  components: { SearchLicenseInfo },
+  components: {Export, SearchLicenseInfo },
+  // components: { SearchLicenseInfo },
   name: "license_Info",
   props: ["id"],
   data() {
