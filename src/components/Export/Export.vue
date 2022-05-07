@@ -1,22 +1,4 @@
 <template>
-  <!-- <el-button class="ExportType-box">
-    <el-row class="block-col-2">
-      <el-col>
-        <el-dropdown trigger="click">
-          <span class="el-dropdown-link">
-            Export <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>Excel</el-dropdown-item>
-            <el-dropdown-item>Json</el-dropdown-item>
-            <el-dropdown-item>Yaml</el-dropdown-item>
-            <el-dropdown-item>MD</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </el-col>
-    </el-row>
-  </el-button> -->
-  <!-- <!-- <el-button class="ExportType-box"> -->
 <div class="ExportType-box">
   <el-select v-model="value" placeholder="Export" >
     <el-option
@@ -96,12 +78,6 @@ input::-webkit-input-placeholder {
         options: [{
           value: '1',
           label: 'Excel'
-        }, {
-          value: '2',
-          label: 'Json'
-        }, {
-          value: '3',
-          label: 'Yaml'
         }, {
           value: '4',
           label: 'MD'
