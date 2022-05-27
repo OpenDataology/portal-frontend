@@ -12,5 +12,5 @@ spec:
         app: portal-frontend
     spec:
       containers:
-        - image: robekeane/portal-frontend:0.2
+        - image: robekeane/portal-frontend:0.3
           name: portal-frontend-con
