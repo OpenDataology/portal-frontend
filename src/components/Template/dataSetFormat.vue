@@ -5,7 +5,8 @@
       :data="data"
       :props="defaultProps"
       @node-click="handleNodeClick"
-      default-expand-all="true"
+      default-expand-all
+      highlight-current
     >
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span v-if="data.craft_code != null">({{ data.craft_code }}) </span>
@@ -369,7 +370,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .box {
   color: #ffffff;
   /*overflow-x: hidden;*/
@@ -378,7 +379,7 @@ export default {
   height: 100%;
   line-height: 40px;
   text-align: center;
-  background-color: #3d7adf;
+  background-color: #003261;
   margin: 0 auto;
 }
 
@@ -388,12 +389,12 @@ export default {
 }
 
 /*click*/
-.el-tree-node.is-current > .el-tree-node__content {
+>>> .el-tree-node.is-current > .el-tree-node__content {
   background-color: #314e6a !important;
 }
 
 /*hover*/
-.el-tree-node__content:hover {
+>>> .el-tree-node__content:hover {
   background: #314e6a !important;
 }
 
@@ -414,6 +415,6 @@ export default {
   height: 40px;
   line-height: 40px;
   text-align: center;
-  background-color: #3d7adf;
+  background-color: #003261;
 }
 </style>
