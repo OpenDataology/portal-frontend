@@ -98,16 +98,20 @@ export default {
 
 };
 </script>
-<style>
+<style >
+.search-box input::-webkit-input-placeholder {
+  color: #fff!important;
+  text-align: center!important;
+}
 .search-box {
   height: 50px;
   /* width: 105px; */
-  margin-top: 7px;
+  /*margin-top: 7px;*/
   /* float: left; */
   margin-left: 10px;
 }
 .search-box .el-input {
-  width: 250% !important;
+  width: 200% !important;
 }
 .el-input__icon {
   color: #ffffff !important;
@@ -115,7 +119,7 @@ export default {
 .el-input__inner {
     border-radius: 10px !important;
     border: 2px solid #fff !important;
-    background-color: #4c8efc !important;
+    background-color: #003261 !important;
     color: #ffffff !important;
 }
 </style>

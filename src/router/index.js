@@ -33,12 +33,9 @@ export default new Router({
      
 
       /**
-       * Search page
+       * Type page
        * 
        *  */ 
-
-
-
      {
         path:"/typeLicense",
         component:()=>import("../views/typeLicense.vue"),
@@ -97,6 +94,9 @@ export default new Router({
        {
         path: '/dataSetFormat',
         component: () => import('../components/Template/dataSetFormat.vue'),
+      }, {
+        path: '/dataSetSymbol',
+        component: () => import('../components/Template/dataSetSymbol.vue'),
       },
 
 
@@ -122,6 +122,7 @@ export default new Router({
         path: "/uploadLicense",
         component: () => import("../components/Skill/uploadLicense"),
       },
+     
   
     
     ]

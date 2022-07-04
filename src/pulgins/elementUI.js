@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import {
   Pagination,
   Row,
@@ -27,8 +28,18 @@ import {
   CheckboxGroup,
   RadioGroup,
   Radio,
+  DatePicker,
+  MessageBox,
+  Notification,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem
 } from "element-ui";
+import lang from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale'
 
+// 设置语言
+locale.use(lang)
 export default {
   install(app) {
     app
@@ -60,6 +71,13 @@ export default {
       .use(CheckboxGroup)
       .use(RadioGroup)
       .use(Radio)
+      .use(DatePicker)
+      .use(Dropdown)
+      .use(DropdownMenu)
+      .use(DropdownItem)
 
   }
 };
+Vue.prototype.$confirm = MessageBox.confirm;
+Vue.prototype.$notify = Notification;
+// Vue.prototype.$message = Message;
