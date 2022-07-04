@@ -10,18 +10,14 @@
               <img
                 src="../assets/images/logo.png"
                 alt=""
-                style=" width: 80px;height: 50px"
+                style="width: 80px; height: 50px"
                 @click="toHome()"
               />
             </div>
           </el-col>
           <el-col :span="2">
-            <div style=" width: 100px">
-              <el-select
-                class="license_color"
-                v-model="value"
-                placeholder="Dataset"
-              >
+            <div style="width: 100px">
+              <el-select class="license_color" v-model="value" placeholder="Dataset">
                 <el-option
                   v-for="item in vague"
                   :key="item.value"
@@ -35,13 +31,11 @@
           </el-col>
           <el-col :span="8">
             <div>
-              <search-dataset-info/>
+              <search-dataset-info />
             </div>
           </el-col>
           <el-col :span="12">
-            <template>
-              &emsp;
-            </template>
+            <template> &emsp; </template>
           </el-col>
         </el-row>
         <div class="licenseWelcome-box">
@@ -287,7 +281,7 @@ export default {
 
 .basic_info_box {
   width: 500px;
-  color: #ffffffff;
+  color: #fff;
 }
 .dataset-info-tail {
   width: 100%;
