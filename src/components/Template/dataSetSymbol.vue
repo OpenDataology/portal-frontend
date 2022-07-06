@@ -39,7 +39,7 @@
               <img
                 src="../../assets/icons/2.1.png"
                 alt=""
-                style="height: 100%; width: 100%"
+                class="img-size"
               />
             </el-card></div
         ></el-col>
@@ -61,7 +61,7 @@
               <img
                 src="../../assets/icons/3.1.png"
                 alt=""
-                style="height: 100%; width: 100%"
+                class="img-size"
               />
             </el-card></div
         ></el-col>
@@ -83,7 +83,7 @@
               <img
                 src="../../assets/icons/4.1.png"
                 alt=""
-                style="height: 100%; width: 100%"
+                class="img-size"
               />
             </el-card></div
         ></el-col>
@@ -213,8 +213,9 @@ export default {
 } */
 .Symbol-header-box {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
   text-align: center;
   background-color: #003261;
 }
@@ -243,5 +244,10 @@ export default {
 } */
 .Symbol-box-card {
   text-align: center !important;
+}
+.img-size{
+  height: 50%; 
+  width: 50%;
+
 }
 </style>

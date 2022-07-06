@@ -2,7 +2,7 @@
   <div class="uploadLicense-box">
     <div class="upload-header-box">Upload About License</div>
     <el-form>
-      <el-row :gutter="20">
+      <el-row :gutter="10">
         <el-col :span="16" :offset="4">
           <div>
             <el-row>
@@ -10,17 +10,17 @@
                 <div>
                   <el-col>
                     <img
-                      src="../../assets/images/uploadTip.png"
+                      src="../../assets/images/upldTip.png"
                       alt=""
-                      style="height: 100%; width: 100%"
+                      style="height: 80%; width: 80%; color: #003261"
                     />
                   </el-col>
                 </div>
               </el-col>
               <el-col :span="20" :gutter="20">
                 <div>
-                  <p class="tip-box">Tips:</p>
-                  <p class="tip-info">
+                  <p class="tip-box"></p>
+                  <p class="tip-info" style="margin-top: 50px">
                     In order to create your information better and faster, please fill in
                     the information below carefully.
                   </p>
@@ -448,7 +448,7 @@ export default {
       },
       formLabelWidth: "80px",
       timer: null,
-      activeNames: ["1"],
+      activeNames: ["1", "2", "3", "4"],
       licenseDataAll: {},
       licenseBasics: {
         license_name: "",
@@ -513,9 +513,9 @@ export default {
       arrayData: [
         "Access",
         "Tagging",
+        "Represent",
         "Distribute",
         "Network",
-        "Represent",
         "Modification",
       ],
       arrayModel: [
@@ -528,20 +528,42 @@ export default {
         "Rev",
       ],
       BigObject: {},
+      queryData: "",
     };
   },
   mounted() {
+    // this.queryData = this.getQueryVariable("data");
     this.loadData("Data", "Model");
+    this.queryData = this.GetQueryString("data");
   },
   methods: {
-    //
+    GetQueryString(name) {
+      // 未传参，返回空
+      if (!name) return null;
+      // 查询参数：先通过search取值，如果取不到就通过hash来取
+      var after = window.location.search;
+      after = after.substr(1) || window.location.hash.split("?")[1];
+      // 地址栏URL没有查询参数，返回空
+      if (!after) return null;
+      // 如果查询参数中没有"name"，返回空
+      if (after.indexOf(name) === -1) return null;
 
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      // 当地址栏参数存在中文时，需要解码，不然会乱码
+      var r = decodeURI(after).match(reg);
+      // 如果url中"name"没有值，返回空
+      if (!r) return null;
+
+      return r[2];
+    },
     // 加载数据
     loadData() {
+      let data = this.GetQueryString("data");
+      console.log(data);
       for (let index = 0; index < arguments.length; index++) {
         const arg = arguments[index];
         this.BigObject[arg] = {};
-        this[`array${arg}`].forEach((item) => {
+        this[`array${arg}`].forEach((item, itemIndex) => {
           const licenseData = {
             name: item,
             rights: "",
@@ -550,6 +572,19 @@ export default {
             obligations: "",
             obligations_text: "",
           };
+          // console.log(arg);
+          // console.log(itemIndex);
+          if (data != null && data.length == 9) {
+            if (index === 0 && itemIndex < 3) {
+              // Data
+              let c_value = data.charAt(itemIndex);
+              licenseData.rights = c_value == 1 ? "Can" : "Cannot";
+            }
+            if (index === 1 && itemIndex < 6) {
+              //Model
+              licenseData.rights = data.charAt(itemIndex + 3) == 1 ? "Can" : "Cannot";
+            }
+          }
           this[`license${arg}List`].push(licenseData);
           this.BigObject[`${arg}`][item] = licenseData;
         });
@@ -647,9 +682,10 @@ export default {
 
 .upload-header-box {
   color: #ffffff;
+  font-size: 18px;
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
   background-color: #003261;
 }
@@ -683,10 +719,17 @@ export default {
 }
 .fontUpdate /deep/ .el-form-item__label {
   font-size: 15px !important;
-  color: #4350b5;
+  color: #003261;
 }
 
 /*.fontUpdate{*/
 /*   margin-left: 20px*/
 /*}*/
+>>> .el-radio__input.is-checked .el-radio__inner {
+  border-color: #003261;
+  background: #003261;
+}
+>>> .el-radio__input.is-checked + .el-radio__label {
+  color: #003261;
+}
 </style>

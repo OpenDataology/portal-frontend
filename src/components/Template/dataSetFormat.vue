@@ -140,8 +140,7 @@ export default {
             },
             {
               key: '"originator"',
-              value:
-                ' "Organization: ExampleCodeInspect (contact@example.com)"',
+              value: ' "Organization: ExampleCodeInspect (contact@example.com)"',
               tip:
                 "Dataset originator</br>" +
                 "Description: The originator of this dataset, may be different from the outlet.</br>" +
@@ -390,12 +389,12 @@ export default {
 
 /*click*/
 >>> .el-tree-node.is-current > .el-tree-node__content {
-  background-color: #314e6a !important;
+  background-color: #003261 !important;
 }
 
 /*hover*/
 >>> .el-tree-node__content:hover {
-  background: #314e6a !important;
+  background: #003261 !important;
 }
 
 .box .el-tree-node {
