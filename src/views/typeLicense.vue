@@ -3,11 +3,7 @@
     <div class="licenseHeader-box">
       <!--  Top Bar    -->
       <template>
-        <el-row
-          :gutter="20"
-          class="licenseHeader-top"
-          style="padding-bottom: 10px"
-        >
+        <el-row :gutter="20" class="licenseHeader-top" style="padding-bottom: 10px">
           <el-col :span="2">
             <div>
               <img
@@ -19,11 +15,7 @@
           </el-col>
           <el-col :span="2">
             <div style="width: 100px">
-              <el-select
-                class="license_color"
-                v-model="value"
-                placeholder="License"
-              >
+              <el-select class="license_color" v-model="value" placeholder="License">
                 <el-option
                   v-for="item in vague"
                   :key="item.value"
@@ -58,9 +50,7 @@
         <el-row justify="center" type="flex">
           <el-col :span="4"
             ><div>
-              <el-button class="licenseType-other" @click="toHome()"
-                >All</el-button
-              >
+              <el-button class="licenseType-other" @click="toHome()">All</el-button>
             </div></el-col
           >
           <el-col :span="4"
@@ -72,18 +62,14 @@
           >
           <el-col :span="4"
             ><div>
-              <el-button
-                class="licenseType-other"
-                @click="toTypeDataSpecificLicense()"
+              <el-button class="licenseType-other" @click="toTypeDataSpecificLicense()"
                 >Data-Specific License</el-button
               >
             </div></el-col
           >
           <el-col :span="4"
             ><div>
-              <el-button
-                class="licenseType-other"
-                @click="toTypeDataSourceTermsofUse()"
+              <el-button class="licenseType-other" @click="toTypeDataSourceTermsofUse()"
                 >DataSource Terms of Use</el-button
               >
             </div></el-col
@@ -145,12 +131,10 @@
         <el-row>
           <el-col :span="24">
             <div class="bg-purple-dark tail_box_len">
+              <p>* The above license analysis has not been reviewed by lawyers</p>
               <p>
-                * The above license analysis has not been reviewed by lawyers
-              </p>
-              <p>
-                * All contents of the portal do not constitute any legal advice
-                and guarantee
+                * All contents of the portal do not constitute any legal advice and
+                guarantee
               </p>
             </div>
           </el-col>
