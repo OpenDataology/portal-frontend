@@ -10,17 +10,13 @@
               <img
                 src="../assets/images/logo.png"
                 alt=""
-                style=" width: 80px;height: 50px"
+                style="width: 80px; height: 50px"
               />
             </div>
           </el-col>
           <el-col :span="2">
-            <div class="grid-content bg-purple-light" style=" width: 100px">
-              <el-select
-                class="license_color"
-                v-model="value"
-                placeholder="License"
-              >
+            <div class="grid-content bg-purple-light" style="width: 100px">
+              <el-select class="license_color" v-model="value" placeholder="License">
                 <el-option
                   v-for="item in vague"
                   :key="item.value"
@@ -34,16 +30,12 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple">
-              <searchLicense/>
+              <searchLicense />
             </div>
           </el-col>
           <el-col :span="7">
             <template v-if="username">
-              <el-button
-                class="license-skill-box"
-                @click="goToUpload"
-                type="primary"
-              >
+              <el-button class="license-skill-box" @click="goToUpload" type="primary">
                 Skill
               </el-button>
             </template>
@@ -55,7 +47,7 @@
                 class="license-login-success"
                 v-model="username"
                 placeholder="username"
-                style=" width: 100px"
+                style="width: 100px"
               >
                 <el-option
                   v-for="item in login"
@@ -69,11 +61,7 @@
             </template>
             <!--     未登录       -->
             <template v-else>
-              <el-button
-                class="license-login-box"
-                @click="drawer = true"
-                type="primary"
-              >
+              <el-button class="license-login-box" @click="drawer = true" type="primary">
                 Login
               </el-button>
             </template>
@@ -86,7 +74,7 @@
               :modal="true"
               :wrapperClosable="true"
             >
-              <loginPage @success="loginSuccess"/>
+              <loginPage @success="loginSuccess" />
             </el-drawer>
           </el-col>
         </el-row>
@@ -95,9 +83,7 @@
       <template>
         <el-row>
           <el-col :span="24">
-            <p class="licenseWelcome-box">
-              Welcome to Dataset Metadata Portal
-            </p>
+            <p class="licenseWelcome-box">Welcome to Dataset Metadata Portal</p>
           </el-col>
         </el-row>
       </template>
@@ -111,17 +97,23 @@
           </el-col>
           <el-col :span="4">
             <div>
-              <el-button class="licenseType-other" @click="toTypeLicense()">Data License</el-button>
+              <el-button class="licenseType-other" @click="toTypeLicense()"
+                >Data License</el-button
+              >
             </div>
           </el-col>
           <el-col :span="4">
             <div>
-              <el-button class="licenseType-other" @click="toTypeDataSpecificLicense()">Data-Specific License</el-button>
+              <el-button class="licenseType-other" @click="toTypeDataSpecificLicense()"
+                >Data-Specific License</el-button
+              >
             </div>
           </el-col>
           <el-col :span="4">
             <div>
-              <el-button class="licenseType-other" @click="toTypeDataSourceTermsofUse()"><a style="text-align: center">DataSource Terms of Use</a></el-button>
+              <el-button class="licenseType-other" @click="toTypeDataSourceTermsofUse()"
+                ><a style="text-align: center">DataSource Terms of Use</a></el-button
+              >
             </div>
           </el-col>
         </el-row>
@@ -130,8 +122,12 @@
     <!-- Middle part-->
     <template>
       <div>
-        <h5 style="text-align:center;color:#003261">Total : {{ totalNum }}</h5>
-        <el-empty v-if="licenseData.length === 0" description="No Data ..." v-show="false">
+        <h5 style="text-align: center; color: #003261">Total : {{ totalNum }}</h5>
+        <el-empty
+          v-if="licenseData.length === 0"
+          description="No Data ..."
+          v-show="false"
+        >
         </el-empty>
         <div v-if="licenseData.length !== 0">
           <!-- 总长度/列数  = 行数 -->
@@ -139,21 +135,22 @@
             <div v-for="o in licenseData" :key="o.id">
               <el-card style="height: 120px">
                 <!-- operate -->
-                <div slot="header" class="clearfix" style="height: 40px;color: #003261;font-size: 15px"
-                     @click="toLicenseInfo(o.id)">
+                <div
+                  slot="header"
+                  class="clearfix"
+                  style="height: 40px; color: #003261; font-size: 15px"
+                  @click="toLicenseInfo(o.id)"
+                >
                   {{ o["license_name"] }}
                 </div>
-                <div style="color: #a8a4a4;font-size: 10px;">
+                <div style="color: #a8a4a4; font-size: 10px">
                   {{ o["license_type"] }}
                 </div>
               </el-card>
             </div>
-
           </div>
-
         </div>
       </div>
-
     </template>
     <!--     Pagination part-->
     <template>
@@ -177,24 +174,23 @@
             <div class="bg-purple-dark tail_box_len">
               <p>* The above license analysis has not been reviewed by lawyers</p>
               <p>
-                * All contents of the portal do not constitute any legal advice
-                and guarantee
+                * All contents of the portal do not constitute any legal advice and
+                guarantee
               </p>
             </div>
           </el-col>
         </el-row>
       </div>
     </template>
-
   </div>
 </template>
 <script>
 import searchLicense from "../components/Search/searchLicense.vue";
 import loginPage from "../components/Login/loginPage.vue";
-import {getLicenseDataAll} from "../../config/api.env.js";
+import { getLicenseDataAll } from "../../config/api.env.js";
 
 export default {
-  components: {searchLicense, loginPage},
+  components: { searchLicense, loginPage },
   name: "body-box",
   data() {
     return {
@@ -223,8 +219,7 @@ export default {
       username: sessionStorage.getItem("userName") || "",
     };
   },
-  mounted() {
-  },
+  mounted() {},
   created: function () {
     this.getLicenseData();
     // this.getLicenseForName();
@@ -257,7 +252,7 @@ export default {
     toLicenseInfo(id) {
       this.$router.push({
         path: "/licenseInfo",
-        query: {id},
+        query: { id },
       });
     },
     toTypeLicense() {
@@ -276,7 +271,7 @@ export default {
       });
     },
     async getLicenseData() {
-      const {data, totalNum} = await getLicenseDataAll(this.numLicenseData);
+      const { data, totalNum } = await getLicenseDataAll(this.numLicenseData);
       this.licenseData = data;
       this.totalNum = totalNum;
     },
@@ -295,11 +290,11 @@ export default {
 </script>
 
 <style scoped>
-.licenseType-box{
+.licenseType-box {
   background-color: #003261;
-  color: #FFFFFF;
+  color: #ffffff;
 }
-.licenseType-other{
+.licenseType-other {
   width: 250px;
 }
 
@@ -379,7 +374,6 @@ export default {
   border-radius: 4px;
 }
 
-
 .el-select .el-input__inner:focus {
   border-color: #ffffff;
 }
@@ -399,10 +393,11 @@ export default {
   text-align: center !important;
 }
 
->>> .el-button--primary:focus, .el-button--primary:hover {
-    background: #003261;
-    border-color: #FFFFFF;
-    color: #FFFFFF;
+>>> .el-button--primary:focus,
+.el-button--primary:hover {
+  background: #003261;
+  border-color: #ffffff;
+  color: #ffffff;
 }
 
 /*Welcome*/
@@ -412,7 +407,6 @@ export default {
   color: #ffffffff;
   margin-top: 50px;
 }
-
 
 /*Tail-box*/
 .tail_box_len {
@@ -430,5 +424,3 @@ export default {
   background: #003261 !important;
 }
 </style>
-
-

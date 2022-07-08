@@ -10,18 +10,14 @@
               <img
                 src="../assets/images/logo.png"
                 alt=""
-                style=" width: 80px;height: 50px"
+                style="width: 80px; height: 50px"
                 @click="toHome()"
               />
             </div>
           </el-col>
           <el-col :span="2">
-            <div style=" width: 100px">
-              <el-select
-                class="license_color"
-                v-model="value"
-                placeholder="Dataset"
-              >
+            <div style="width: 100px">
+              <el-select class="license_color" v-model="value" placeholder="Dataset">
                 <el-option
                   v-for="item in vague"
                   :key="item.value"
@@ -35,22 +31,18 @@
           </el-col>
           <el-col :span="8">
             <div>
-              <searchDataset/>
+              <searchDataset />
             </div>
           </el-col>
           <el-col :span="12">
             <template>
-              <div style=" width: 100px">
-                <el-select
-                  class="license_color"
-                  v-model="value"
-                  placeholder="Menu"
-                >
+              <div style="width: 100px">
+                <el-select class="license_color" v-model="value" placeholder="Menu">
                   <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
+                    v-for="items in options"
+                    :key="items.values"
+                    :label="items.label"
+                    :value="items.values"
                     @click.native="changenewClass"
                   >
                   </el-option>
@@ -64,9 +56,7 @@
       <template>
         <el-row>
           <el-col :span="24">
-            <p class="licenseWelcome-box">
-              Welcome to Dataset Metadata Portal
-            </p>
+            <p class="licenseWelcome-box">Welcome to Dataset Metadata Portal</p>
           </el-col>
         </el-row>
       </template>
@@ -74,8 +64,12 @@
     <!-- Middle part-->
     <template>
       <div>
-        <h5 style="text-align:center;color:#003261">Total : {{ totalNum }}</h5>
-        <el-empty v-if="dataSetData.length === 0" description="No Data ..." v-show="false">
+        <h5 style="text-align: center; color: #003261">Total : {{ totalNum }}</h5>
+        <el-empty
+          v-if="dataSetData.length === 0"
+          description="No Data ..."
+          v-show="false"
+        >
         </el-empty>
         <div v-if="dataSetData.length !== 0">
           <!-- 总长度/列数  = 行数 -->
@@ -83,21 +77,22 @@
             <div v-for="o in dataSetData" :key="o.id">
               <el-card style="height: 120px">
                 <!-- operate -->
-                <div slot="header" class="clearfix" style="height: 40px;color: #003261;font-size: 15px"
-                     @click="toDataSetInfo(o.id)">
+                <div
+                  slot="header"
+                  class="clearfix"
+                  style="height: 40px; color: #003261; font-size: 15px"
+                  @click="toDataSetInfo(o.id)"
+                >
                   {{ o["dataset_name"] }}
                 </div>
-                <div style="color: #a8a4a4;font-size: 10px;">
+                <div style="color: #a8a4a4; font-size: 10px">
                   {{ o["license_name"] }}
                 </div>
               </el-card>
             </div>
-
           </div>
-
         </div>
       </div>
-
     </template>
     <!--  分页-->
     <div class="Dataset-paging">
@@ -121,8 +116,8 @@
             <div class="bg-purple-dark tail_box_len">
               <p>* The above license analysis has not been reviewed by lawyers</p>
               <p>
-                * All contents of the portal do not constitute any legal advice
-                and guarantee
+                * All contents of the portal do not constitute any legal advice and
+                guarantee
               </p>
             </div>
           </el-col>
@@ -133,11 +128,10 @@
 </template>
 <script>
 import searchDataset from "../components/Search/searchDataset.vue";
-import {getDatasetDataAll} from "../../config/api.env.js";
-
+import { getDatasetDataAll } from "../../config/api.env.js";
 
 export default {
-  components: {searchDataset},
+  components: { searchDataset },
   name: "Welcome",
   data() {
     return {
@@ -146,16 +140,18 @@ export default {
         {
           value: "1",
           label: "License",
-
         },
       ],
-      options: [{
-        value: '选项1',
-        label: 'Template'
-      }, {
-        value: '选项2',
-        label: 'Badges'
-      }],
+      options: [
+        {
+          values: "Template",
+          label: "Template",
+        },
+        {
+          values: "Badges",
+          label: "Badges",
+        },
+      ],
       dataSetData: [],
       totalNum: 0,
       numDatasetData: {
@@ -165,21 +161,19 @@ export default {
       basicInfoId: {},
     };
   },
-  mounted() {
-  },
+  mounted() {},
   created: function () {
     this.getDatasetData();
   },
   methods: {
     changenewClass() {
       console.log(this.value);
-      if (this.value === '选项1') {
-
+      if (this.value === "Template") {
         // 另外添加一个跳转页面
         this.$router.push({
           path: "/dataSetFormat",
         });
-      } else if (this.value === '选项2') {
+      } else if (this.value === "Badges") {
         // 另外添加跳转页面
         this.$router.push({
           path: "/dataSetSymbol",
@@ -195,11 +189,11 @@ export default {
     toDataSetInfo(id) {
       this.$router.push({
         path: "/dataSetInfo",
-        query: {id},
+        query: { id },
       });
     },
     async getDatasetData() {
-      const {data, totalNum} = await getDatasetDataAll(this.numDatasetData);
+      const { data, totalNum } = await getDatasetDataAll(this.numDatasetData);
       this.dataSetData = data;
       this.totalNum = totalNum;
     },
@@ -218,8 +212,6 @@ export default {
 };
 </script>
 <style scoped>
-
-
 /*Header-top Part*/
 .licenseHeader-top {
   margin: 0 !important;
@@ -278,5 +270,4 @@ export default {
 .license-tail-box .bg-purple-dark {
   background: #003261 !important;
 }
-
 </style>

@@ -9,17 +9,13 @@
               <img
                 src="../assets/images/logo.png"
                 alt=""
-                style=" width: 80px;height: 50px"
+                style="width: 80px; height: 50px"
               />
             </div>
           </el-col>
           <el-col :span="2">
-            <div style=" width: 100px">
-              <el-select
-                class="license_color"
-                v-model="value"
-                placeholder="License"
-              >
+            <div style="width: 100px">
+              <el-select class="license_color" v-model="value" placeholder="License">
                 <el-option
                   v-for="item in vague"
                   :key="item.value"
@@ -33,22 +29,19 @@
           </el-col>
           <el-col :span="8">
             <div>
-              <searchtype-data-specific-license/>
+              <searchtype-data-specific-license />
             </div>
           </el-col>
           <el-col :span="12">
             <template>&emsp;</template>
           </el-col>
-
         </el-row>
       </template>
       <!--  Welcome  -->
       <template>
         <el-row>
           <el-col :span="24">
-            <p class="licenseWelcome-box">
-              Welcome to Dataset Metadata Portal
-            </p>
+            <p class="licenseWelcome-box">Welcome to Dataset Metadata Portal</p>
           </el-col>
         </el-row>
       </template>
@@ -57,22 +50,27 @@
         <el-row justify="center" type="flex">
           <el-col :span="4">
             <div>
-              <el-button class=" licenseType-other" @click="toHome()">All</el-button>
+              <el-button class="licenseType-other" @click="toHome()">All</el-button>
             </div>
           </el-col>
           <el-col :span="4">
             <div>
-              <el-button class=" licenseType-other" @click="toTypeLicense()">Data License</el-button>
+              <el-button class="licenseType-other" @click="toTypeLicense()"
+                >Data License</el-button
+              >
             </div>
           </el-col>
           <el-col :span="4">
             <div>
-              <el-button class="licenseType-box licenseType-other">Data-Specific License</el-button>
+              <el-button class="licenseType-box licenseType-other"
+                >Data-Specific License</el-button
+              >
             </div>
           </el-col>
           <el-col :span="4">
             <div>
-              <el-button class=" licenseType-other" @click="toTypeDataSourceTermsofUse()">DataSource Terms of Use
+              <el-button class="licenseType-other" @click="toTypeDataSourceTermsofUse()"
+                >DataSource Terms of Use
               </el-button>
             </div>
           </el-col>
@@ -83,8 +81,12 @@
     <!-- Middle part-->
     <template>
       <div>
-        <h5 style="text-align:center;">Total : {{ totalNum }}</h5>
-        <el-empty v-if="licenseData.length === 0" description="No Data ..." v-show="false">
+        <h5 style="text-align: center">Total : {{ totalNum }}</h5>
+        <el-empty
+          v-if="licenseData.length === 0"
+          description="No Data ..."
+          v-show="false"
+        >
         </el-empty>
         <div v-if="licenseData.length !== 0">
           <!-- 总长度/列数  = 行数 -->
@@ -92,21 +94,22 @@
             <div v-for="o in licenseData" :key="o.id">
               <el-card style="height: 120px">
                 <!-- operate -->
-                <div slot="header" class="clearfix" style="height: 40px;color: #003261;font-size: 15px"
-                     @click="toLicenseInfo(o.id)">
+                <div
+                  slot="header"
+                  class="clearfix"
+                  style="height: 40px; color: #003261; font-size: 15px"
+                  @click="toLicenseInfo(o.id)"
+                >
                   {{ o["license_name"] }}
                 </div>
-                <div style="color: #a8a4a4;font-size: 10px;">
+                <div style="color: #a8a4a4; font-size: 10px">
                   {{ o["license_type"] }}
                 </div>
               </el-card>
             </div>
-
           </div>
-
         </div>
       </div>
-
     </template>
     <!-- Pagination part-->
     <template>
@@ -118,7 +121,6 @@
           :page-size="numLicenseData.pageSize"
           layout="total, prev, pager, next, jumper"
           :total="totalNum"
-
         >
         </el-pagination>
       </div>
@@ -131,8 +133,8 @@
             <div class="bg-purple-dark tail_box_len">
               <p>* The above license analysis has not been reviewed by lawyers</p>
               <p>
-                * All contents of the portal do not constitute any legal advice
-                and guarantee
+                * All contents of the portal do not constitute any legal advice and
+                guarantee
               </p>
             </div>
           </el-col>
@@ -140,14 +142,13 @@
       </div>
     </template>
   </div>
-
 </template>
 <script>
-import {getTypeDataSpecificLicense} from "../../config/api.env.js";
+import { getTypeDataSpecificLicense } from "../../config/api.env.js";
 import SearchtypeDataSpecificLicense from "../components/Search/searchTypeDataSpecificLicense";
 
 export default {
-  components: {SearchtypeDataSpecificLicense},
+  components: { SearchtypeDataSpecificLicense },
   name: "Welcome",
   data() {
     return {
@@ -167,8 +168,7 @@ export default {
       basicInfoId: {},
     };
   },
-  mounted() {
-  },
+  mounted() {},
   created: function () {
     this.getLicenseData();
     // this.getLicenseForName();
@@ -182,13 +182,11 @@ export default {
     toTypeLicense() {
       this.$router.push({
         path: "/typeLicense",
-
       });
     },
     toTypeDataSourceTermsofUse() {
       this.$router.push({
         path: "/typeDataSourceTermsofUse",
-
       });
     },
     toDataSetALL() {
@@ -199,12 +197,12 @@ export default {
     toLicenseInfo(id) {
       this.$router.push({
         path: "/licenseInfo",
-        query: {id},
+        query: { id },
       });
     },
     async getLicenseData() {
       // let that = this;
-      const {data, totalNum} = await getTypeDataSpecificLicense(this.numLicenseData);
+      const { data, totalNum } = await getTypeDataSpecificLicense(this.numLicenseData);
       // const { data, totalNum } = await getLicenseDataAll();
 
       this.licenseData = data;
@@ -230,7 +228,7 @@ export default {
 <style scoped>
 .licenseType-box {
   background-color: #003261;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .licenseType-other {
@@ -313,7 +311,6 @@ export default {
   border-radius: 4px;
 }
 
-
 .el-select .el-input__inner:focus {
   border-color: #ffffff;
 }
@@ -340,7 +337,6 @@ export default {
   color: #ffffffff;
   margin-top: 50px;
 }
-
 
 /*Tail-box*/
 .tail_box_len {
