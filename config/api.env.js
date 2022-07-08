@@ -98,22 +98,22 @@ export const getLicenseBasicInfo = data => {
 //     })
 // }
 
-// /**
-//  *API 2.4 Search basic info of dataset license by Name
-//  * @param {object} data
-//  * @returns
-//  */
-// export const getResultByLicense_name = (queryString) => {
-//     return axios.request({
-//         url: "/search_license_basic_by_name",
-//         method: "get",
-//         params: {
-//             token: Token,
-//             name:queryString
+/**
+ *API 2.4 Search basic info of dataset license by Name
+ * @param {object} data
+ * @returns
+ */
+export const getResultByLicense_name = (queryString) => {
+    return axios.request({
+        url: "/search_license_basic_by_name",
+        method: "get",
+        params: {
+            token: Token,
+            name:queryString
 
-//         }
-//     })
-// }
+        }
+    })
+}
 
 /**
  *API 2.5 Get data info of dataset license by ID
