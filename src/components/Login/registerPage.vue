@@ -41,7 +41,7 @@
       >
     </el-form-item>
     <el-form-item class="btns">
-      <el-button type="primary" @click="submitForm('ruleForm')" style="font-weight:bold !important;">Sign up</el-button>
+      <el-button type="primary" @click="submitForm('ruleForm')" style="font-weight:bold !important; background-color: #003261">Sign up</el-button>
       <el-button @click="resetForm('ruleForm')" style="font-weight:bold !important;">Reset</el-button>
     </el-form-item>
   </el-form>
@@ -83,7 +83,7 @@ export default {
       rules: {
         account: [
           {required: true, message: "Please enter your name", trigger: "blur"},//请输入您的名称
-          {min: 6, max: 10, message: "The length is between 6 and 10 characters", trigger: "blur"},//长度在 2 到 5 个字符
+          {min: 1, max: 8, message: "The length is between 1 and 8 characters", trigger: "blur"},//长度在 2 到 5 个字符
         ],
         password: [{required: true, validator: validatePass, trigger: "blur"}],
         checkPass: [
@@ -114,67 +114,43 @@ export default {
   }
 };
 </script>
-
-
-
-<style>
+<style scoped>
+>>> .el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
+  color: #003261!important;
+}
+>>> .el-tabs--border-card>.el-tabs__header .el-tabs__item:not(.is-disabled):hover {
+  color: #003261 !important;
+}
+>>> .el-button:focus, .el-button:hover {
+  color: #9fb3f6 !important;
+}
 .btns {
   display: flex;
   justify-content: flex-end;
 }
 
-::v-deep .el-tabs__item {
+>>> .el-tabs__item {
   font-size: 16px !important;
   font-weight: bold !important;
 }
 
-::v-deep::v-deep .el-input__inner {
+>>> .el-input__inner {
   border-radius: 10px !important;
   border: 2px solid #bebebe !important;
   background-color: #ffffff !important;
-  color: rgb(7, 64, 114) !important;
+  color: #003261 !important;
 }
 
-::v-deep .el-input__icon {
-  color: rgb(7, 64, 114) !important;
+>>> .el-input__icon {
+  color: #003261 !important;
 }
- .verification-box {
+
+>>> .verification-box {
   width: 50% !important;
 }
-::v-deep .el-button {
+
+>>> .el-button {
   border-radius: 10px;
   border: 2px solid #c6e2ff;
 }
 </style>
-
-
-// .btns {
-//   display: flex;
-//   justify-content: flex-end;
-// }
-
-// >>> .el-tabs__item {
-//   font-size: 16px !important;
-//   font-weight: bold !important;
-// }
-
-// >>> .el-input__inner {
-//   border-radius: 10px !important;
-//   border: 2px solid #bebebe !important;
-//   background-color: #ffffff !important;
-//   color: rgb(7, 64, 114) !important;
-// }
-
-// >>> .el-input__icon {
-//   color: rgb(7, 64, 114) !important;
-// }
-
-// >>> .verification-box {
-//   width: 50% !important;
-// }
-
-// >>> .el-button {
-//   border-radius: 10px;
-//   border: 2px solid #c6e2ff;
-// }
-// </style>

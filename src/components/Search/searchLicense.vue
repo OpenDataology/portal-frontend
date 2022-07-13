@@ -12,21 +12,16 @@
           @select="handleSelect"
           value-key="license_name"
         >
-        <i
-          class="el-icon-search el-input__icon"
-          slot="suffix"
-        >
-        </i
-      >
+          <i class="el-icon-search el-input__icon" slot="suffix"> </i>
         </el-autocomplete>
       </el-col>
     </el-row>
   </div>
 </template>
-  
+
 <script>
-// import {getResultByLicense_name} from '../../../config/api.env'
-import {getResultLicenseIndex} from '../../../config/api.env'
+import { getResultByLicense_name } from "../../../config/api.env";
+// import { getResultLicenseIndex } from "../../../config/api.env";
 
 export default {
   data() {
@@ -35,8 +30,8 @@ export default {
       state: "",
     };
   },
-    mounted(){
-    this.getLicenseIndex()
+  mounted() {
+    this.getLicenseIndex();
   },
   methods: {
     async querySearch(queryString, cb) {
@@ -51,18 +46,17 @@ export default {
       return (restaurant) => {
         return (
           // this.fuzzyMatch(restaurant.license_name.toLowerCase(),queryString.toLowerCase())
-          restaurant.license_name
-            .toLowerCase()
-            .indexOf(queryString.toLowerCase()) !== -1 //从头
+          restaurant.license_name.toLowerCase().indexOf(queryString.toLowerCase()) !== -1 //从头
         );
       };
     },
     async getLicenseIndex() {
-      const { data } = await getResultLicenseIndex();
+      // const { data } = await getResultLicenseIndex();
+      const { data } = await getResultByLicense_name();
       this.restaurants = data;
     },
     handleSelect(item) {
-       this.$router.push({
+      this.$router.push({
         path: "/licenseInfo",
         query: { id: item.id },
       });
@@ -77,23 +71,27 @@ export default {
 };
 </script>
 <style>
+.search-box input::-webkit-input-placeholder {
+  color: #fff !important;
+  text-align: center !important;
+}
 .search-box {
   height: 50px;
   /* width: 105px; */
-  margin-top: 7px;
+  /*margin-top: 7px;*/
   /* float: left; */
   margin-left: 10px;
 }
 .search-box .el-input {
-  width: 250% !important;
+  width: 200% !important;
 }
 .el-input__icon {
   color: #ffffff !important;
 }
 .el-input__inner {
-    border-radius: 10px !important;
-    border: 2px solid #fff !important;
-    background-color: #4c8efc !important;
-    color: #ffffff !important;
+  border-radius: 10px !important;
+  border: 2px solid #fff !important;
+  background-color: #003261 !important;
+  color: #ffffff !important;
 }
 </style>
