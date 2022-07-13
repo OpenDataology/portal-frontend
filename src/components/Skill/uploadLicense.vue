@@ -432,14 +432,29 @@
         </el-drawer>
       </template>
 
+      <el-drawer
+        title="withHeader"
+        :visible.sync="drawer"
+        :with-header="false"
+        size="40%"
+        :modal="true"
+        :wrapperClosable="true"
+      >
+        <loginPage @success="loginSuccess" />
+      </el-drawer>
       <!-- <el-button type="primary" @click="submitForm">Create</el-button> -->
     </el-form>
   </div>
 </template>
 <script>
+import loginPage from "../Login/loginPage.vue";
+
 export default {
+  components: { loginPage },
+
   data() {
     return {
+      drawer: false,
       dialog: false,
       loading: false,
       usertip: {
@@ -529,6 +544,7 @@ export default {
       ],
       BigObject: {},
       queryData: "",
+      username: sessionStorage.getItem("userName") || "",
     };
   },
   mounted() {
@@ -559,7 +575,7 @@ export default {
     // 加载数据
     loadData() {
       let data = this.GetQueryString("data");
-      console.log(data);
+      // console.log(data);
       for (let index = 0; index < arguments.length; index++) {
         const arg = arguments[index];
         this.BigObject[arg] = {};
@@ -595,7 +611,17 @@ export default {
         path: "/licenseAll",
       });
     },
+    loginSuccess(userName) {
+      this.drawer = false;
+      this.username = userName;
+    },
     submitForm() {
+      console.log("user:", sessionStorage.getItem("userName"));
+      if (sessionStorage.getItem("userName") === null) {
+        //登陆弹窗
+        this.drawer = true;
+        return;
+      }
       let formValidates = [
         this.$refs["licenseBasics"].validate(),
         this.$refs["licenseBasics2"].validate(),
