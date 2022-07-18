@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import { getResultByLicense_name } from "../../../config/api.env";
-// import { getResultLicenseIndex } from "../../../config/api.env";
+// import { getResultByLicense_name } from "../../../config/api.env";
+import { getResultLicenseIndex } from "../../../config/api.env";
 
 export default {
   data() {
@@ -44,6 +44,8 @@ export default {
     },
     createFilter(queryString) {
       return (restaurant) => {
+        if (restaurant.license_name === "" || restaurant.license_name === undefined)
+          return;
         return (
           // this.fuzzyMatch(restaurant.license_name.toLowerCase(),queryString.toLowerCase())
           restaurant.license_name.toLowerCase().indexOf(queryString.toLowerCase()) !== -1 //从头
@@ -51,8 +53,8 @@ export default {
       };
     },
     async getLicenseIndex() {
-      // const { data } = await getResultLicenseIndex();
-      const { data } = await getResultByLicense_name();
+      const { data } = await getResultLicenseIndex();
+      // const { data } = await getResultByLicense_name();
       this.restaurants = data;
     },
     handleSelect(item) {

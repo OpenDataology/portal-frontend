@@ -11,23 +11,19 @@
           :trigger-on-focus="false"
           @select="handleSelect"
           value-key="dataset_name"
-          :debounce=200
+          :debounce="200"
         >
-          <i
-            class="el-icon-search el-input__icon"
-            slot="suffix"
-          >
-          </i>
+          <i class="el-icon-search el-input__icon" slot="suffix"> </i>
         </el-autocomplete>
       </el-col>
     </el-row>
   </div>
 </template>
-  
+
 <script>
 // import { getResultByDataset_name } from "../../../config/api.env";
 import { getResultDatasetIndex } from "../../../config/api.env";
-import event from '../../assets/js/instance'
+import event from "../../assets/js/instance";
 
 export default {
   data() {
@@ -36,8 +32,8 @@ export default {
       state2: "",
     };
   },
-  mounted(){
-    this.getDatasetIndex()
+  mounted() {
+    this.getDatasetIndex();
   },
   // created(){
   //   this.getDatasetIndex()
@@ -52,10 +48,10 @@ export default {
     },
     createFilter(queryString) {
       return (restaurant) => {
+        if (restaurant.dataset_name === "" || restaurant.dataset_name === undefined)
+          return;
         return (
-          restaurant.dataset_name
-            .toLowerCase()
-            .indexOf(queryString.toLowerCase()) !== -1 //从头
+          restaurant.dataset_name.toLowerCase().indexOf(queryString.toLowerCase()) !== -1 //从头
         );
       };
     },
@@ -64,29 +60,28 @@ export default {
       this.restaurants = data;
       // console.log(this.restaurants);
     },
-  // methods: {
-  //   async querySearch(queryString, cb) {
-  //     const { data } = await getResultByDataset_name(queryString);
-  //     this.restaurants = data;
-  //     var restaurants = this.restaurants;
-  //     var results = queryString
-  //       ? restaurants.filter(this.createFilter(queryString))
-  //       : restaurants;
-  //     // 调用 callback 返回建议列表的数据
-  //     cb(results);
-  //   },
-  //   createFilter(queryString) {
-  //     return (restaurant) => {
-  //       return (
-  //         // this.fuzzyMatch(restaurant.license_name.toLowerCase(),queryString.toLowerCase())
-  //         restaurant.dataset_name
-  //           .toLowerCase()
-  //           .indexOf(queryString.toLowerCase()) !== -1 //从头
-  //       );
-  //     };
-  //   },
+    // methods: {
+    //   async querySearch(queryString, cb) {
+    //     const { data } = await getResultDatasetIndex(queryString);
+    //     this.restaurants = data;
+    //     var restaurants = this.restaurants;
+    //     var results = queryString
+    //       ? restaurants.filter(this.createFilter(queryString))
+    //       : restaurants;
+    //     // 调用 callback 返回建议列表的数据
+    //     cb(results);
+    //   },
+    //   createFilter(queryString) {
+    //     return (restaurant) => {
+    //       return (
+    //         // this.fuzzyMatch(restaurant.license_name.toLowerCase(),queryString.toLowerCase())
+    //         restaurant.dataset_name.toLowerCase().indexOf(queryString.toLowerCase()) !==
+    //         -1 //从头
+    //       );
+    //     };
+    //   },
     handleSelect(item) {
-      event.$emit('updateDataSet', item.id)
+      event.$emit("updateDataSet", item.id);
     },
     // handleIconClick(item) {
     //   this.$router.push({
@@ -95,13 +90,12 @@ export default {
     //   });
     // },
   },
-
 };
 </script>
-<style >
+<style>
 .search-box input::-webkit-input-placeholder {
-  color: #fff!important;
-  text-align: center!important;
+  color: #fff !important;
+  text-align: center !important;
 }
 .search-box {
   height: 50px;
@@ -117,9 +111,9 @@ export default {
   color: #ffffff !important;
 }
 .el-input__inner {
-    border-radius: 10px !important;
-    border: 2px solid #fff !important;
-    background-color: #003261 !important;
-    color: #ffffff !important;
+  border-radius: 10px !important;
+  border: 2px solid #fff !important;
+  background-color: #003261 !important;
+  color: #ffffff !important;
 }
 </style>
