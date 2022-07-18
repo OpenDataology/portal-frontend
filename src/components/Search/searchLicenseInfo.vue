@@ -12,23 +12,17 @@
           @select="handleSelect"
           value-key="license_name"
         >
-        <i
-          class="el-icon-search el-input__icon"
-          slot="suffix"
-        >
-        </i
-      >
+          <i class="el-icon-search el-input__icon" slot="suffix"> </i>
         </el-autocomplete>
       </el-col>
     </el-row>
   </div>
 </template>
-  
-<script>
-// import {getResultByLicense_name} from '../../../config/api.env'
-import {getResultLicenseIndex} from '../../../config/api.env'
-import event from '../../assets/js/instance'
 
+<script>
+// import { getResultByLicense_name } from "../../../config/api.env";
+import { getResultLicenseIndex } from "../../../config/api.env";
+import event from "../../assets/js/instance";
 
 export default {
   data() {
@@ -37,8 +31,8 @@ export default {
       state: "",
     };
   },
-    mounted(){
-    this.getLicenseIndex()
+  mounted() {
+    this.getLicenseIndex();
   },
   methods: {
     async querySearch(queryString, cb) {
@@ -51,11 +45,11 @@ export default {
     },
     createFilter(queryString) {
       return (restaurant) => {
+        if (restaurant.license_name === "" || restaurant.license_name === undefined)
+          return;
         return (
           // this.fuzzyMatch(restaurant.license_name.toLowerCase(),queryString.toLowerCase())
-          restaurant.license_name
-            .toLowerCase()
-            .indexOf(queryString.toLowerCase()) !== -1 //从头
+          restaurant.license_name.toLowerCase().indexOf(queryString.toLowerCase()) !== -1 //从头
         );
       };
     },
@@ -64,7 +58,7 @@ export default {
       this.restaurants = data;
     },
     handleSelect(item) {
-       event.$emit('updateLicenseData', item.id)
+      event.$emit("updateLicenseData", item.id);
     },
     // handleIconClick(item) {
     //   this.$router.push({
@@ -75,10 +69,10 @@ export default {
   },
 };
 </script>
-<style >
+<style>
 .search-box input::-webkit-input-placeholder {
-  color: #fff!important;
-  text-align: center!important;
+  color: #fff !important;
+  text-align: center !important;
 }
 .search-box {
   height: 50px;
@@ -94,9 +88,9 @@ export default {
   color: #ffffff !important;
 }
 .el-input__inner {
-    border-radius: 10px !important;
-    border: 2px solid #fff !important;
-    background-color: #003261 !important;
-    color: #ffffff !important;
+  border-radius: 10px !important;
+  border: 2px solid #fff !important;
+  background-color: #003261 !important;
+  color: #ffffff !important;
 }
 </style>
