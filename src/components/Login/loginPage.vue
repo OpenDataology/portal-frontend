@@ -118,6 +118,7 @@ export default {
           if (data.data !== null) {
             const userName = data.data.account;
             sessionStorage.setItem("userName", userName); //保存用户信息
+            sessionStorage.setItem("userId", data.data.id); //保存用户Id
             this.$emit("success", userName);
 
             /* this.$router.push("/");
