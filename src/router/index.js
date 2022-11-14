@@ -7,9 +7,9 @@ export default new Router({
     routes: [
 
       /**
-       * 
+       *
        * Home page
-       * 
+       *
        */
       {
         path: '/',
@@ -30,12 +30,12 @@ export default new Router({
         component: () => import('../views/dataSetInfo.vue'),
         props: route => ({id: route.query.id})
       },
-     
+
 
       /**
        * Type page
-       * 
-       *  */ 
+       *
+       *  */
      {
         path:"/typeLicense",
         component:()=>import("../views/typeLicense.vue"),
@@ -48,8 +48,8 @@ export default new Router({
       },
       /**
        * Search components
-       * 
-       *  */ 
+       *
+       *  */
        {
         path:"/searchLicense",
         component:()=>import("../components/Search/searchLicense.vue"),
@@ -77,19 +77,19 @@ export default new Router({
 
 
       /**
-       * 
+       *
        * Export
-       * 
-       * 
+       *
+       *
        */
       {
         path:"/Export",
         component:()=>import("../components/Export/Export.vue"),
       },
       /**
-       * 
+       *
        * format
-       * 
+       *
        */
        {
         path: '/dataSetFormat',
@@ -122,8 +122,49 @@ export default new Router({
         path: "/uploadLicense",
         component: () => import("../components/Skill/uploadLicense"),
       },
-     
-  
-    
+
+      /*
+       *
+       * review user
+       */
+      {
+        path:"/review",
+        component:()=>import("../views/review.vue"),
+        redirect:'/review/review_upload',
+        children:[
+          {
+            path:"/review/review_upload",
+            component:()=>import("../components/Review/reviewUpload.vue"),
+            meta:{requireAuth:true}
+          },
+          {
+            path:"/review/reviewUploadByFile",
+            component:()=>import("../components/Review/reviewUploadByFile"),
+            meta:{requireAuth:true}
+          },{
+            name:"/review/appending_aibom",
+            path:"/review/appending_aibom",
+            component:()=>import("../components/Review/apendingAIBOM"),
+            meta:{requireAuth:true}
+          },{
+            name:"/review/reviewedDataSet",
+            path:"/review/reviewedDataSet",
+            component:() => import("../components/Review/reviewedDataSet"),
+            meta:{requireAuth:true}
+          }
+        ]
+      },
+
+      /*
+      *
+      * inspect page
+      */
+      {
+        path: '/inspectDataSet',
+        component: () => import('../views/inspectDataSetAll.vue'),
+      },
+
+
+
     ]
   })
