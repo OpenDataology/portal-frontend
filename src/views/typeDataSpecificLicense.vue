@@ -158,6 +158,10 @@ export default {
           value: "1",
           label: "Dataset",
         },
+        {
+          value: "2",
+          label: "Review",
+        },
       ],
       licenseData: [],
       totalNum: 0,
@@ -190,9 +194,18 @@ export default {
       });
     },
     toDataSetALL() {
-      this.$router.push({
-        path: "/dataSetAll",
-      });
+      if(this.value == 1){
+        this.$router.push({
+          path: "/dataSetAll",
+        });
+      }else {
+        this.$router.push({
+          path: "/review",
+        });
+        if(this.$route.path === '/typeDataSpecificLicense' || this.$route.path === '/' ){
+          this.value = 'License';
+        }
+      }
     },
     toLicenseInfo(id) {
       this.$router.push({

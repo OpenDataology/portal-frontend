@@ -14,6 +14,22 @@ Vue.use(ElementUI);
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  // var _this = this;
+  if(to.meta.requireAuth){
+    if(JSON.parse(sessionStorage.getItem("userId"))==null){
+      console.log('not login',)
+      alert("please login")
+      return;
+      // next('licenseAll')
+    } else {
+      next()
+    }
+  }
+  else {
+    next();
+  }
+});
 
 /* eslint-disable no-new */
 new Vue({
