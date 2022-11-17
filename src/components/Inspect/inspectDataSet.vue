@@ -318,9 +318,9 @@ export default {
           this.currentData
         ]
       }
+      data.pending_review_list[0].size = data.pending_review_list[0].size +this.sizeOptionsValue
       requestService.saveTempReviewData(data).then(param => {
-
-        this.currentData.size=this.currentData.size+""+this.sizeOptionsValue;
+        // this.currentData.size=this.currentData.size+""+this.sizeOptionsValue;
         this.tableData[this.index] = this.currentData
         this.reloadTable = !this.reloadTable
         this.successMess('Staging succeeded')
@@ -342,6 +342,7 @@ export default {
           this.currentData
         ]
       }
+      data.pending_review_list[0].size = data.pending_review_list[0].size +this.sizeOptionsValue
       requestService.submitReviewData(data).then(param => {
         this.successMess('submit success')
         this.tableAllData.splice(this.index, 1)

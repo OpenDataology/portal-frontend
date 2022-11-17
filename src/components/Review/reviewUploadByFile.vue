@@ -32,6 +32,7 @@ export default {
   data(){
     return{
       fileList:[],
+      userId:sessionStorage.getItem("userId")
     }
   },
   created() {
@@ -51,8 +52,8 @@ export default {
       console.log("click：",this.$refs.upload)
       console.log("click fileList：",this.fileList)
       const data = {
-        user_id:33,
-        dataset_review_list:this.fileList[0].raw
+        "user_id": this.userId,
+        "dataset_review_list":this.fileList[0].raw
       }
       requestService.uploadFiles(data).then( res => {
         Message(
