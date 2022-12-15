@@ -1,3 +1,14 @@
+/*
+.postcssrc.js
+
+Copyright (c) 2022 The OpenDataology Authors 
+All rights reserved.
+
+SPDX-License-Identifier: Apache-2.0
+*/
+
+
+
 // https://github.com/michael-ciniawsky/postcss-load-config
 
 module.exports = {

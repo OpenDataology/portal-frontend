@@ -1,3 +1,14 @@
+/*
+review.env.js
+
+Copyright (c) 2022 The OpenDataology Authors 
+All rights reserved.
+
+SPDX-License-Identifier: Apache-2.0
+*/
+
+
+
 import axios from "axios";
 // export { default } from "axios"
 // axios.defaults.baseURL = "http://{Server-IP}}/api/v1";
