@@ -1,3 +1,14 @@
+/*
+index.js
+
+Copyright (c) 2022 The OpenDataology Authors 
+All rights reserved.
+
+SPDX-License-Identifier: Apache-2.0
+*/
+
+
+
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
