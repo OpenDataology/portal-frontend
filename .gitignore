@@ -14,5 +14,4 @@ yarn-error.log*
 *.sln
 
 package-lock.json
-https.env.js
-config/review.env.js
+config/keys.js

@@ -1,8 +1,9 @@
 import axios from "axios";
 import cur_keys from "./keys.js"
+// export { default } from "axios"
 
 const ax = axios.create({
-  baseURL:cur_keys.review_backend,
+  baseURL:cur_keys.aibom_generator_backend,
   timeout:5000,
   headers:{
     'Content-Type': "application/json; charset=utf-8"
