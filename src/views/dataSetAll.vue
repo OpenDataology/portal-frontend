@@ -124,11 +124,94 @@
         </el-row>
       </div>
     </template>
+
+    <el-dialog title="AI Open Dataset Metadata Uploader" :visible.sync="dialogFormVisible">
+      <el-form :model="datasetMetadataForm" ref="datasetMetadataForm">
+        <el-form-item label="Name" :label-width="formLabelWidth" prop="name">
+          <el-input v-model="datasetMetadataForm.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Version" :label-width="formLabelWidth" prop="Version">
+          <el-input v-model="datasetMetadataForm.version" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="License ID" :label-width="formLabelWidth" prop="License ID">
+          <el-input v-model="datasetMetadataForm.licenseId" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="License Name" :label-width="formLabelWidth" prop="License Name">
+          <el-input v-model="datasetMetadataForm.licenseName" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Licensor" :label-width="formLabelWidth" prop="Licensor">
+          <el-input v-model="datasetMetadataForm.licensor" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="License From" :label-width="formLabelWidth" prop="License From">
+          <el-input v-model="datasetMetadataForm.licenseFrom" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="License Location" :label-width="formLabelWidth" prop="License Location">
+          <el-input v-model="datasetMetadataForm.licenseLocation" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Origin" :label-width="formLabelWidth" prop="Origin">
+          <el-input v-model="datasetMetadataForm.origin" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Downloaded" :label-width="formLabelWidth" prop="Downloaded">
+          <el-input v-model="datasetMetadataForm.downloaded" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="Outlet" :label-width="formLabelWidth" prop="Outlet">
+          <el-input v-model="datasetMetadataForm.outlet" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Size" :label-width="formLabelWidth" prop="Size">
+          <el-input v-model="datasetMetadataForm.size" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Format" :label-width="formLabelWidth" prop="Format">
+          <el-input v-model="datasetMetadataForm.format" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="Personal" :label-width="formLabelWidth" prop="Personal">
+          <el-input v-model="datasetMetadataForm.personal" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Additional" :label-width="formLabelWidth" prop="Additional">
+          <el-input v-model="datasetMetadataForm.additional" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Offensive" :label-width="formLabelWidth" prop="Offensive">
+          <el-input v-model="datasetMetadataForm.offensive" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="Comply" :label-width="formLabelWidth" prop="Comply">
+          <el-input v-model="datasetMetadataForm.comply" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Collect" :label-width="formLabelWidth" prop="Collect">
+          <el-input v-model="datasetMetadataForm.collect" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Available" :label-width="formLabelWidth" prop="Available">
+          <el-input v-model="datasetMetadataForm.available" autocomplete="off"></el-input>
+        </el-form-item>
+        
+        <el-form-item label="License content" :label-width="formLabelWidth" prop="License content">
+          <el-input v-model="datasetMetadataForm.licenseContent" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Description" :label-width="formLabelWidth" prop="Description">
+          <el-input v-model="datasetMetadataForm.description" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Hashcode" :label-width="formLabelWidth" prop="Hashcode">
+          <el-input v-model="datasetMetadataForm.hashcode" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Collection process" :label-width="formLabelWidth" prop="Collection process">
+          <el-input v-model="datasetMetadataForm.collectionProcess" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">cancel</el-button>
+        <el-button type="primary" @click="clearDatasetMetadata('datasetMetadataForm')">clear</el-button>
+        <el-button type="primary" @click="uploadDatasetMetadata('datasetMetadataForm')">upload</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
 import searchDataset from "../components/Search/searchDataset.vue";
 import { getDatasetDataAll } from "../../config/api.env.js";
+import { Message } from "element-ui";
 
 export default {
   components: { searchDataset },
@@ -155,8 +238,37 @@ export default {
           values: "Badges",
           label: "Badges",
         },
+        {
+          values: "upload_dataset_metadata",
+          label: "Upload dataset metadata",
+        }
       ],
       dataSetData: [],
+      dialogFormVisible: false,
+      datasetMetadataForm: {
+        name: "",
+        version: "",
+        licenseId:"",
+        licenseName:"",
+        licensor:"",
+        licenseFrom:"",
+        licenseLocation:"",
+        origin:"",
+        downloaded:"",
+        outlet:"",
+        size:"",
+        format:"",
+        personal:"",
+        additional:"",
+        offensive:"",
+        comply:"",
+        collect:"",
+        available:"",
+        licenseContent:"",
+        description:"",
+        hashcode:"",
+        collectionProcess:""
+      },
       totalNum: 0,
       numDatasetData: {
         pageSize: 12,
@@ -182,6 +294,9 @@ export default {
         this.$router.push({
           path: "/dataSetSymbol",
         });
+      } else if (this.value === "upload_dataset_metadata") {
+        // // 打开填写表单
+        this.dialogFormVisible = true;
       }
       this.$forceUpdate();
     },
@@ -220,6 +335,66 @@ export default {
       this.numDatasetData.pageNum = newPage;
       this.getDatasetData();
       // console.log(newPage)
+    },
+    tipMessage(message, type) {
+      Message({
+        message: message,
+        type: type
+      })
+    },
+    // 通过表单获取数据集元数据信息
+    uploadDatasetMetadata(datasetMetadataForm) {
+      this.$refs[datasetMetadataForm].validate(async(valid) => {
+        if (valid) {
+          console.log(this.datasetMetadataForm.name);
+          console.log(this.datasetMetadataForm.version);
+          console.log(this.datasetMetadataForm.licenseId);
+
+          console.log(this.datasetMetadataForm.licenseName);
+          console.log(this.datasetMetadataForm.licensor);
+          console.log(this.datasetMetadataForm.licenseFrom);
+
+          console.log(this.datasetMetadataForm.licenseLocation);
+          console.log(this.datasetMetadataForm.origin);
+          console.log(this.datasetMetadataForm.downloaded);
+
+          console.log(this.datasetMetadataForm.outlet);
+          console.log(this.datasetMetadataForm.size);
+          console.log(this.datasetMetadataForm.format);
+
+          console.log(this.datasetMetadataForm.personal);
+          console.log(this.datasetMetadataForm.additional);
+          console.log(this.datasetMetadataForm.offensive);
+
+          console.log(this.datasetMetadataForm.comply);
+          console.log(this.datasetMetadataForm.collect);
+          console.log(this.datasetMetadataForm.available);
+
+          console.log(this.datasetMetadataForm.licenseContent);
+          console.log(this.datasetMetadataForm.description);
+          console.log(this.datasetMetadataForm.hashcode);
+          console.log(this.datasetMetadataForm.collectionProcess);
+
+          this.dialogFormVisible = false;
+          this.clearDatasetMetadata(datasetMetadataForm);
+          this.tipMessage("Submitted successfully, please wait for review!", "success")
+        } else {
+          console.log('error submit!');
+          alert("Some required information is not filled, please try again!")
+          this.tipMessage("Some required information is not filled", "warning")
+          return false;
+        }
+      });
+    },
+    // 清空数据集元数据表单
+    clearDatasetMetadata(datasetMetadataForm) {
+      this.$refs[datasetMetadataForm].validate(async(valid) => {
+        if (valid) {
+          for(var key in this.datasetMetadataForm){
+            this.datasetMetadataForm[key] = "";
+          }
+        } 
+      });
     },
   },
 };
