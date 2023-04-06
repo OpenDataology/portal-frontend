@@ -1,7 +1,7 @@
 /*
 api.js
 
-Copyright (c) 2022 The OpenDataology Authors 
+Copyright (c) 2022 The OpenDataology Authors
 All rights reserved.
 
 SPDX-License-Identifier: Apache-2.0
@@ -20,4 +20,17 @@ export const getAIBOM = (source, link) => {
           similarDatasets: "False"
         }
     })
+}
+
+export const getNewAIBOM = (source, link) => {
+  return axios.request({
+    url: "/dataset/metadata/load",
+    method: "get",
+    params: {
+      datasetName: "",
+      datasetMainUrl: link,
+      isSimilarDatasets: "False",
+      typeFlag: source
+    }
+  })
 }

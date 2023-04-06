@@ -165,7 +165,7 @@
 <script>
 import requestService from '../../../config/api'
 import { Message } from "element-ui";
-import {getAIBOM} from "../../../config/api_aibom_generator"
+import {getAIBOM,getNewAIBOM} from "../../../config/api_aibom_generator"
 
 export default {
   name: "apendingAIBOM-table",
@@ -340,19 +340,27 @@ export default {
           console.log(this.AIBOMtData.source.toLowerCase());
           console.log(this.AIBOMtData.link);
 
-          const data = await getAIBOM(this.AIBOMtData.source.toLowerCase(), this.AIBOMtData.link);
+          const data = await getNewAIBOM(this.AIBOMtData.source.toLowerCase(), this.AIBOMtData.link);
           console.log(data)
-          console.log(data.size.totalAmountOfDiskUsed)
-          console.log(data.size.totalAmountOfDiskUsed.split(" "))
-          console.log(data.size.totalAmountOfDiskUsed.split(" ")[0])
-          this.currentData.name = data.name
-          this.currentData.location = data.homepage
-          this.currentData.originator = data.originator
+          // console.log(data.size.totalAmountOfDiskUsed)
+          // console.log(data.size.totalAmountOfDiskUsed.split(" "))
+          // console.log(data.size.totalAmountOfDiskUsed.split(" ")[0])
+            if (data.name !== "") {
+                this.currentData.name = data.name
+            }
+
+            if (data.location !== "") {
+                this.currentData.location = data.location
+            }
+            if (data.originator !== "") {
+                this.currentData.originator = data.originator
+            }
+
           this.currentData.license_location = ""
           this.currentData.concluded_license = ""
           this.currentData.declared_license = data.declaredLicense
           this.currentData.type = data.type
-          this.currentData.size = data.size.totalAmountOfDiskUsed.split(" ")[0]
+          this.currentData.size = data.size
           this.currentData.intended_use = ""
           this.currentData.checksum = ""
           this.currentData.data_collection_process = ""

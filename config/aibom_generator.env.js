@@ -4,7 +4,7 @@ import cur_keys from "./keys.js"
 
 const ax = axios.create({
   baseURL:cur_keys.aibom_generator_backend,
-  timeout:5000,
+  timeout:50000,
   headers:{
     'Content-Type': "application/json; charset=utf-8"
   }
