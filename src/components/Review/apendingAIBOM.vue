@@ -148,6 +148,7 @@
           <el-radio-group v-model="AIBOMtData.source">
             <el-radio label="HuggingFace"></el-radio>
             <el-radio label="Kaggle"></el-radio>
+            <el-radio label="Auto"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="link" :label-width="formLabelWidth" prop="link" required>
@@ -360,7 +361,9 @@ export default {
           this.currentData.concluded_license = ""
           this.currentData.declared_license = data.declaredLicense
           this.currentData.type = data.type
-          this.currentData.size = data.size
+            if (Array.isArray(data.size) && data.size.length != 0){
+                this.currentData.size = data.size[0]
+            }
           this.currentData.intended_use = ""
           this.currentData.checksum = ""
           this.currentData.data_collection_process = ""
