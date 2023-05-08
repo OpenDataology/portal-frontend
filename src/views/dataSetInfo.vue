@@ -149,6 +149,10 @@
             {{ dataSetBasicInfo.license_content }}
           </el-descriptions-item>
           <el-descriptions-item>
+            <template slot="label"> Task type </template>
+            {{ dataSetBasicInfo.task_type }}
+          </el-descriptions-item>
+          <el-descriptions-item>
             <template slot="label"> Description </template>
             {{ dataSetBasicInfo.description }}
           </el-descriptions-item>
