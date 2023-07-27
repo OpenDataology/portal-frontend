@@ -295,10 +295,13 @@ export default {
       options: [],
       value: [],
       vague: [
-        {
-          value: "选项1",
-          label: "Dataset",
-        },
+          {
+              value: "1",
+              label: "Dataset",
+          }, {
+              value: "2",
+              label: "review",
+          },
       ],
       licenseInfo: [],
       licenseDataTabCan: [],
@@ -343,11 +346,20 @@ export default {
         path: "/licenseAll",
       });
     },
-    toDataSetALL() {
-      this.$router.push({
-        path: "/dataSetAll",
-      });
-    },
+      toDataSetALL() {
+          if (this.value == 1) {
+              this.$router.push({
+                  path: "/dataSetAll",
+              });
+          } else {
+              this.$router.push({
+                  path: "/review",
+              });
+              if (this.$route.path === '/licenseAll' || this.$route.path === '/') {
+                  this.value = 'License';
+              }
+          }
+      },
     tableRowClassName({row, rowIndex}) {
       if (rowIndex === 1) {
         return "warning-row";
