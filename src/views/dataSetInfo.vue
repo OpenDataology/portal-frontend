@@ -31,11 +31,11 @@
           </el-col>
           <el-col :span="8">
             <div>
-              <search-dataset-info />
+              <search-dataset-info/>
             </div>
           </el-col>
           <el-col :span="12">
-            <template> &emsp; </template>
+            <template> &emsp;</template>
           </el-col>
         </el-row>
         <div class="licenseWelcome-box">
@@ -62,19 +62,19 @@
       <div>
         <el-descriptions class="margin-top" title="" :column="3" :size="size" border>
           <el-descriptions-item>
-            <template slot="label"> Name </template>
+            <template slot="label"> Name</template>
             {{ dataSetBasicInfo.dataset_name }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Version </template>
+            <template slot="label"> Version</template>
             {{ dataSetBasicInfo.dataset_version }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> License ID </template>
+            <template slot="label"> License ID</template>
             {{ dataSetBasicInfo.license_id }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> License Name </template>
+            <template slot="label"> License Name</template>
             <!-- <a href="licenseInfo">{{ dataSetBasicInfo.license_name }}</a> -->
             <router-link
               :to="{
@@ -87,65 +87,65 @@
             </router-link>
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Licensor </template>
+            <template slot="label"> Licensor</template>
             {{ dataSetBasicInfo.licensor }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> License From </template>
+            <template slot="label"> License From</template>
             {{ dataSetBasicInfo.license_from }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> License Location </template>
+            <template slot="label"> License Location</template>
             {{ dataSetBasicInfo.license_location }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Origin </template>
+            <template slot="label"> Origin</template>
             {{ dataSetBasicInfo.origin }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Downloaded </template>
+            <template slot="label"> Downloaded</template>
             {{ dataSetBasicInfo.downloaded_outlet }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Outlet </template>
+            <template slot="label"> Outlet</template>
             {{ dataSetBasicInfo.outlet_licensed }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Size </template>
+            <template slot="label"> Size</template>
             {{ dataSetBasicInfo.data_size }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Format </template>
+            <template slot="label"> Format</template>
             {{ dataSetBasicInfo.format }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Personal </template>
+            <template slot="label"> Personal</template>
             {{ dataSetBasicInfo.is_personal_data }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Additional </template>
+            <template slot="label"> Additional</template>
             {{ dataSetBasicInfo.is_additional_verify }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Offensive </template>
+            <template slot="label"> Offensive</template>
             {{ dataSetBasicInfo.is_offensive_content }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Comply </template>
+            <template slot="label"> Comply</template>
             {{ dataSetBasicInfo.is_comply }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Collect </template>
+            <template slot="label"> Collect</template>
             {{ dataSetBasicInfo.dataset_collect_method }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Available </template>
+            <template slot="label"> Available</template>
             {{ dataSetBasicInfo.available }}
           </el-descriptions-item>
         </el-descriptions>
         <el-descriptions class="margin-top" title="" :column="1" :size="size" border>
           <el-descriptions-item>
-            <template slot="label"> License content </template>
+            <template slot="label"> License content</template>
             {{ dataSetBasicInfo.license_content }}
           </el-descriptions-item>
           <el-descriptions-item>
@@ -157,11 +157,11 @@
             {{ dataSetBasicInfo.description }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Hashcode </template>
+            <template slot="label"> Hashcode</template>
             {{ dataSetBasicInfo.hash_code }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Collection process </template>
+            <template slot="label"> Collection process</template>
             {{ dataSetBasicInfo.collection_process }}
           </el-descriptions-item>
         </el-descriptions>
@@ -175,124 +175,142 @@
   </div>
 </template>
 <script>
-import { getDatasetMetaData } from "../../config/api.env.js";
-import SearchDatasetInfo from "../components/Search/searchDatasetInfo.vue";
-import event from "../assets/js/instance";
+    import {getDatasetMetaData} from "../../config/api.env.js";
+    import SearchDatasetInfo from "../components/Search/searchDatasetInfo.vue";
+    import event from "../assets/js/instance";
 
-export default {
-  // components: {Export, SearchDatasetInfo },
-  components: { SearchDatasetInfo },
-  name: "license_Info",
-  props: ["id"],
-  data() {
-    return {
-      size: "",
-      value: [],
-      vague: [
-        {
-          value: "选项1",
-          label: "License",
+    export default {
+        // components: {Export, SearchDatasetInfo },
+        components: {SearchDatasetInfo},
+        name: "license_Info",
+        props: ["id"],
+        data() {
+            return {
+                size: "",
+                value: [],
+                vague: [
+                    {
+                        value: "1",
+                        label: "License",
+                    },
+                    {
+                        value: "2",
+                        label: "Review",
+                    }
+                ],
+                dataSetBasicInfo: [],
+            };
         },
-      ],
-      dataSetBasicInfo: [],
-    };
-  },
-  created: function () {
-    this.getDataSetBasicInfo();
-    event.$on("updateDataSet", (id) => {
-      this.getDataSetBasicInfo(id);
-    });
-  },
-  beforeDestroy() {
-    event.$off("updateDataSet");
-  },
-  methods: {
-    toHome() {
-      this.$router.push({
-        path: "/licenseAll",
-      });
-    },
-    toDataSetInfo(id) {
-      this.$router.push({
-        path: "/dataSetInfo",
-        query: { id },
-      });
-    },
-    async getDataSetBasicInfo(id) {
-      // let that = this;
-      let data;
-      if (!id) {
-        data = await getDatasetMetaData({ id: this.id });
-      } else {
-        data = await getDatasetMetaData({ id });
-      }
-      // console.log(data);
-      this.dataSetBasicInfo = data.data;
-      // console.log(this.dataSetBasicInfo);
-    },
+        created: function () {
+            this.getDataSetBasicInfo();
+            event.$on("updateDataSet", (id) => {
+                this.getDataSetBasicInfo(id);
+            });
+        },
+        beforeDestroy() {
+            event.$off("updateDataSet");
+        },
+        methods: {
+            toHome() {
+                if (this.value == 1) {
+                    this.$router.push({
+                        path: "/licenseAll",
+                    });
+                } else if (this.value == 2) {
+                    this.$router.push({
+                        path: "/review",
+                    });
+                    if (this.$route.path === '/dataSetAll' || this.$route.path === '/') {
+                        this.value = 'DataSet';
+                    }
+                }
+            },
+            toDataSetInfo(id) {
+                this.$router.push({
+                    path: "/dataSetInfo",
+                    query: {id},
+                });
+            },
+            async getDataSetBasicInfo(id) {
+                // let that = this;
+                let data;
+                if (!id) {
+                    data = await getDatasetMetaData({id: this.id});
+                } else {
+                    data = await getDatasetMetaData({id});
+                }
+                // console.log(data);
+                this.dataSetBasicInfo = data.data;
+                // console.log(this.dataSetBasicInfo);
+            },
 
-    handleClick(tab, event) {
-      // console.log(tab, event);
-    },
-    handleChange(val) {
-      // console.log(val);
-    },
-  },
-};
+            handleClick(tab, event) {
+                // console.log(tab, event);
+            },
+            handleChange(val) {
+                // console.log(val);
+            },
+        },
+    };
 </script>
 
 <style scoped>
-/*Header-top Part*/
-.licenseHeader-top {
-  margin: 0 !important;
-  padding-bottom: 10px;
-  box-shadow: 0 3px 5px -1px rgb(0 0 0 / 50%);
-}
+  /*Header-top Part*/
+  .licenseHeader-top {
+    margin: 0 !important;
+    padding-bottom: 10px;
+    box-shadow: 0 3px 5px -1px rgb(0 0 0 / 50%);
+  }
 
-/*Header Part*/
-.licenseHeader-box {
-  padding-top: 20px;
-  background-color: #003261;
-  padding-bottom: 30px;
-  height: 217px;
-}
-/*简介信息*/
-.licenseWelcome-box {
-  margin-top: 35px;
-  margin-left: 70px;
-  height: 100px;
-  width: 300px;
-  font-size: 17px;
-  color: #ffffffff;
-}
->>> .el-input__inner::-webkit-input-placeholder {
-  color: #fff !important;
-  text-align: center !important;
-}
-.Middle-box {
-  width: 1200px;
-  margin: 0 auto;
-}
-.metadata-box {
-  width: 1200px;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  margin: 0 auto;
-  border-bottom: 2px solid #003261;
-  background-color: #ececec;
-}
+  /*Header Part*/
+  .licenseHeader-box {
+    padding-top: 20px;
+    background-color: #003261;
+    padding-bottom: 30px;
+    height: 217px;
+  }
 
-.basic_info_box {
-  width: 500px;
-  color: #fff;
-}
-.dataset-info-tail {
-  width: 100%;
-  height: 100%;
-  background-color: #003261;
-  color: #ffffff;
-  font-size: 1px;
-  margin-top: 132px;
-}
+  /*简介信息*/
+  .licenseWelcome-box {
+    margin-top: 35px;
+    margin-left: 70px;
+    height: 100px;
+    width: 300px;
+    font-size: 17px;
+    color: #ffffffff;
+  }
+
+  >>> .el-input__inner::-webkit-input-placeholder {
+    color: #fff !important;
+    text-align: center !important;
+  }
+
+  .Middle-box {
+    width: 1200px;
+    margin: 0 auto;
+  }
+
+  .metadata-box {
+    width: 1200px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    margin: 0 auto;
+    border-bottom: 2px solid #003261;
+    background-color: #ececec;
+  }
+
+  .basic_info_box {
+    width: 500px;
+    color: #fff;
+  }
+
+  .dataset-info-tail {
+    width: 100%;
+    height: 100%;
+    background-color: #003261;
+    color: #ffffff;
+    font-size: 1px;
+    margin-top: 132px;
+  }
 </style>
