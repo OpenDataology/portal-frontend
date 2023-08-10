@@ -61,12 +61,12 @@
                        icon="el-icon-check"></el-button>
           </el-tooltip>
           <el-tooltip effect="dark" content="similar report" placement="top">
-            <el-button size="mini" type="success" @click="similarReportData(scope.$index, scope.row)"
+            <el-button size="small" type="success" @click="similarReportData(scope.$index, scope.row)"
                        icon="el-icon-data-analysis"></el-button>
           </el-tooltip>
           <el-tooltip effect="dark" content="delete" placement="top">
-            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)"
-                       icon="el-icon-delete"></el-button>
+            <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)"
+                       icon="el-icon-data-analysis"></el-button>
           </el-tooltip>
 
           <!--          </el-button-group>-->
