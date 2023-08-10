@@ -16,7 +16,7 @@
       <div class="el-upload__tip" slot="tip" style="color: red">only support csv/xlsx file type</div>
     </el-upload></el-col>
     <el-col :span="4">
-      <el-button  style="margin: 70px 0px 0px 50px;" size="big" type="success" @click="submitUpload">upload</el-button>
+      <el-button  style="margin: 70px 0px 0px 10px;" size="big" type="success" @click="submitUpload">upload</el-button>
     </el-col>
   </el-row>
 

@@ -1,7 +1,7 @@
 /*
 api.js
 
-Copyright (c) 2022 The OpenDataology Authors
+Copyright (c) 2022 The OpenDataology Authors 
 All rights reserved.
 
 SPDX-License-Identifier: Apache-2.0
@@ -95,18 +95,6 @@ export default {
       }
     });
   },
-  getReviewDataForDatasetName(params) {
-    return axios.request({
-      url: "/auth/dataset_review/review_result_search_for_name",
-      method: "post",
-      // headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      // params: {
-      // }
-      data:{
-        dataset_name: params.dataset_name,
-      }
-    });
-  },
   saveTempReviewData(data){
     return axios.request({
       url: "/auth/dataset_review/save_review",
@@ -149,22 +137,6 @@ export default {
       data:data
     });
   },
-  reviewResultCurRowDownLoad(data){
-    return axios.request({
-      url: "/auth/dataset_review/review_result_cur_row_download",
-      method: "post",
-      // headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      data:data
-    });
-  },
-  reviewResultCurSearchDownLoad(data){
-    return axios.request({
-      url: "/auth/dataset_review/review_result_cur_search_download",
-      method: "post",
-      // headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      data:data
-    });
-  }
 }
 // export const dataUpload = (data = {}) => {
 //   return axios.request({

@@ -1,7 +1,7 @@
 /*
 api.env.js
 
-Copyright (c) 2022 The OpenDataology Authors
+Copyright (c) 2022 The OpenDataology Authors 
 All rights reserved.
 
 SPDX-License-Identifier: Apache-2.0
@@ -377,16 +377,7 @@ export function loginData(data) {
   });
 }
 
-export const loadDatasetByName = (queryString) => {
-  return axios.request({
-    url: "/search_dataset_by_name",
-    method: "get",
-    params: {
-      token: Token,
-      name: queryString
-    }
-  })
-}
+
 
 /**
  *
