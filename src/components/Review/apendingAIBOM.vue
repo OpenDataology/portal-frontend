@@ -66,7 +66,7 @@
           </el-tooltip>
           <el-tooltip effect="dark" content="delete" placement="top">
             <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)"
-                       icon="el-icon-data-analysis"></el-button>
+                       icon="el-icon-delete"></el-button>
           </el-tooltip>
 
           <!--          </el-button-group>-->
