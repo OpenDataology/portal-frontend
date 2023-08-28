@@ -65,16 +65,16 @@
             <template slot="label"> Name</template>
             {{ dataSetBasicInfo.dataset_name }}
           </el-descriptions-item>
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Version</template>-->
+<!--            {{ dataSetBasicInfo.dataset_version }}-->
+<!--          </el-descriptions-item>-->
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> License ID</template>-->
+<!--            {{ dataSetBasicInfo.license_id }}-->
+<!--          </el-descriptions-item>-->
           <el-descriptions-item>
-            <template slot="label"> Version</template>
-            {{ dataSetBasicInfo.dataset_version }}
-          </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> License ID</template>
-            {{ dataSetBasicInfo.license_id }}
-          </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> License Name</template>
+            <template slot="label"> Declared License </template>
             <!-- <a href="licenseInfo">{{ dataSetBasicInfo.license_name }}</a> -->
             <router-link
               :to="{
@@ -86,80 +86,124 @@
               {{ dataSetBasicInfo.license_name }}
             </router-link>
           </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> Licensor</template>
-            {{ dataSetBasicInfo.licensor }}
-          </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> License From</template>
-            {{ dataSetBasicInfo.license_from }}
-          </el-descriptions-item>
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Licensor</template>-->
+<!--            {{ dataSetBasicInfo.licensor }}-->
+<!--          </el-descriptions-item>-->
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> License From</template>-->
+<!--            {{ dataSetBasicInfo.license_from }}-->
+<!--          </el-descriptions-item>-->
           <el-descriptions-item>
             <template slot="label"> License Location</template>
             {{ dataSetBasicInfo.license_location }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Origin</template>
+            <template slot="label"> Location</template>
             {{ dataSetBasicInfo.origin }}
           </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> Downloaded</template>
-            {{ dataSetBasicInfo.downloaded_outlet }}
-          </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> Outlet</template>
-            {{ dataSetBasicInfo.outlet_licensed }}
-          </el-descriptions-item>
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Downloaded</template>-->
+<!--            {{ dataSetBasicInfo.downloaded_outlet }}-->
+<!--          </el-descriptions-item>-->
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Outlet</template>-->
+<!--            {{ dataSetBasicInfo.outlet_licensed }}-->
+<!--          </el-descriptions-item>-->
           <el-descriptions-item>
             <template slot="label"> Size</template>
             {{ dataSetBasicInfo.data_size }}
           </el-descriptions-item>
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Format</template>-->
+<!--            {{ dataSetBasicInfo.format }}-->
+<!--          </el-descriptions-item>-->
           <el-descriptions-item>
-            <template slot="label"> Format</template>
-            {{ dataSetBasicInfo.format }}
-          </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> Personal</template>
+            <template slot="label"> Sensitive Personal Info</template>
             {{ dataSetBasicInfo.is_personal_data }}
           </el-descriptions-item>
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Additional</template>-->
+<!--            {{ dataSetBasicInfo.is_additional_verify }}-->
+<!--          </el-descriptions-item>-->
           <el-descriptions-item>
-            <template slot="label"> Additional</template>
-            {{ dataSetBasicInfo.is_additional_verify }}
-          </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> Offensive</template>
+            <template slot="label"> KnownBias</template>
             {{ dataSetBasicInfo.is_offensive_content }}
           </el-descriptions-item>
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Comply</template>-->
+<!--            {{ dataSetBasicInfo.is_comply }}-->
+<!--          </el-descriptions-item>-->
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Collect Method</template>-->
+<!--            {{ dataSetBasicInfo.dataset_collect_method }}-->
+<!--          </el-descriptions-item>-->
           <el-descriptions-item>
-            <template slot="label"> Comply</template>
-            {{ dataSetBasicInfo.is_comply }}
+            <template slot="label"> Dataset Availability</template>
+            {{ dataSetBasicInfo.available }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Collect</template>
+            <template slot="label"> Dataset Update Mechanism</template>
             {{ dataSetBasicInfo.dataset_collect_method }}
           </el-descriptions-item>
           <el-descriptions-item>
-            <template slot="label"> Available</template>
-            {{ dataSetBasicInfo.available }}
+            <template slot="label"> Type</template>
+<!--            {{ dataSetBasicInfo.available }}-->
+            TBD
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label"> Intended Use</template>
+            <!--            {{ dataSetBasicInfo.available }}-->
+            TBD
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label"> Noise</template>
+            <!--            {{ dataSetBasicInfo.available }}-->
+            TBD
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label"> Sensor</template>
+            <!--            {{ dataSetBasicInfo.available }}-->
+            TBD
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label"> Anonymization Method Used</template>
+            <!--            {{ dataSetBasicInfo.available }}-->
+            TBD
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label"> Confidentiality Level</template>
+            <!--            {{ dataSetBasicInfo.available }}-->
+            TBD
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label"> DataPreprocessing </template>
+            <!--            {{ dataSetBasicInfo.dataset_collect_method }}-->
+            TBD
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label"> Concluded License </template>
+<!--            {{ dataSetBasicInfo.dataset_collect_method }}-->
+            TBD
           </el-descriptions-item>
         </el-descriptions>
         <el-descriptions class="margin-top" title="" :column="1" :size="size" border>
-          <el-descriptions-item>
-            <template slot="label"> License content</template>
-            {{ dataSetBasicInfo.license_content }}
-          </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> Task type </template>
-            {{ dataSetBasicInfo.task_type }}
-          </el-descriptions-item>
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> License content</template>-->
+<!--            {{ dataSetBasicInfo.license_content }}-->
+<!--          </el-descriptions-item>-->
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Task type </template>-->
+<!--            {{ dataSetBasicInfo.task_type }}-->
+<!--          </el-descriptions-item>-->
           <el-descriptions-item>
             <template slot="label"> Description </template>
             {{ dataSetBasicInfo.description }}
           </el-descriptions-item>
-          <el-descriptions-item>
-            <template slot="label"> Hashcode</template>
-            {{ dataSetBasicInfo.hash_code }}
-          </el-descriptions-item>
+<!--          <el-descriptions-item>-->
+<!--            <template slot="label"> Hashcode</template>-->
+<!--            {{ dataSetBasicInfo.hash_code }}-->
+<!--          </el-descriptions-item>-->
           <el-descriptions-item>
             <template slot="label"> Collection process</template>
             {{ dataSetBasicInfo.collection_process }}
