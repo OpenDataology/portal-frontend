@@ -119,10 +119,11 @@
           </el-select>
         </el-form-item>
         <el-form-item label="size" :label-width="formLabelWidth" prop="size" required>
-          <el-input-number v-model="currentData.size" controls-position="right" @change="sizeChange" :min="0"
+          <el-input-number v-model="currentData.currentDataSizeNum" controls-position="right" @change="sizeChange"
+                           :min="0"
                            :max="1000000000000">
           </el-input-number>
-          <el-select v-model="sizeOptionsValue" placeholder="unit">
+          <el-select v-model="currentData.sizeOptionsValue" placeholder="unit">
             <el-option v-for="item in sizeOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -532,7 +533,6 @@
                     value: 'TB',
                     label: 'TB'
                 }],
-                sizeOptionsValue: 'B',
                 dropdownOptions: [{
                     id: 1,
                     name: "oscar"
@@ -557,7 +557,9 @@
                     sensitive_personal_information: true,
                     offensive_content: true,
                     user_id: null,
-                    rejection_notes: ""
+                    rejection_notes: "",
+                    sizeOptionsValue: 'B',
+                    currentDataSizeNum: 0,
                 },
                 ruleForm: {
                     name: "",
@@ -622,8 +624,8 @@
                 if (row.size !== null && row.size !== "") {
                     const pattern = /[0-9]+/;
                     const pattern_str = /[A-Z]+/;
-                    this.sizeOptionsValue = newObject.size.match(pattern_str).toString();
-                    newObject.size = newObject.size.match(pattern)
+                    newObject.sizeOptionsValue = newObject.size.match(pattern_str).toString();
+                    newObject.currentDataSizeNum = newObject.size.match(pattern);
                 }
                 this.currentData = newObject;
                 this.curIndex = index;
@@ -670,8 +672,11 @@
                             pending_aibom_list: [],
                         }
                         // this.currentData.size=this.currentData.size+""+this.sizeOptionsValue;
-                        data.pending_aibom_list.push(this.currentData)
-                        data.pending_aibom_list[0].size = this.currentData.size + "" + this.sizeOptionsValue;
+                        const currentDataDeepCopy = this.currentData;
+                        data.pending_aibom_list.push(currentDataDeepCopy)
+                        const newDataSize = currentDataDeepCopy.currentDataSizeNum + "" + currentDataDeepCopy.sizeOptionsValue;
+                        data.pending_aibom_list[0].size = newDataSize
+                        currentDataDeepCopy.size = newDataSize
                         requestService.saveAIBOM(data).then(res => {
                             console.log(res)
                             this.tipMessage(res.message, "success")
